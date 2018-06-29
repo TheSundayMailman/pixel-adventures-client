@@ -1,19 +1,18 @@
 const initialState = {
   id: 1,
-  name: 'Ghoul',
+  name: 'GHOUL',
   level: 3,
   currentHp: 20,
   maxHp: 20,
   stats: {attack: 15, defense: 5},
-  reward: {experience: 12, gold: 33}
+  rewards: {exp: 999, gold: 999}
 };
 
 export const enemyReducer = (state = initialState, action) => {
-  if (action.type === 'UPDATE_ENEMY_STATS') {
-    const newHp = state.currentHp - action.damage;
+  if (action.type === 'UPDATE_ENEMY_HP') {
     return {
       ...state,
-      hp: newHp
+      currentHp: action.newHp
     };
   }
   return state;

@@ -2,32 +2,72 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {
-  updatePlayerStats,
-  updateEnemyStats,
-  updateDamageDealtMessages,
-  updateDamageReceivedMessages
+  updatePlayerHp,
+  updateEnemyHp,
+  finishPlayerTurn,
+  finishEnemyTurn,
+  collectBattleRewards,
+  toggleVictoryMode,
+  toggleExploreMode,
+  toggleDefeatMode
 } from '../actions/index.js';
 
 export class CommandList extends React.Component {
-  calculatePlayerAttack(char1, char2) {
-    const damage = (char1.stats.attack - char2.stats.defense) + Math.floor(Math.random() * char1.level);
+  startExploring() {
     const messages = [
-      `${char1.name} attacked!`,
-      `${char2.name} received ${damage} damage points!`
+      `You are in the ${this.props.game.currentLocation}`,
+      `What will you do next?`
     ];
-    this.props.dispatch(updateEnemyStats(damage));
-    this.props.dispatch(updateDamageDealtMessages(messages));
+    this.props.dispatch(toggleExploreMode(messages));
   }
 
-  calculateEnemyAttack(char1, char2) {
-    const damage = (char1.stats.attack - char2.stats.defense) + Math.floor(Math.random() * char1.level);
-    const messages = [
-      `${char1.name} attacked!`,
-      `${char2.name} received ${damage} damage points!`,
-      'What will you do next?'
-    ];
-    this.props.dispatch(updatePlayerStats(damage));
-    this.props.dispatch(updateDamageReceivedMessages(messages));
+  calculatePlayerAttack(player, enemy) {
+    const oldHp = enemy.currentHp;
+    const damage = (player.stats.attack - enemy.stats.defense) + Math.floor(Math.random() * player.level);
+    let newHp = oldHp - damage;
+    if (newHp <= 0) {
+      newHp = 0;
+      const messages = [
+        `${player.name} attacked!`,
+        `${enemy.name} received ${damage} damage points!`,
+        `${enemy.name} is defeated!`,
+        `${player.name} gains ${enemy.rewards.exp} exp points and ${enemy.rewards.gold} gold!`
+      ];
+      this.props.dispatch(updateEnemyHp(newHp))
+      this.props.dispatch(toggleVictoryMode(messages));
+      this.props.dispatch(collectBattleRewards(enemy.rewards.exp, enemy.rewards.gold));
+    } else {
+      const messages = [
+        `${player.name} attacked!`,
+        `${enemy.name} received ${damage} damage points!`
+      ];
+      this.props.dispatch(updateEnemyHp(newHp));
+      this.props.dispatch(finishPlayerTurn(messages));
+    }
+  }
+
+  calculateEnemyAttack(enemy, player) {
+    const oldHp = player.currentHp;
+    const damage = (enemy.stats.attack - player.stats.defense) + Math.floor(Math.random() * enemy.level);
+    let newHp = oldHp - damage;
+    if (newHp <= 0) {
+      newHp = 0;
+      const messages = [
+        `${enemy.name} attacked!`,
+        `${player.name} received ${damage} damage points!`,
+        `${player.name} is defeated...`
+      ];
+      this.props.dispatch(updatePlayerHp(newHp));
+      this.props.dispatch(toggleDefeatMode(messages));
+    } else {
+      const messages = [
+        `${enemy.name} attacked!`,
+        `${player.name} received ${damage} damage points!`,
+        'What will you do next?'
+      ];
+      this.props.dispatch(updatePlayerHp(newHp));
+      this.props.dispatch(finishEnemyTurn(messages));
+    }
   }
 
   render() {
@@ -77,7 +117,7 @@ export class CommandList extends React.Component {
     } else if (this.props.game.victoryMode) {
       return (
         <section className="menu command-list animate-reveal animate-last">
-        <button>NEXT</button>
+        <button onClick={() => this.startExploring()}>NEXT</button>
       </section>
       );
     } else if (this.props.game.defeatMode) {
