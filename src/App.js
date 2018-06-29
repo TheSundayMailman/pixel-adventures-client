@@ -2,20 +2,16 @@ import React from 'react';
 
 import './App.css';
 
-import CharacterStatus from './components/character-status.js';
-import EventLog from './components/event-log.js';
-import CommandList from './components/command-list.js';
+import NavBar from './components/nav-bar.js';
+import GameContainer from './components/game-container.js';
 
 export default class App extends React.Component {
   render() {
     return (
       <div>
+        <NavBar />
         <h1>Pixel Adventures</h1>
-        <main className="game-container">
-          <CharacterStatus />
-          <EventLog />
-          <CommandList />
-        </main>
+        <GameContainer />
       </div>
     );
   }

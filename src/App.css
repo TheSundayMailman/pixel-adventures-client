@@ -3,18 +3,13 @@ h1 {
   font-family: fantasy;
   text-align: center;
 }
-p, h2, li a {
+h2, p {
   color: #fff;
   margin: 7px;
   font-size: 15px;
   font-family: monospace;
   letter-spacing: .1em; /* Adjust as needed */
   white-space: nowrap; /* Keeps the content on a single line */
-}
-ul {
-  list-style: none;
-  margin-left: 10px;
-  padding-left: 0;
 }
 
 /* GAME CONTAINER DIMENSIONS */
@@ -54,6 +49,20 @@ ul {
   right: 0;
   width: 136px;
   height: 133px;
+}
+.command-list button {
+  display: block;
+  height: 20px;
+  border: none;
+  color: #fff;
+  background-color: darkblue;
+  font-size: 15px;
+  font-family: monospace;
+  padding: 7px;
+  letter-spacing: .1em; /* Adjust as needed */
+}
+.command-list button:hover {
+  text-decoration: underline;
 }
 
 /* TYPEWRITER REVEAL FOR EVENT LOG, CURSOR DISABLED */
