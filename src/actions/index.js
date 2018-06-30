@@ -14,6 +14,14 @@ export const enterTownMode = (messages) => {
   }
 };
 
+export const TOGGLE_CONVO_MODE = 'TOGGLE_CONVO_MODE';
+export const toggleConvoMode = (messages) => {
+  return {
+    type: TOGGLE_CONVO_MODE,
+    messages
+  }
+};
+
 export const ENTER_EXPLORE_MODE = 'ENTER_EXPLORE_MODE';
 export const enterExploreMode = (location, messages) => {
   return {
@@ -110,4 +118,12 @@ export const toggleDefeatMode = (messages) => {
     type: TOGGLE_DEFEAT_MODE,
     messages
   }
+};
+
+export const POPULATE_NPC_OBJECT = 'POPULATE_NPC_OBJECT';
+export const populateNpcObject = (npc) => {
+  return {
+    type: POPULATE_NPC_OBJECT,
+    npc
+  };
 };

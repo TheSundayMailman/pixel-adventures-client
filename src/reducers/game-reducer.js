@@ -2,6 +2,7 @@ const initialState = {
   currentLocation: 'ASTERA',
   hubMode: true,
   townMode: false,
+  convoMode: false,
   exploreMode: false,
   battleMode: false,
   playerTurn: false,
@@ -23,6 +24,7 @@ export const gameReducer = (state = initialState, action) => {
       currentLocation: 'ASTERA',
       hubMode: true,
       townMode: false,
+      convoMode: false,
       exploreMode: false,
       battleMode: false,
       playerTurn: false,
@@ -38,6 +40,7 @@ export const gameReducer = (state = initialState, action) => {
       currentLocation: 'TOWN',
       hubMode: false,
       townMode: true,
+      convoMode: false,
       exploreMode: false,
       battleMode: false,
       playerTurn: false,
@@ -47,12 +50,21 @@ export const gameReducer = (state = initialState, action) => {
       currentMessages: action.messages
     };
   }
+  if (action.type === 'TOGGLE_CONVO_MODE') {
+    return {
+      ...state,
+      townMode: false,
+      convoMode: true,
+      currentMessages: action.messages
+    };
+  }
   if (action.type === 'ENTER_EXPLORE_MODE') {
     return {
       ...state,
       currentLocation: action.location,
       hubMode: false,
       townMode: false,
+      convoMode: false,
       exploreMode: true,
       battleMode: false,
       playerTurn: false,
@@ -67,6 +79,7 @@ export const gameReducer = (state = initialState, action) => {
       ...state,
       hubMode: false,
       townMode: false,
+      convoMode: false,
       exploreMode: true,
       battleMode: false,
       playerTurn: false,
@@ -81,6 +94,7 @@ export const gameReducer = (state = initialState, action) => {
       ...state,
       hubMode: false,
       townMode: false,
+      convoMode: false,
       exploreMode: false,
       battleMode: true,
       playerTurn: true,

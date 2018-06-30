@@ -10,16 +10,19 @@ import {
   finishPlayerTurn,
   finishEnemyTurn,
   collectBattleRewards,
+  toggleConvoMode,
   toggleExploreMode,
   toggleBattleMode,
   toggleVictoryMode,
   toggleDefeatMode,
-  populateEnemyObject
+  populateEnemyObject,
+  populateNpcObject
 } from '../actions/index.js';
 
 import forestEnemyDb from '../database/forest-enemy-db.js';
 import mountainEnemyDb from '../database/mountain-enemy-db.js';
 import dungeonEnemyDb from '../database/dungeon-enemy-db.js';
+import npcDb from '../database/npc-db.js';
 
 export class CommandList extends React.Component {
   enterHub() {
@@ -40,28 +43,35 @@ export class CommandList extends React.Component {
       'the latest rumors around here.'
     ];
     this.props.dispatch(enterTownMode(messages));
+    // below generates a new npc for next conversation
+    const randomNpc = npcDb[Math.floor(Math.random() * npcDb.length)];
+    this.props.dispatch(populateNpcObject(randomNpc));
   }
 
-  enterExploration(location) { // this isn't re-rendering menu into exploring mode
+  engageConversation() {
+    console.log(this.props.npc);
+    const messages = this.props.npc.messages;
+    this.props.dispatch(toggleConvoMode(messages));
+  }
+
+  enterExploration(location) {
     const messages = [
       `You are in the ${location}`,
       'What will you do next?',
     ];
     this.props.dispatch(enterExploreMode(location, messages));
     // below generates a new enemy for next battle
+    let randomEnemy;
     if (location === 'FOREST') {
-      const randomEncounter = Math.floor(Math.random() * forestEnemyDb.length)
-      const randomEnemy = forestEnemyDb[randomEncounter];
-      this.props.dispatch(populateEnemyObject(randomEnemy)); // may change this to an api call once db is setup
-    } else if (location === 'MOUNTAIN') {
-      const randomEncounter = Math.floor(Math.random() * mountainEnemyDb.length)
-      const randomEnemy = mountainEnemyDb[randomEncounter];
-      this.props.dispatch(populateEnemyObject(randomEnemy)); // may change this to an api call once db is setup
-    } else if (location === 'DUNGEON') {
-      const randomEncounter = Math.floor(Math.random() * dungeonEnemyDb.length)
-      const randomEnemy = dungeonEnemyDb[randomEncounter];
-      this.props.dispatch(populateEnemyObject(randomEnemy)); // may change this to an api call once db is setup
+      randomEnemy = forestEnemyDb[Math.floor(Math.random() * forestEnemyDb.length)];
     }
+    if (location === 'MOUNTAIN') {
+      randomEnemy = mountainEnemyDb[Math.floor(Math.random() * mountainEnemyDb.length)];
+    }
+    if (location === 'DUNGEON') {
+      randomEnemy = dungeonEnemyDb[Math.floor(Math.random() * dungeonEnemyDb.length)];
+    }
+    this.props.dispatch(populateEnemyObject(randomEnemy)); // may change this to an api call once db is setup
   }
 
   resumeExploring() {
@@ -71,19 +81,17 @@ export class CommandList extends React.Component {
     ];
     this.props.dispatch(toggleExploreMode(messages));
     // below generates a new enemy for next battle
+    let randomEnemy;
     if (this.props.game.currentLocation === 'FOREST') {
-      const randomEncounter = Math.floor(Math.random() * forestEnemyDb.length)
-      const randomEnemy = forestEnemyDb[randomEncounter];
-      this.props.dispatch(populateEnemyObject(randomEnemy)); // may change this to an api call once db is setup
-    } else if (this.props.game.currentLocation === 'MOUNTAIN') {
-      const randomEncounter = Math.floor(Math.random() * mountainEnemyDb.length)
-      const randomEnemy = mountainEnemyDb[randomEncounter];
-      this.props.dispatch(populateEnemyObject(randomEnemy)); // may change this to an api call once db is setup
-    } else if (this.props.game.currentLocation === 'DUNGEON') {
-      const randomEncounter = Math.floor(Math.random() * dungeonEnemyDb.length)
-      const randomEnemy = dungeonEnemyDb[randomEncounter];
-      this.props.dispatch(populateEnemyObject(randomEnemy)); // may change this to an api call once db is setup
+      randomEnemy = forestEnemyDb[Math.floor(Math.random() * forestEnemyDb.length)];
     }
+    if (this.props.game.currentLocation === 'MOUNTAIN') {
+      randomEnemy = mountainEnemyDb[Math.floor(Math.random() * mountainEnemyDb.length)];
+    }
+    if (this.props.game.currentLocation === 'DUNGEON') {
+      randomEnemy = dungeonEnemyDb[Math.floor(Math.random() * dungeonEnemyDb.length)];
+    }
+    this.props.dispatch(populateEnemyObject(randomEnemy)); // may change this to an api call once db is setup
   }
 
   engageBattle() {
@@ -156,17 +164,26 @@ export class CommandList extends React.Component {
         <button >STATUS</button>
       </section>
       );
-    } else if (this.props.game.townMode) {
+    }
+    if (this.props.game.townMode) {
       return (
         <section id="townMode" className="menu command-list animate-reveal animate-last">
-        <button>PUB</button>
+        <button onClick={() => this.engageConversation()}>PUB</button>
         <button>SHOP</button>
         <button>INN</button>
         <button>STATUS</button>
         <button onClick={() => this.enterHub()}>EXIT</button>
       </section>
       );
-    } else if (this.props.game.exploreMode) {
+    }
+    if (this.props.game.convoMode) {
+      return (
+        <section id="convoMode" className="menu command-list animate-reveal animate-last">
+        <button onClick={() => this.enterTown()}>OK</button>
+      </section>
+      );
+    }
+    if (this.props.game.exploreMode) {
       return (
         <section id="exploreMode" className="menu command-list animate-reveal animate-last">
         <button onClick={() => this.engageBattle()}>EXPLORE</button>
@@ -174,7 +191,8 @@ export class CommandList extends React.Component {
         <button onClick={() => this.enterHub()}>EXIT</button>
       </section>
       );
-    } else if (this.props.game.battleMode && this.props.game.playerTurn) {
+    }
+    if (this.props.game.battleMode && this.props.game.playerTurn) {
       return (
         <section id="playerTurn" className="menu command-list animate-reveal animate-last">
         <button onClick={() => this.calculatePlayerAttack(this.props.player, this.props.enemy)}>ATTACK</button>
@@ -183,19 +201,22 @@ export class CommandList extends React.Component {
         <button>RUN</button>
       </section>
       );
-    } else if (this.props.game.battleMode && this.props.game.enemyTurn) {
+    }
+    if (this.props.game.battleMode && this.props.game.enemyTurn) {
       return (
         <section id="enemyTurn" className="menu command-list animate-reveal animate-last">
         <button onClick={() => this.calculateEnemyAttack(this.props.enemy, this.props.player)}>NEXT</button>
       </section>
       );
-    } else if (this.props.game.victoryMode) {
+    }
+    if (this.props.game.victoryMode) {
       return (
         <section id="victoryMode" className="menu command-list animate-reveal animate-last">
         <button onClick={() => this.resumeExploring()}>NEXT</button>
       </section>
       );
-    } else if (this.props.game.defeatMode) {
+    }
+    if (this.props.game.defeatMode) {
       return (
         <section id="defeatMode" className="menu command-list animate-reveal animate-last">
         <button>RELOAD...</button>
@@ -214,7 +235,8 @@ const mapStateToProps = (state, props) => {
   return {
     game: state.game,
     player: state.player,
-    enemy: state.enemy
+    enemy: state.enemy,
+    npc: state.npc
   };
 };
 
