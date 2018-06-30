@@ -47,6 +47,30 @@ export const toggleExploreMode = (messages) => {
   }
 };
 
+export const POPULATE_ENEMY_OBJECT = 'POPULATE_ENEMY_OBJECT';
+export const populateEnemyObject = (enemy) => {
+  return {
+    type: POPULATE_ENEMY_OBJECT,
+    enemy,
+  };
+};
+
+// export const GET_NEW_ENEMY = 'GET_NEW_ENEMY';
+// export const getNewEnemy = () => (dispatch) => {
+//   fetch('api/address/here')
+//     .then(res => res.json())
+//     .then(enemy => disptach(populateEnemyObject(enemy)))
+//     .catch(err => console.error(err));
+// };
+
+export const TOGGLE_BATTLE_MODE = 'TOGGLE_BATTLE_MODE';
+export const toggleBattleMode = (messages) => {
+  return {
+    type: TOGGLE_BATTLE_MODE,
+    messages
+  }
+};
+
 export const TOGGLE_VICTORY_MODE = 'TOGGLE_VICTORY_MODE';
 export const toggleVictoryMode = (messages) => {
   return {

@@ -7,18 +7,36 @@ import {
   finishPlayerTurn,
   finishEnemyTurn,
   collectBattleRewards,
-  toggleVictoryMode,
   toggleExploreMode,
-  toggleDefeatMode
+  toggleBattleMode,
+  toggleVictoryMode,
+  toggleDefeatMode,
+  populateEnemyObject
 } from '../actions/index.js';
+
+import forestEnemyDb from '../database/forest-enemy-db.js';
 
 export class CommandList extends React.Component {
   startExploring() {
     const messages = [
-      `You are in the ${this.props.game.currentLocation}`,
+      `You are in the ${this.props.game.currentLocation}.`,
       `What will you do next?`
     ];
     this.props.dispatch(toggleExploreMode(messages));
+    // below generates a new enemy for next battle
+    const randomEncounter = Math.floor(Math.random() * forestEnemyDb.length)
+    const randomEnemy = forestEnemyDb[randomEncounter];
+    this.props.dispatch(populateEnemyObject(randomEnemy)); // may change this to an api call once db is setup
+  }
+
+  startBattling() {
+    const messages = [
+      `As you explore the ${this.props.game.currentLocation}, a ${this.props.enemy.name} suddenly`,
+      'draws near!',
+      'It prepares for battle!',
+      'What will you do next?'
+    ];
+    this.props.dispatch(toggleBattleMode(messages));
   }
 
   calculatePlayerAttack(player, enemy) {
@@ -33,7 +51,7 @@ export class CommandList extends React.Component {
         `${enemy.name} is defeated!`,
         `${player.name} gains ${enemy.rewards.exp} exp points and ${enemy.rewards.gold} gold!`
       ];
-      this.props.dispatch(updateEnemyHp(newHp))
+      this.props.dispatch(updateEnemyHp(newHp));
       this.props.dispatch(toggleVictoryMode(messages));
       this.props.dispatch(collectBattleRewards(enemy.rewards.exp, enemy.rewards.gold));
     } else {
@@ -94,7 +112,7 @@ export class CommandList extends React.Component {
     } else if (this.props.game.exploreMode) {
       return (
         <section className="menu command-list animate-reveal animate-last">
-        <button>EXPLORE</button>
+        <button onClick={() => this.startBattling()}>EXPLORE</button>
         <button>STATUS</button>
         <button>EXIT</button>
       </section>

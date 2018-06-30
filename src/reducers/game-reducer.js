@@ -2,16 +2,14 @@ const initialState = {
   currentLocation: 'FOREST',
   hubMode: false,
   townMode: false,
-  exploreMode: false,
-  battleMode: true,
-  playerTurn: true,
+  exploreMode: true,
+  battleMode: false,
+  playerTurn: false,
   enemyTurn: false,
   victoryMode: false,
   defeatMode: false,
   currentMessages: [
-    'As you explore the FOREST, a GHOUL suddenly',
-    'draws near...',
-    'It prepares for battle!',
+    'You are in the FOREST.',
     'What will you do next?'
   ]
 };
@@ -41,6 +39,20 @@ export const gameReducer = (state = initialState, action) => {
       exploreMode: true,
       battleMode: false,
       playerTurn: false,
+      enemyTurn: false,
+      victoryMode: false,
+      defeatMode: false,
+      currentMessages: action.messages
+    };
+  }
+  if (action.type === 'TOGGLE_BATTLE_MODE') {
+    return {
+      ...state,
+      hubMode: false,
+      townMode: false,
+      exploreMode: false,
+      battleMode: true,
+      playerTurn: true,
       enemyTurn: false,
       victoryMode: false,
       defeatMode: false,
