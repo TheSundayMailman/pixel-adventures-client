@@ -22,19 +22,27 @@ export const toggleConvoMode = (messages) => {
   }
 };
 
+export const POPULATE_NPC_OBJECT = 'POPULATE_NPC_OBJECT';
+export const populateNpcObject = (npc) => {
+  return {
+    type: POPULATE_NPC_OBJECT,
+    npc
+  };
+};
+
+// export const GET_NEW_NPC = 'GET_NEW_NPC';
+// export const getNewNPC = () => (dispatch) => {
+//   fetch('api/address/here')
+//     .then(res => res.json())
+//     .then(enemy => disptach(populateNpcObject(enemy)))
+//     .catch(err => console.error(err));
+// };
+
 export const ENTER_EXPLORE_MODE = 'ENTER_EXPLORE_MODE';
 export const enterExploreMode = (location, messages) => {
   return {
     type: ENTER_EXPLORE_MODE,
     location,
-    messages
-  }
-};
-
-export const TOGGLE_EXPLORE_MODE = 'TOGGLE_EXPLORE_MODE';
-export const toggleExploreMode = (messages) => {
-  return {
-    type: TOGGLE_EXPLORE_MODE,
     messages
   }
 };
@@ -118,12 +126,4 @@ export const toggleDefeatMode = (messages) => {
     type: TOGGLE_DEFEAT_MODE,
     messages
   }
-};
-
-export const POPULATE_NPC_OBJECT = 'POPULATE_NPC_OBJECT';
-export const populateNpcObject = (npc) => {
-  return {
-    type: POPULATE_NPC_OBJECT,
-    npc
-  };
 };

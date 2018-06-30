@@ -4,19 +4,18 @@ import {connect} from 'react-redux';
 import {
   enterHubMode,
   enterTownMode,
+  populateNpcObject,
+  toggleConvoMode,
   enterExploreMode,
-  updatePlayerHp,
+  populateEnemyObject,
+  toggleBattleMode,
   updateEnemyHp,
+  updatePlayerHp,
   finishPlayerTurn,
   finishEnemyTurn,
   collectBattleRewards,
-  toggleConvoMode,
-  toggleExploreMode,
-  toggleBattleMode,
   toggleVictoryMode,
-  toggleDefeatMode,
-  populateEnemyObject,
-  populateNpcObject
+  toggleDefeatMode
 } from '../actions/index.js';
 
 import forestEnemyDb from '../database/forest-enemy-db.js';
@@ -25,6 +24,10 @@ import dungeonEnemyDb from '../database/dungeon-enemy-db.js';
 import npcDb from '../database/npc-db.js';
 
 export class CommandList extends React.Component {
+  viewPlayerStatus() {
+    console.log('tried to view status...');
+  }
+
   enterHub() {
     const messages = [
       'You are now back in the world of ASTERA! Pick',
@@ -47,21 +50,65 @@ export class CommandList extends React.Component {
     const randomNpc = npcDb[Math.floor(Math.random() * npcDb.length)];
     this.props.dispatch(populateNpcObject(randomNpc));
   }
+  
+  resumeTown() {
+    const messages = [
+      'You are in back in TOWN.',
+      'Where will you go next?'
+    ];
+    this.props.dispatch(enterTownMode(messages));
+    // below generates a new npc for next conversation
+    const randomNpc = npcDb[Math.floor(Math.random() * npcDb.length)];
+    this.props.dispatch(populateNpcObject(randomNpc));
+  }
 
   engageConversation() {
-    console.log(this.props.npc);
     const messages = this.props.npc.messages;
     this.props.dispatch(toggleConvoMode(messages));
   }
 
+  engageInn() {
+    console.log('tried to visit inn...');
+  }
+
+  stayAtInn() {
+    console.log('tried to stay at inn...');
+  }
+
+  engageShop() {
+    console.log('tried to visit shop...');
+  }
+
   enterExploration(location) {
-    const messages = [
-      `You are in the ${location}`,
-      'What will you do next?',
-    ];
-    this.props.dispatch(enterExploreMode(location, messages));
-    // below generates a new enemy for next battle
+    let messages;
     let randomEnemy;
+    // below generates a welcome message based on locale
+    if (location === 'FOREST') {
+      messages = [
+        `You are in the ${location}, a mystical place filled`,
+        'with mysterious creatures. This makes for a',
+        'great place for beginners to explore.',
+        'What will you do next?'
+      ];
+    }
+    if (location === 'MOUNTAIN') {
+      messages = [
+        `You are in the ${location}, a treacherous locale`,
+        'filled with tough enemies. Make sure you are',
+        'well prepared before venturing further.',
+        'What will you do next?'
+      ];
+    }
+    if (location === 'DUNGEON') {
+      messages = [
+        `You are in the ${location}, an area feared by most`,
+        'due to the terrible evil that dwell within.',
+        'Truly a place to test your strength as a',
+        'warrior.',
+        'What will you do next?',
+      ];
+    }
+    // below generates a new enemy for next battle locale
     if (location === 'FOREST') {
       randomEnemy = forestEnemyDb[Math.floor(Math.random() * forestEnemyDb.length)];
     }
@@ -71,15 +118,15 @@ export class CommandList extends React.Component {
     if (location === 'DUNGEON') {
       randomEnemy = dungeonEnemyDb[Math.floor(Math.random() * dungeonEnemyDb.length)];
     }
+    this.props.dispatch(enterExploreMode(location, messages));
     this.props.dispatch(populateEnemyObject(randomEnemy)); // may change this to an api call once db is setup
   }
 
-  resumeExploring() {
+  resumeExploration() {
     const messages = [
       `You are in the ${this.props.game.currentLocation}.`,
       `What will you do next?`
     ];
-    this.props.dispatch(toggleExploreMode(messages));
     // below generates a new enemy for next battle
     let randomEnemy;
     if (this.props.game.currentLocation === 'FOREST') {
@@ -91,6 +138,7 @@ export class CommandList extends React.Component {
     if (this.props.game.currentLocation === 'DUNGEON') {
       randomEnemy = dungeonEnemyDb[Math.floor(Math.random() * dungeonEnemyDb.length)];
     }
+    this.props.dispatch(enterExploreMode(this.props.game.currentLocation, messages));
     this.props.dispatch(populateEnemyObject(randomEnemy)); // may change this to an api call once db is setup
   }
 
@@ -104,13 +152,22 @@ export class CommandList extends React.Component {
     this.props.dispatch(toggleBattleMode(messages));
   }
 
+  useItems() {
+    console.log('tried to use items...');
+  }
+
+  useSkills() {
+    console.log('tried to use skills...');
+  }
+
   calculatePlayerAttack(player, enemy) {
     const oldHp = enemy.hp.current;
     const damage = (player.stats.attack - enemy.stats.defense) + Math.floor(Math.random() * player.level);
     let newHp = oldHp - damage;
+    let messages;
     if (newHp <= 0) {
       newHp = 0;
-      const messages = [
+      messages = [
         `${player.name} attacked!`,
         `${enemy.name} received ${damage} damage points!`,
         `${enemy.name} is defeated!`,
@@ -120,7 +177,7 @@ export class CommandList extends React.Component {
       this.props.dispatch(toggleVictoryMode(messages));
       this.props.dispatch(collectBattleRewards(enemy.rewards.exp, enemy.rewards.gold));
     } else {
-      const messages = [
+      messages = [
         `${player.name} attacked!`,
         `${enemy.name} received ${damage} damage points!`
       ];
@@ -133,9 +190,10 @@ export class CommandList extends React.Component {
     const oldHp = player.hp.current;
     const damage = (enemy.stats.attack - player.stats.defense) + Math.floor(Math.random() * enemy.level);
     let newHp = oldHp - damage;
+    let messages;
     if (newHp <= 0) {
       newHp = 0;
-      const messages = [
+      messages = [
         `${enemy.name} attacked!`,
         `${player.name} received ${damage} damage points!`,
         `${player.name} is defeated...`
@@ -143,7 +201,7 @@ export class CommandList extends React.Component {
       this.props.dispatch(updatePlayerHp(newHp));
       this.props.dispatch(toggleDefeatMode(messages));
     } else {
-      const messages = [
+      messages = [
         `${enemy.name} attacked!`,
         `${player.name} received ${damage} damage points!`,
         'What will you do next?'
@@ -151,6 +209,30 @@ export class CommandList extends React.Component {
       this.props.dispatch(updatePlayerHp(newHp));
       this.props.dispatch(finishEnemyTurn(messages));
     }
+  }
+
+  calculateEscape(player, enemy) {
+    const escapeChance = player.level / enemy.level;
+    let messages;
+    if (escapeChance > Math.random()) {
+      messages = [
+        `${player.name} successfully makes a daring escape`,
+        `from the ${enemy.name}!`,
+        `${player.name} gains 1 exp point and 1 gold...`
+      ];
+      this.props.dispatch(toggleVictoryMode(messages));
+      this.props.dispatch(collectBattleRewards(1, 1))
+    } else {
+      messages = [
+        `${player.name} tried to escape from the`,
+        `${enemy.name}! But was not successful...`
+      ];
+      this.props.dispatch(finishPlayerTurn(messages));
+    }
+  }
+
+  restartGame() {
+    console.log('tried to restart game...')
   }
 
   render() {
@@ -161,7 +243,7 @@ export class CommandList extends React.Component {
         <button onClick={() => this.enterExploration('FOREST')}>FOREST</button>
         <button onClick={() => this.enterExploration('MOUNTAIN')}>MOUNTAIN</button>
         <button onClick={() => this.enterExploration('DUNGEON')}>DUNGEON</button>
-        <button >STATUS</button>
+        <button onClick={() => this.viewPlayerStatus()}>STATUS</button>
       </section>
       );
     }
@@ -169,9 +251,9 @@ export class CommandList extends React.Component {
       return (
         <section id="townMode" className="menu command-list animate-reveal animate-last">
         <button onClick={() => this.engageConversation()}>PUB</button>
-        <button>SHOP</button>
-        <button>INN</button>
-        <button>STATUS</button>
+        <button onClick={() => this.engageInn()}>INN</button>
+        <button onClick={() => this.engageShop()}>SHOP</button>
+        <button onClick={() => this.viewPlayerStatus()}>STATUS</button>
         <button onClick={() => this.enterHub()}>EXIT</button>
       </section>
       );
@@ -179,7 +261,15 @@ export class CommandList extends React.Component {
     if (this.props.game.convoMode) {
       return (
         <section id="convoMode" className="menu command-list animate-reveal animate-last">
-        <button onClick={() => this.enterTown()}>OK</button>
+        <button onClick={() => this.resumeTown()}>OK</button>
+      </section>
+      );
+    }
+    if (this.props.game.innMode) {
+      return (
+        <section id="innMode" className="menu command-list animate-reveal animate-last">
+        <button onClick={() => this.stayAtInn()}>YES</button>
+        <button onClick={() => this.resumeTown()}>NO</button>
       </section>
       );
     }
@@ -187,7 +277,7 @@ export class CommandList extends React.Component {
       return (
         <section id="exploreMode" className="menu command-list animate-reveal animate-last">
         <button onClick={() => this.engageBattle()}>EXPLORE</button>
-        <button>STATUS</button>
+        <button onClick={() => this.viewPlayerStatus()}>STATUS</button>
         <button onClick={() => this.enterHub()}>EXIT</button>
       </section>
       );
@@ -196,9 +286,10 @@ export class CommandList extends React.Component {
       return (
         <section id="playerTurn" className="menu command-list animate-reveal animate-last">
         <button onClick={() => this.calculatePlayerAttack(this.props.player, this.props.enemy)}>ATTACK</button>
-        <button>ITEMS</button>
-        <button>STATUS</button>
-        <button>RUN</button>
+        <button onClick={() => this.useSkills()}>SKILLS</button>
+        <button onClick={() => this.useItems()}>ITEMS</button>
+        <button onClick={() => this.viewPlayerStatus()}>STATUS</button>
+        <button onClick={() => this.calculateEscape(this.props.player, this.props.enemy)}>ESCAPE</button>
       </section>
       );
     }
@@ -212,14 +303,14 @@ export class CommandList extends React.Component {
     if (this.props.game.victoryMode) {
       return (
         <section id="victoryMode" className="menu command-list animate-reveal animate-last">
-        <button onClick={() => this.resumeExploring()}>NEXT</button>
+        <button onClick={() => this.resumeExploration()}>OK</button>
       </section>
       );
     }
     if (this.props.game.defeatMode) {
       return (
         <section id="defeatMode" className="menu command-list animate-reveal animate-last">
-        <button>RELOAD...</button>
+        <button onClick={() => this.restartGame()}>RELOAD...</button>
       </section>
       );
     }

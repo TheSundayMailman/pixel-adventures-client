@@ -3,9 +3,8 @@ const initialState = {
   name: 'MISSINGNO',
   level: 1,
   hp: {current: 1, max: 1},
-  stats: {attack: 20, defense: 10},
+  stats: {attack: 1, defense: 1},
   rewards: {exp: 1, gold: 1}
-  
 };
 
 export const enemyReducer = (state = initialState, action) => {

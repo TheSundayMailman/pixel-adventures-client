@@ -4,9 +4,8 @@ const npcDb = [
     name: 'OLD MAN',
     messages: [
       'OLD MAN:',
-      'It\'s dangerous to go alone! Make sure you',
-      'are well equipped before venturing into the',
-      'wilderness!'
+      'It\'s dangerous to go alone! Make sure you are',
+      'well equipped before venturing into the wild!'
     ]
   },
   {
@@ -23,9 +22,9 @@ const npcDb = [
     name: 'EVIL-LOOKING PERSON',
     messages: [
       'EVIL-LOOKING PERSON:',
-      'Did you ever hear the story of Darth Plageus',
-      'the wise?',
-      ' ',
+      'Did you ever hear the tragedy of Darth',
+      'Plagueis The Wise? I thought not. It\'s not a',
+      'story the Jedi would tell you.',
       '(This guy is clearly drunk...)'
     ]
   },

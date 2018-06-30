@@ -3,6 +3,8 @@ const initialState = {
   hubMode: true,
   townMode: false,
   convoMode: false,
+  innMode: false,
+  shopMode: false,
   exploreMode: false,
   battleMode: false,
   playerTurn: false,
@@ -25,6 +27,8 @@ export const gameReducer = (state = initialState, action) => {
       hubMode: true,
       townMode: false,
       convoMode: false,
+      innMode: false,
+      shopMode: false,
       exploreMode: false,
       battleMode: false,
       playerTurn: false,
@@ -41,6 +45,8 @@ export const gameReducer = (state = initialState, action) => {
       hubMode: false,
       townMode: true,
       convoMode: false,
+      innMode: false,
+      shopMode: false,
       exploreMode: false,
       battleMode: false,
       playerTurn: false,
@@ -55,6 +61,28 @@ export const gameReducer = (state = initialState, action) => {
       ...state,
       townMode: false,
       convoMode: true,
+      innMode: false,
+      shopMode: false,
+      currentMessages: action.messages
+    };
+  }
+  if (action.type === 'TOGGLE_INN_MODE') {
+    return {
+      ...state,
+      townMode: false,
+      convoMode: false,
+      innMode: true,
+      shopMode: false,
+      currentMessages: action.messages
+    };
+  }
+  if (action.type === 'TOGGLE_SHOP_MODE') {
+    return {
+      ...state,
+      townMode: false,
+      convoMode: false,
+      innMode: false,
+      shopMode: true,
       currentMessages: action.messages
     };
   }
@@ -65,21 +93,8 @@ export const gameReducer = (state = initialState, action) => {
       hubMode: false,
       townMode: false,
       convoMode: false,
-      exploreMode: true,
-      battleMode: false,
-      playerTurn: false,
-      enemyTurn: false,
-      victoryMode: false,
-      defeatMode: false,
-      currentMessages: action.messages
-    };
-  }
-  if (action.type === 'TOGGLE_EXPLORE_MODE') {
-    return {
-      ...state,
-      hubMode: false,
-      townMode: false,
-      convoMode: false,
+      innMode: false,
+      shopMode: false,
       exploreMode: true,
       battleMode: false,
       playerTurn: false,
@@ -92,9 +107,6 @@ export const gameReducer = (state = initialState, action) => {
   if (action.type === 'TOGGLE_BATTLE_MODE') {
     return {
       ...state,
-      hubMode: false,
-      townMode: false,
-      convoMode: false,
       exploreMode: false,
       battleMode: true,
       playerTurn: true,
