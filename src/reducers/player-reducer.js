@@ -1,6 +1,6 @@
 const initialState = {
   name: 'ERDRICK',
-  level: 5,
+  level: 3,
   currentHp: 128,
   maxHp: 128,
   stats: {attack: 20, defense: 10},

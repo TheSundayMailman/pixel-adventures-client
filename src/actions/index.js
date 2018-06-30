@@ -1,3 +1,60 @@
+export const ENTER_HUB_MODE = 'ENTER_HUB_MODE';
+export const enterHubMode = (messages) => {
+  return {
+    type: ENTER_HUB_MODE,
+    messages
+  }
+};
+
+export const ENTER_TOWN_MODE = 'ENTER_TOWN_MODE';
+export const enterTownMode = (messages) => {
+  return {
+    type: ENTER_TOWN_MODE,
+    messages
+  }
+};
+
+export const ENTER_EXPLORE_MODE = 'ENTER_EXPLORE_MODE';
+export const enterExploreMode = (location, messages) => {
+  return {
+    type: ENTER_EXPLORE_MODE,
+    location,
+    messages
+  }
+};
+
+export const TOGGLE_EXPLORE_MODE = 'TOGGLE_EXPLORE_MODE';
+export const toggleExploreMode = (messages) => {
+  return {
+    type: TOGGLE_EXPLORE_MODE,
+    messages
+  }
+};
+
+export const POPULATE_ENEMY_OBJECT = 'POPULATE_ENEMY_OBJECT';
+export const populateEnemyObject = (enemy) => {
+  return {
+    type: POPULATE_ENEMY_OBJECT,
+    enemy,
+  };
+};
+
+// export const GET_NEW_ENEMY = 'GET_NEW_ENEMY';
+// export const getNewEnemy = () => (dispatch) => {
+//   fetch('api/address/here')
+//     .then(res => res.json())
+//     .then(enemy => disptach(populateEnemyObject(enemy)))
+//     .catch(err => console.error(err));
+// };
+
+export const TOGGLE_BATTLE_MODE = 'TOGGLE_BATTLE_MODE';
+export const toggleBattleMode = (messages) => {
+  return {
+    type: TOGGLE_BATTLE_MODE,
+    messages
+  }
+};
+
 export const UPDATE_PLAYER_HP = 'UPDATE_PLAYER_HP';
 export const updatePlayerHp = (newHp) => {
   return {
@@ -36,38 +93,6 @@ export const collectBattleRewards = (exp, gold) => {
     type: COLLECT_BATTLE_REWARDS,
     exp,
     gold
-  }
-};
-
-export const TOGGLE_EXPLORE_MODE = 'TOGGLE_EXPLORE_MODE';
-export const toggleExploreMode = (messages) => {
-  return {
-    type: TOGGLE_EXPLORE_MODE,
-    messages
-  }
-};
-
-export const POPULATE_ENEMY_OBJECT = 'POPULATE_ENEMY_OBJECT';
-export const populateEnemyObject = (enemy) => {
-  return {
-    type: POPULATE_ENEMY_OBJECT,
-    enemy,
-  };
-};
-
-// export const GET_NEW_ENEMY = 'GET_NEW_ENEMY';
-// export const getNewEnemy = () => (dispatch) => {
-//   fetch('api/address/here')
-//     .then(res => res.json())
-//     .then(enemy => disptach(populateEnemyObject(enemy)))
-//     .catch(err => console.error(err));
-// };
-
-export const TOGGLE_BATTLE_MODE = 'TOGGLE_BATTLE_MODE';
-export const toggleBattleMode = (messages) => {
-  return {
-    type: TOGGLE_BATTLE_MODE,
-    messages
   }
 };
 
