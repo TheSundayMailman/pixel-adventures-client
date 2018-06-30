@@ -97,7 +97,7 @@ export class CommandList extends React.Component {
   }
 
   calculatePlayerAttack(player, enemy) {
-    const oldHp = enemy.currentHp;
+    const oldHp = enemy.hp.current;
     const damage = (player.stats.attack - enemy.stats.defense) + Math.floor(Math.random() * player.level);
     let newHp = oldHp - damage;
     if (newHp <= 0) {
@@ -122,7 +122,7 @@ export class CommandList extends React.Component {
   }
 
   calculateEnemyAttack(enemy, player) {
-    const oldHp = player.currentHp;
+    const oldHp = player.hp.current;
     const damage = (enemy.stats.attack - player.stats.defense) + Math.floor(Math.random() * enemy.level);
     let newHp = oldHp - damage;
     if (newHp <= 0) {

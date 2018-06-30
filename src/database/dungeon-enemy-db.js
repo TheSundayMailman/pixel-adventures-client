@@ -3,8 +3,7 @@ const dungeonEnemyDb = [
     id: 1,
     name: 'WIZARD',
     level: 9,
-    currentHp: 80,
-    maxHp: 80,
+    hp: {current: 80, max: 80},
     stats: {attack: 70, defense: 10},
     rewards: {exp: 999, gold: 999},
   },
@@ -12,8 +11,7 @@ const dungeonEnemyDb = [
     id: 2,
     name: 'KNIGHT',
     level: 10,
-    currentHp: 110,
-    maxHp: 110,
+    hp: {current: 110, max: 110},
     stats: {attack: 50, defense: 10},
     rewards: {exp: 12, gold: 33}
   },
@@ -21,8 +19,7 @@ const dungeonEnemyDb = [
     id: 3,
     name: 'CENTAUR',
     level: 12,
-    currentHp: 170,
-    maxHp: 170,
+    hp: {current: 170, max: 170},
     stats: {attack: 60, defense: 10},
     rewards: {exp: 37, gold: 76}
   },
@@ -30,8 +27,7 @@ const dungeonEnemyDb = [
     id: 4,
     name: 'DRAGON',
     level: 15,
-    currentHp: 250,
-    maxHp: 250,
+    hp: {current: 250, max: 250},
     stats: {attack: 70, defense: 10},
     rewards: {exp: 29, gold: 65}
   }

@@ -1,8 +1,7 @@
 const initialState = {
   name: 'ERDRICK',
   level: 3,
-  currentHp: 128,
-  maxHp: 128,
+  hp: {current: 128, max: 128},
   stats: {attack: 20, defense: 10},
   exp: 634,
   gold: 796,
@@ -11,10 +10,9 @@ const initialState = {
 
 export const playerReducer = (state = initialState, action) => {
   if (action.type === 'UPDATE_PLAYER_HP') {
-    const newHp = action.newHp
     return {
       ...state,
-      currentHp: newHp
+      hp: {...state.hp, current: action.newHp}
     };
   }
   if (action.type === 'COLLECT_BATTLE_REWARDS') {

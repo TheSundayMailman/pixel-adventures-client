@@ -7,7 +7,7 @@ export class PlayerStatus extends React.Component {
       <section className="menu character-status">
         <h2>{this.props.player.name}</h2>
         <p>Level: {this.props.player.level}</p>
-        <p>HP: {this.props.player.currentHp} / {this.props.player.maxHp}</p>
+        <p>HP: {this.props.player.hp.current} / {this.props.player.hp.max}</p>
         <p>Gold: {this.props.player.gold}</p>
       </section>
     );
