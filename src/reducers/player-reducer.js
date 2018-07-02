@@ -4,7 +4,7 @@ const initialState = {
   level: 3,
   hp: {current: 1, max: 128},
   mp: {current: 1, max: 21},
-  stats: {attack: 20, defense: 10},
+  stats: {attack: 20, defense: 10, intelligence: 10},
   exp: 634,
   gold: 101,
   items: {potions: 2}

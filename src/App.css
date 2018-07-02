@@ -17,8 +17,26 @@ h2, p {
   position: relative;
   margin: 0 auto;
   background: black;
+  background-image: url(./images/BLANK.png);
   width: 640px;
   height: 480px;
+}
+
+/* BACKGROUND IMAGE FOR GAME CONTAINER */
+#ASTERA {
+  background-image: url(./images/ASTERA.jpg);
+}
+#TOWN {
+  background-image: url(./images/TOWN.jpg);
+}
+#FOREST {
+  background-image: url(./images/FOREST.jpg);
+}
+#MOUNTAIN {
+  background-image: url(./images/MOUNTAIN.jpg);
+}
+#DUNGEON {
+  background-image: url(./images/DUNGEON.jpg);
 }
 
 /* MENU STYLE */

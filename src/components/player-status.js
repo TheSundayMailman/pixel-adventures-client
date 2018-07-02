@@ -22,8 +22,10 @@ export class PlayerStatus extends React.Component {
           <p>LVL: {this.props.player.level}</p>
           <p>HP: {this.props.player.hp.current} / {this.props.player.hp.max}</p>
           <p>MP: {this.props.player.mp.current} / {this.props.player.mp.max}</p>
-          <p>ATTACK: {this.props.player.stats.attack}</p>
-          <p>DEFENSE: {this.props.player.stats.defense}</p>
+          <p>STATUS: NORMAL</p>
+          <p>ATK: {this.props.player.stats.attack}</p>
+          <p>DEF: {this.props.player.stats.defense}</p>
+          <p>INT: {this.props.player.stats.intelligence}</p>
           <p>SKILLS: NONE</p>
           <p>ITEMS: NONE</p>
           <p>GOLD: {this.props.player.gold}</p>
