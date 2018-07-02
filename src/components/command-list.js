@@ -6,10 +6,12 @@ import {
   enterTownMode,
   populateNpcObject,
   toggleConvoMode,
+  toggleInnMode,
   enterExploreMode,
   populateEnemyObject,
   toggleBattleMode,
   updateEnemyHp,
+  updatePlayerGold,
   updatePlayerHp,
   finishPlayerTurn,
   finishEnemyTurn,
@@ -18,10 +20,10 @@ import {
   toggleDefeatMode
 } from '../actions/index.js';
 
+import npcDb from '../database/npc-db.js';
 import forestEnemyDb from '../database/forest-enemy-db.js';
 import mountainEnemyDb from '../database/mountain-enemy-db.js';
 import dungeonEnemyDb from '../database/dungeon-enemy-db.js';
-import npcDb from '../database/npc-db.js';
 
 export class CommandList extends React.Component {
   viewPlayerStatus() {
@@ -68,11 +70,37 @@ export class CommandList extends React.Component {
   }
 
   engageInn() {
-    console.log('tried to visit inn...');
+    const messages = [
+      'INN-KEEPER:',
+      'Would you like to stay the night and restore',
+      'your HP?',
+      'It costs 50 GOLD per stay...'
+    ];
+    this.props.dispatch(toggleInnMode(messages));
   }
 
   stayAtInn() {
-    console.log('tried to stay at inn...');
+    const newHp = this.props.player.hp.max;
+    const oldGold = this.props.player.gold;
+    const newGold = oldGold - 50;
+    let messages;
+    if (newGold < 0) {
+      messages = [
+        'INN-KEEPER:',
+        'You do not have enough gold...'
+      ];
+      this.props.dispatch(toggleConvoMode(messages));
+    } else {
+      messages = [
+        'INN-KEEPER:',
+        'Thank you! Enjoy your stay!',
+        ' ',
+        '(Your HP is fully restored!)'
+      ];
+      this.props.dispatch(updatePlayerHp(newHp));
+      this.props.dispatch(updatePlayerGold(newGold));
+      this.props.dispatch(toggleConvoMode(messages));
+    }
   }
 
   engageShop() {

@@ -1,10 +1,10 @@
 const initialState = {
   name: 'ERDRICK',
   level: 3,
-  hp: {current: 128, max: 128},
+  hp: {current: 1, max: 128},
   stats: {attack: 20, defense: 10},
   exp: 634,
-  gold: 796,
+  gold: 0,
   items: {potions: 2}
 };
 
@@ -13,6 +13,12 @@ export const playerReducer = (state = initialState, action) => {
     return {
       ...state,
       hp: {...state.hp, current: action.newHp}
+    };
+  }
+  if (action.type === 'UPDATE_PLAYER_GOLD') {
+    return {
+      ...state,
+      gold: action.newGold
     };
   }
   if (action.type === 'COLLECT_BATTLE_REWARDS') {

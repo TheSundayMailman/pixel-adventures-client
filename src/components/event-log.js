@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 
 export class EventLog extends React.Component {
   render() {
-    const displayMessages = this.props.currentMessages.map((each, index) => {
-      return (<p key={index}>{each}</p>);
+    const displayMessages = this.props.currentMessages.map((message, index) => {
+      return (<p key={index}>{message}</p>);
       }
     );
     return (

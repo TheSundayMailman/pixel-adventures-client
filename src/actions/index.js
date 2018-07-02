@@ -22,6 +22,14 @@ export const toggleConvoMode = (messages) => {
   }
 };
 
+export const TOGGLE_INN_MODE = 'TOGGLE_INN_MODE';
+export const toggleInnMode = (messages) => {
+  return {
+    type: TOGGLE_INN_MODE,
+    messages
+  }
+};
+
 export const POPULATE_NPC_OBJECT = 'POPULATE_NPC_OBJECT';
 export const populateNpcObject = (npc) => {
   return {
@@ -76,6 +84,14 @@ export const updatePlayerHp = (newHp) => {
   return {
     type: UPDATE_PLAYER_HP,
     newHp,
+  };
+};
+
+export const UPDATE_PLAYER_GOLD = 'UPDATE_PLAYER_GOLD';
+export const updatePlayerGold = (newGold) => {
+  return {
+    type: UPDATE_PLAYER_GOLD,
+    newGold,
   };
 };
 
