@@ -1,5 +1,6 @@
 const initialState = {
   currentLocation: 'ASTERA',
+  statusMode: false,
   hubMode: true,
   townMode: false,
   convoMode: false,
@@ -20,6 +21,12 @@ const initialState = {
 };
 
 export const gameReducer = (state = initialState, action) => {
+  if (action.type === 'TOGGLE_STATUS_MODE') {
+    return {
+      ...state,
+      statusMode: !state.statusMode
+    };
+  }
   if (action.type === 'ENTER_HUB_MODE') {
     return {
       ...state,

@@ -5,6 +5,10 @@ import EventLog from './event-log.js';
 import CommandList from './command-list.js';
 
 export default class App extends React.Component {
+  componentDidMount() {
+    // fetch player data here
+  }
+
   render() {
     return (
         <main className="game-container">

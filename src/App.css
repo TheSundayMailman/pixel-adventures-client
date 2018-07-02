@@ -31,8 +31,14 @@ h2, p {
 /* POSITIONS OF MENUS */
 .character-status {
   display: inline-block;
+}
+#summaryView {
   width: 157px;
-  height: 110px;
+  height: 133px;
+}
+#fullView {
+  width: 640px;
+  height: 347px
 }
 .event-log {
   display: inline-block;

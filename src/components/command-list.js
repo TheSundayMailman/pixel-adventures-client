@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {
+  toggleStatusMode,
   enterHubMode,
   enterTownMode,
   populateNpcObject,
@@ -13,6 +14,7 @@ import {
   updateEnemyHp,
   updatePlayerGold,
   updatePlayerHp,
+  updatePlayerMp,
   finishPlayerTurn,
   finishEnemyTurn,
   collectBattleRewards,
@@ -27,7 +29,7 @@ import dungeonEnemyDb from '../database/dungeon-enemy-db.js';
 
 export class CommandList extends React.Component {
   viewPlayerStatus() {
-    console.log('tried to view status...');
+    this.props.dispatch(toggleStatusMode());
   }
 
   enterHub() {
@@ -73,7 +75,7 @@ export class CommandList extends React.Component {
     const messages = [
       'INN-KEEPER:',
       'Would you like to stay the night and restore',
-      'your HP?',
+      'your HP and MP?',
       'It costs 50 GOLD per stay...'
     ];
     this.props.dispatch(toggleInnMode(messages));
@@ -81,6 +83,7 @@ export class CommandList extends React.Component {
 
   stayAtInn() {
     const newHp = this.props.player.hp.max;
+    const newMp = this.props.player.mp.max;
     const oldGold = this.props.player.gold;
     const newGold = oldGold - 50;
     let messages;
@@ -95,9 +98,10 @@ export class CommandList extends React.Component {
         'INN-KEEPER:',
         'Thank you! Enjoy your stay!',
         ' ',
-        '(Your HP is fully restored!)'
+        '(Your HP and MP are fully restored!)'
       ];
       this.props.dispatch(updatePlayerHp(newHp));
+      this.props.dispatch(updatePlayerMp(newMp));
       this.props.dispatch(updatePlayerGold(newGold));
       this.props.dispatch(toggleConvoMode(messages));
     }
@@ -172,8 +176,8 @@ export class CommandList extends React.Component {
 
   engageBattle() {
     const messages = [
-      `As you explore the ${this.props.game.currentLocation}, a ${this.props.enemy.name} suddenly`,
-      'draws near!',
+      `As you explore the ${this.props.game.currentLocation}, a ${this.props.enemy.name}`,
+      'suddenly draws near!',
       'It prepares for battle!',
       'What will you do next?'
     ];
@@ -199,7 +203,7 @@ export class CommandList extends React.Component {
         `${player.name} attacked!`,
         `${enemy.name} received ${damage} damage points!`,
         `${enemy.name} is defeated!`,
-        `${player.name} gains ${enemy.rewards.exp} exp points and ${enemy.rewards.gold} gold!`
+        `${player.name} gains ${enemy.rewards.exp} EXP points and ${enemy.rewards.gold} GOLD!`
       ];
       this.props.dispatch(updateEnemyHp(newHp));
       this.props.dispatch(toggleVictoryMode(messages));
@@ -246,7 +250,7 @@ export class CommandList extends React.Component {
       messages = [
         `${player.name} successfully makes a daring escape`,
         `from the ${enemy.name}!`,
-        `${player.name} gains 1 exp point and 1 gold...`
+        `${player.name} gains 1 EXP point and 1 GOLD...`
       ];
       this.props.dispatch(toggleVictoryMode(messages));
       this.props.dispatch(collectBattleRewards(1, 1))
@@ -264,6 +268,13 @@ export class CommandList extends React.Component {
   }
 
   render() {
+    if (this.props.game.statusMode) {
+      return (
+        <section id="statusMode" className="menu command-list animate-reveal animate-last">
+        <button onClick={() => this.viewPlayerStatus()}>OK</button>
+      </section>
+      );
+    }
     if (this.props.game.hubMode) {
       return (
         <section id="hubMode" className="menu command-list animate-reveal animate-last">

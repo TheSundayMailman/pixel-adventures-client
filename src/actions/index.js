@@ -1,3 +1,10 @@
+export const TOGGLE_STATUS_MODE = 'TOGGLE_STATUS_MODE';
+export const toggleStatusMode = () => {
+  return {
+    type: TOGGLE_STATUS_MODE
+  };
+};
+
 export const ENTER_HUB_MODE = 'ENTER_HUB_MODE';
 export const enterHubMode = (messages) => {
   return {
@@ -39,8 +46,12 @@ export const populateNpcObject = (npc) => {
 };
 
 // export const GET_NEW_NPC = 'GET_NEW_NPC';
-// export const getNewNPC = () => (dispatch) => {
-//   fetch('api/address/here')
+// export const getNewNPC = () => (dispatch, getState) => {
+//   const authToken = getState().auth.authToken; // need to setup and import auth
+//   fetch('api/address/here', {
+//     method: 'GET',
+//     header: {Authorization: `Bearer ${authToken}`}
+//   })
 //     .then(res => res.json())
 //     .then(enemy => disptach(populateNpcObject(enemy)))
 //     .catch(err => console.error(err));
@@ -64,8 +75,12 @@ export const populateEnemyObject = (enemy) => {
 };
 
 // export const GET_NEW_ENEMY = 'GET_NEW_ENEMY';
-// export const getNewEnemy = () => (dispatch) => {
-//   fetch('api/address/here')
+// export const getNewEnemy = () => (dispatch, getState) => {
+//   const authToken = getState().auth.authToken; // need to setup and import auth
+//   fetch('api/address/here', {
+//     method: 'GET',
+//     header: {Authorization: `Bearer ${authToken}`}
+//   })
 //     .then(res => res.json())
 //     .then(enemy => disptach(populateEnemyObject(enemy)))
 //     .catch(err => console.error(err));
@@ -84,6 +99,14 @@ export const updatePlayerHp = (newHp) => {
   return {
     type: UPDATE_PLAYER_HP,
     newHp,
+  };
+};
+
+export const UPDATE_PLAYER_MP = 'UPDATE_PLAYER_MP';
+export const updatePlayerMp = (newMp) => {
+  return {
+    type: UPDATE_PLAYER_MP,
+    newMp,
   };
 };
 

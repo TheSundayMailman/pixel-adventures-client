@@ -1,10 +1,12 @@
 const initialState = {
   name: 'ERDRICK',
+  job: 'KNIGHT',
   level: 3,
   hp: {current: 1, max: 128},
+  mp: {current: 1, max: 21},
   stats: {attack: 20, defense: 10},
   exp: 634,
-  gold: 0,
+  gold: 101,
   items: {potions: 2}
 };
 
@@ -13,6 +15,12 @@ export const playerReducer = (state = initialState, action) => {
     return {
       ...state,
       hp: {...state.hp, current: action.newHp}
+    };
+  }
+  if (action.type === 'UPDATE_PLAYER_MP') {
+    return {
+      ...state,
+      mp: {...state.mp, current: action.newMp}
     };
   }
   if (action.type === 'UPDATE_PLAYER_GOLD') {
