@@ -143,12 +143,35 @@ export const finishEnemyTurn = (messages) => {
 };
 
 export const COLLECT_BATTLE_REWARDS = 'COLLECT_BATTLE_REWARDS';
-export const collectBattleRewards = (exp, gold) => {
+export const collectBattleRewards = (exp, gold, newNextLevel) => {
   return {
     type: COLLECT_BATTLE_REWARDS,
     exp,
-    gold
+    gold,
+    newNextLevel
   }
+};
+
+export const LEVEL_UP_PLAYER = 'LEVEL_UP_PLAYER';
+export const levelUpPlayer = (newLevel, newMaxHp, newMaxMp, newAttack, newDefense, newIntelligence, newNextLevel) => {
+  return {
+    type: LEVEL_UP_PLAYER,
+    newLevel,
+    newMaxHp,
+    newMaxMp,
+    newAttack,
+    newDefense,
+    newIntelligence,
+    newNextLevel
+  };
+}
+
+export const TOGGLE_LEVEL_UP_MODE = 'TOGGLE_LEVEL_UP_MODE';
+export const toggleLevelUpMode = (messages) => {
+  return {
+    type: TOGGLE_LEVEL_UP_MODE,
+    messages
+  };
 };
 
 export const TOGGLE_VICTORY_MODE = 'TOGGLE_VICTORY_MODE';

@@ -30,7 +30,7 @@ export class PlayerStatus extends React.Component {
           <p>ITEMS: NONE</p>
           <p>GOLD: {this.props.player.gold}</p>
           <p>EXP: {this.props.player.exp}</p>
-          <p>NEXT LEVEL UP: 999 EXP</p>
+          <p>NEXT LEVEL UP: {this.props.player.nextLevel} EXP</p>
         </section>
       );
     }

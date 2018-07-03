@@ -5,7 +5,7 @@ const forestEnemyDb = [
     level: 1,
     hp: {current: 5, max: 5},
     stats: {attack: 20, defense: 10},
-    rewards: {exp: 999, gold: 999},
+    rewards: {exp: 999, gold: 100},
   },
   {
     id: 2,

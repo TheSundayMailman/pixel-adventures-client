@@ -18,8 +18,10 @@ import {
   finishPlayerTurn,
   finishEnemyTurn,
   collectBattleRewards,
+  toggleLevelUpMode,
   toggleVictoryMode,
-  toggleDefeatMode
+  toggleDefeatMode,
+  levelUpPlayer
 } from '../actions/index.js';
 
 import npcDb from '../database/npc-db.js';
@@ -184,83 +186,143 @@ export class CommandList extends React.Component {
     this.props.dispatch(toggleBattleMode(messages));
   }
 
-  useItems() {
-    console.log('tried to use items...');
-  }
-
-  useSkills() {
-    console.log('tried to use skills...');
-  }
-
-  calculatePlayerAttack(player, enemy) {
-    const oldHp = enemy.hp.current;
-    const damage = (player.stats.attack - enemy.stats.defense) + Math.floor(Math.random() * player.level);
-    let newHp = oldHp - damage;
-    let messages;
-    if (newHp <= 0) {
-      newHp = 0;
-      messages = [
-        `${player.name} attacked!`,
-        `${enemy.name} received ${damage} damage points!`,
-        `${enemy.name} is defeated!`,
-        `${player.name} gains ${enemy.rewards.exp} EXP points and ${enemy.rewards.gold} GOLD!`
-      ];
-      this.props.dispatch(updateEnemyHp(newHp));
-      this.props.dispatch(toggleVictoryMode(messages));
-      this.props.dispatch(collectBattleRewards(enemy.rewards.exp, enemy.rewards.gold));
-    } else {
-      messages = [
-        `${player.name} attacked!`,
-        `${enemy.name} received ${damage} damage points!`
-      ];
-      this.props.dispatch(updateEnemyHp(newHp));
-      this.props.dispatch(finishPlayerTurn(messages));
-    }
-  }
-
-  calculateEnemyAttack(enemy, player) {
-    const oldHp = player.hp.current;
-    const damage = (enemy.stats.attack - player.stats.defense) + Math.floor(Math.random() * enemy.level);
-    let newHp = oldHp - damage;
-    let messages;
-    if (newHp <= 0) {
-      newHp = 0;
-      messages = [
-        `${enemy.name} attacked!`,
-        `${player.name} received ${damage} damage points!`,
-        `${player.name} is defeated...`
-      ];
-      this.props.dispatch(updatePlayerHp(newHp));
-      this.props.dispatch(toggleDefeatMode(messages));
-    } else {
-      messages = [
-        `${enemy.name} attacked!`,
-        `${player.name} received ${damage} damage points!`,
-        'What will you do next?'
-      ];
-      this.props.dispatch(updatePlayerHp(newHp));
-      this.props.dispatch(finishEnemyTurn(messages));
-    }
-  }
-
-  calculateEscape(player, enemy) {
+  processPlayerTurn(intent, player, enemy) {
+    // initialize constants needed to process player's turn
+    const oldEnemyHp = enemy.hp.current;
+    const oldNextLevel = player.nextLevel;
     const escapeChance = player.level / enemy.level;
+
+    // initialize variables depending on player's intent
+    let newNextLevel;
+    let damage;
+    let newEnemyHp;
     let messages;
-    if (escapeChance > Math.random()) {
-      messages = [
-        `${player.name} successfully makes a daring escape`,
-        `from the ${enemy.name}!`,
-        `${player.name} gains 1 EXP point and 1 GOLD...`
-      ];
-      this.props.dispatch(toggleVictoryMode(messages));
-      this.props.dispatch(collectBattleRewards(1, 1))
-    } else {
-      messages = [
-        `${player.name} tried to escape from the`,
-        `${enemy.name}! But was not successful...`
-      ];
-      this.props.dispatch(finishPlayerTurn(messages));
+
+    if (intent === 'attack') {
+      damage = (player.stats.attack - enemy.stats.defense) + Math.floor(Math.random() * player.level);
+      newEnemyHp = oldEnemyHp - damage;
+      if (newEnemyHp <= 0) {
+        newEnemyHp = 0;
+        newNextLevel = oldNextLevel - enemy.rewards.exp;
+        messages = [
+          `${player.name} attacked!`,
+          `${enemy.name} received ${damage} damage points!`,
+          `${enemy.name} is defeated!`,
+          `${player.name} gains ${enemy.rewards.exp} EXP points and ${enemy.rewards.gold} GOLD!`
+        ];
+        this.props.dispatch(updateEnemyHp(newEnemyHp));
+        this.props.dispatch(collectBattleRewards(enemy.rewards.exp, enemy.rewards.gold, newNextLevel));
+        if (newNextLevel <= 0) {
+          this.props.dispatch(toggleLevelUpMode(messages));
+        } else {
+          this.props.dispatch(toggleVictoryMode(messages));
+        }
+      } else {
+        messages = [
+          `${enemy.name} received ${damage} damage points!`
+        ];
+        this.props.dispatch(updateEnemyHp(newEnemyHp));
+        this.props.dispatch(finishPlayerTurn(messages));
+      }
     }
+
+    if (intent === 'items') {
+      console.log('item feature to come...');
+    }
+
+    if (intent === 'skills') {
+      console.log('skill feature to come...')
+    }
+
+    if (intent === 'escape') {
+      if (escapeChance > Math.random()) {
+        newNextLevel = oldNextLevel;
+        messages = [
+          `${player.name} successfully makes a daring escape`,
+          `from the ${enemy.name}!`,
+          `${player.name} gains 0 EXP point and 1 GOLD...`
+        ];
+        this.props.dispatch(toggleVictoryMode(messages));
+        this.props.dispatch(collectBattleRewards(0, 1, newNextLevel))
+      } else {
+        messages = [
+          `${player.name} tried to escape from the`,
+          `${enemy.name}! But was not successful...`
+        ];
+        this.props.dispatch(finishPlayerTurn(messages));
+      }
+    }
+  }
+
+  processEnemyTurn(intent, enemy, player) {
+    // initialize constants needed to process enemy's turn
+    const oldPlayerHp = player.hp.current;
+
+    // initialize variables depending on enemy's intent
+    let damage;
+    let newPlayerHp;
+    let messages;
+
+    if (intent === 'attack') {
+      damage = (enemy.stats.attack - player.stats.defense) + Math.floor(Math.random() * enemy.level);
+      newPlayerHp = oldPlayerHp - damage;
+      if (newPlayerHp <= 0) {
+        newPlayerHp = 0;
+        messages = [
+          `${enemy.name} attacked!`,
+          `${player.name} received ${damage} damage points!`,
+          `${player.name} is defeated...`
+        ];
+        this.props.dispatch(updatePlayerHp(newPlayerHp));
+        this.props.dispatch(toggleDefeatMode(messages));
+      } else {
+        messages = [
+          `${enemy.name} attacked!`,
+          `${player.name} received ${damage} damage points!`,
+          'What will you do next?'
+        ];
+        this.props.dispatch(updatePlayerHp(newPlayerHp));
+        this.props.dispatch(finishEnemyTurn(messages));
+      }
+    }
+  }
+
+  calculateLevelUp(player) {
+    const oldLevel = player.level;
+    const newLevel = oldLevel + 1;
+
+    const oldMaxHp = player.hp.max;
+    const hpGain = Math.floor(oldMaxHp * 0.1) + Math.floor(Math.random() * 10);
+    const newMaxHp = oldMaxHp + hpGain;
+
+    const oldMaxMp = player.mp.max;
+    const mpGain = Math.floor(oldMaxMp * 0.1) + Math.floor(Math.random() * 5);
+    const newMaxMp = oldMaxMp + mpGain;
+
+    const oldAttack = player.stats.attack;
+    const attackGain = Math.floor(oldAttack * 0.14) + Math.floor(Math.random() * 3);
+    const newAttack = oldAttack + attackGain;
+
+    const oldDefense = player.stats.defense;
+    const defenseGain = Math.floor(oldDefense * 0.12) + Math.floor(Math.random() * 6);
+    const newDefense = oldDefense + defenseGain;
+
+    const oldIntelligence = player.stats.intelligence;
+    const intelligenceGain = Math.floor(oldIntelligence * 0.1) + Math.floor(Math.random() * 3);
+    const newIntelligence = oldIntelligence + intelligenceGain;
+
+    // need a table for this...
+    const newNextLevel = 300; // need a table for this...
+
+    // also need to add skills
+    const messages = [
+      `${player.name} reached LVL ${newLevel}! HP increased by ${hpGain},`,
+      `MP increased by ${mpGain}, ATK increased by ${attackGain},`,
+      `DEF increased by ${defenseGain}, INT increased by ${intelligenceGain}!`,
+      `Learned a new skill: BASH!`
+    ];
+    this.props.dispatch(levelUpPlayer(newLevel, newMaxHp, newMaxMp, newAttack, newDefense, newIntelligence, newNextLevel));
+    this.props.dispatch(toggleVictoryMode(messages));
   }
 
   restartGame() {
@@ -324,18 +386,25 @@ export class CommandList extends React.Component {
     if (this.props.game.battleMode && this.props.game.playerTurn) {
       return (
         <section id="playerTurn" className="menu command-list animate-reveal animate-last">
-        <button onClick={() => this.calculatePlayerAttack(this.props.player, this.props.enemy)}>ATTACK</button>
-        <button onClick={() => this.useSkills()}>SKILLS</button>
-        <button onClick={() => this.useItems()}>ITEMS</button>
+        <button onClick={() => this.processPlayerTurn('attack', this.props.player, this.props.enemy)}>ATTACK</button>
+        <button onClick={() => this.processPlayerTurn('skills', this.props.player, this.props.enemy)}>SKILLS</button>
+        <button onClick={() => this.processPlayerTurn('items', this.props.player, this.props.enemy)}>ITEMS</button>
         <button onClick={() => this.viewPlayerStatus()}>STATUS</button>
-        <button onClick={() => this.calculateEscape(this.props.player, this.props.enemy)}>ESCAPE</button>
+        <button onClick={() => this.processPlayerTurn('escape', this.props.player, this.props.enemy)}>ESCAPE</button>
       </section>
       );
     }
     if (this.props.game.battleMode && this.props.game.enemyTurn) {
       return (
         <section id="enemyTurn" className="menu command-list animate-reveal animate-last">
-        <button onClick={() => this.calculateEnemyAttack(this.props.enemy, this.props.player)}>NEXT</button>
+        <button onClick={() => this.processEnemyTurn('attack', this.props.enemy, this.props.player)}>NEXT</button>
+      </section>
+      );
+    }
+    if (this.props.game.levelUpMode) {
+      return (
+        <section id="levelUpMode" className="menu command-list animate-reveal animate-last">
+        <button onClick={() => this.calculateLevelUp(this.props.player)}>OK</button>
       </section>
       );
     }

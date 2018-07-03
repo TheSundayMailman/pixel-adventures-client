@@ -11,6 +11,7 @@ const initialState = {
   playerTurn: false,
   enemyTurn: false,
   victoryMode: false,
+  levelUpMode: false,
   defeatMode: false,
   currentMessages: [
     'You are now back in the world of ASTERA! Pick',
@@ -139,6 +140,19 @@ export const gameReducer = (state = initialState, action) => {
       currentMessages: action.messages
     };
   }
+  if (action.type === 'TOGGLE_LEVEL_UP_MODE') {
+    return {
+      ...state,
+      exploreMode: false,
+      battleMode: false,
+      playerTurn: false,
+      enemyTurn: false,
+      victoryMode: false,
+      levelUpMode: true,
+      defeatMode: false,
+      currentMessages: action.messages
+    };
+  }
   if (action.type === 'TOGGLE_VICTORY_MODE') {
     return {
       ...state,
@@ -147,6 +161,7 @@ export const gameReducer = (state = initialState, action) => {
       playerTurn: false,
       enemyTurn: false,
       victoryMode: true,
+      levelUpMode: false,
       defeatMode: false,
       currentMessages: action.messages
     };
