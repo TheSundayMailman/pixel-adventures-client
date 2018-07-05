@@ -30,16 +30,25 @@ export const gameReducer = (state = initialState, action) => {
       statusMode: !state.statusMode
     };
   }
-  if (action.type === 'TOGGLE_NPC_DISPLAY') {
+  if (action.type === 'ENABLE_NPC_DISPLAY') {
     return {
       ...state,
-      npcDisplay: !state.npcDisplay
+      npcDisplay: true,
+      enemyDisplay: false
     };
   }
-  if (action.type === 'TOGGLE_ENEMY_DISPLAY') {
+  if (action.type === 'ENABLE_ENEMY_DISPLAY') {
     return {
       ...state,
-      enemyDisplay: !state.enemyDisplay
+      npcDisplay: false,
+      enemyDisplay: true
+    };
+  }
+  if (action.type === 'DISABLE_SPRITE_DISPLAY') {
+    return {
+      ...state,
+      npcDisplay: false,
+      enemyDisplay: false
     };
   }
   if (action.type === 'ENTER_HUB_MODE') {

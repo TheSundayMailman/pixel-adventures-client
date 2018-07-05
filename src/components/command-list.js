@@ -3,8 +3,9 @@ import {connect} from 'react-redux';
 
 import {
   toggleStatusMode,
-  toggleNpcDisplay,
-  toggleEnemyDisplay,
+  enableNpcDisplay,
+  enableEnemyDisplay,
+  disableSpriteDisplay,
   enterHubMode,
   enterTownMode,
   populateNpcObject,
@@ -64,7 +65,7 @@ export class CommandList extends React.Component {
       'You are in back in TOWN.',
       'Where will you go next?'
     ];
-    this.props.dispatch(toggleNpcDisplay());
+    this.props.dispatch(disableSpriteDisplay());
     this.props.dispatch(enterTownMode(messages));
     // below generates a new npc for next conversation
     const randomNpc = npcDb[Math.floor(Math.random() * npcDb.length)];
@@ -73,7 +74,7 @@ export class CommandList extends React.Component {
 
   engageConversation() {
     const messages = this.props.npc.messages;
-    this.props.dispatch(toggleNpcDisplay());
+    this.props.dispatch(enableNpcDisplay());
     this.props.dispatch(toggleConvoMode(messages));
   }
 
@@ -84,7 +85,7 @@ export class CommandList extends React.Component {
       'your HP and MP?',
       'It costs 50 GOLD per stay...'
     ];
-    this.props.dispatch(toggleNpcDisplay());
+    this.props.dispatch(enableNpcDisplay());
     this.props.dispatch(toggleInnMode(messages));
   }
 
@@ -177,6 +178,7 @@ export class CommandList extends React.Component {
     if (this.props.game.currentLocation === 'DUNGEON') {
       randomEnemy = dungeonEnemyDb[Math.floor(Math.random() * dungeonEnemyDb.length)];
     }
+    this.props.dispatch(disableSpriteDisplay());
     this.props.dispatch(enterExploreMode(this.props.game.currentLocation, messages));
     this.props.dispatch(populateEnemyObject(randomEnemy)); // may change this to an api call once db is setup
   }
@@ -188,7 +190,7 @@ export class CommandList extends React.Component {
       'It prepares for battle!',
       'What will you do next?'
     ];
-    this.props.dispatch(toggleEnemyDisplay());
+    this.props.dispatch(enableEnemyDisplay());
     this.props.dispatch(toggleBattleMode(messages));
   }
 
@@ -250,7 +252,7 @@ export class CommandList extends React.Component {
         ];
         this.props.dispatch(toggleVictoryMode(messages));
         this.props.dispatch(collectBattleRewards(0, 1, newNextLevel));
-        this.props.dispatch(toggleEnemyDisplay());
+        this.props.dispatch(disableSpriteDisplay());
       } else {
         messages = [
           `${player.name} tried to escape from the`,
@@ -330,7 +332,7 @@ export class CommandList extends React.Component {
     ];
     this.props.dispatch(levelUpPlayer(newLevel, newMaxHp, newMaxMp, newAttack, newDefense, newIntelligence, newNextLevel));
     this.props.dispatch(toggleVictoryMode(messages));
-    this.props.dispatch(toggleEnemyDisplay());
+    this.props.dispatch(disableSpriteDisplay());
   }
 
   restartGame() {

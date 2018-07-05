@@ -5,19 +5,27 @@ export const toggleStatusMode = () => {
   };
 };
 
-export const TOGGLE_NPC_DISPLAY = 'TOGGLE_NPC_DISPLAY';
-export const toggleNpcDisplay = () => {
+export const ENABLE_NPC_DISPLAY = 'ENABLE_NPC_DISPLAY';
+export const enableNpcDisplay = () => {
   return {
-    type: TOGGLE_NPC_DISPLAY
+    type: ENABLE_NPC_DISPLAY
   };
 };
 
-export const TOGGLE_ENEMY_DISPLAY = 'TOGGLE_ENEMY_DISPLAY';
-export const toggleEnemyDisplay = () => {
+export const ENABLE_ENEMY_DISPLAY = 'ENABLE_ENEMY_DISPLAY';
+export const enableEnemyDisplay = () => {
   return {
-    type: TOGGLE_ENEMY_DISPLAY
+    type: ENABLE_ENEMY_DISPLAY
   };
 };
+
+export const DISABLE_SPRITE_DISPLAY = 'DISABLE_SPRITE_DISPLAY';
+export const disableSpriteDisplay = () => {
+  return {
+    type: DISABLE_SPRITE_DISPLAY
+  };
+};
+
 
 export const ENTER_HUB_MODE = 'ENTER_HUB_MODE';
 export const enterHubMode = (messages) => {
