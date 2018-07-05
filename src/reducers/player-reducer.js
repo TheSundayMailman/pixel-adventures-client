@@ -22,11 +22,11 @@ const initialState = {
     'HELM-SPLITTER'
   ],
   items: [
-    {name: 'POTION', quantity: 12},
-    {name: 'HI-POTION', quantity: 3},
-    {name: 'ETHER', quantity: 3},
-    {name: 'HI-ETHER', quantity: 3},
-    {name: 'ELIXIR', quantity: 1}
+    {id: 1, name: 'POTION', quantity: 1},
+    {id: 2, name: 'HI-POTION', quantity: 1},
+    {id: 3, name: 'ETHER', quantity: 1},
+    {id: 4, name: 'HI-ETHER', quantity: 1},
+    {id: 5, name: 'ELIXIR', quantity: 3}
   ],
   exp: 634,
   gold: 51,
@@ -48,7 +48,8 @@ export const playerReducer = (state = initialState, action) => {
   }
   if (action.type === 'UPDATE_PLAYER_ITEMS') {
     return {
-      ...state
+      ...state,
+      items: action.newItems
     };
   }
   if (action.type === 'UPDATE_PLAYER_GOLD') {

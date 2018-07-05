@@ -31,9 +31,12 @@ export class SkillList extends React.Component {
     let messages;
 
     if (currentSkill.type === 'attack') {
-      damage = Math.floor(player.stats.attack * currentSkill.power * 0.7);
-      newPlayerMp = oldPlayerMp - currentSkill.mp;
+      damage = Math.floor(player.stats.attack * currentSkill.power * 0.7) - enemy.stats.defense - Math.floor(Math.random() * enemy.level * 0.5);
+      if (damage <= 0) {
+        damage = Math.floor(Math.random() * 10) + 1;
+      }
       newEnemyHp = oldEnemyHp - damage;
+      newPlayerMp = oldPlayerMp - currentSkill.mp;
       if (newPlayerMp <= 0) {
         messages = [
           `${player.name} tried to use ${skillName}!`,
@@ -60,6 +63,7 @@ export class SkillList extends React.Component {
         }
       } else {
         messages = [
+          `${player.name} used ${skillName}!`,
           `${enemy.name} received ${damage} damage points!`
         ];
         this.props.dispatch(updatePlayerMp(newPlayerMp));

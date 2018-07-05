@@ -4,7 +4,7 @@ const mountainEnemyDb = [
     name: 'FAIRY',
     level: 7,
     hp: {current: 30, max: 30},
-    stats: {attack: 30, defense: 10},
+    stats: {attack: 28, defense: 14},
     rewards: {exp: 999, gold: 999},
   },
   {
@@ -12,7 +12,7 @@ const mountainEnemyDb = [
     name: 'HARPY',
     level: 8,
     hp: {current: 55, max: 55},
-    stats: {attack: 25, defense: 10},
+    stats: {attack: 32, defense: 16},
     rewards: {exp: 12, gold: 33}
   },
   {
@@ -20,7 +20,7 @@ const mountainEnemyDb = [
     name: 'OGRE',
     level: 9,
     hp: {current: 80, max: 80},
-    stats: {attack: 30, defense: 20},
+    stats: {attack: 35, defense: 18},
     rewards: {exp: 37, gold: 76}
   },
   {
@@ -28,7 +28,7 @@ const mountainEnemyDb = [
     name: 'GRIFFON',
     level: 10,
     hp: {current: 90, max: 90},
-    stats: {attack: 35, defense: 20},
+    stats: {attack: 39, defense: 21},
     rewards: {exp: 29, gold: 65}
   }
 ];

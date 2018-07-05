@@ -147,9 +147,10 @@ export const updatePlayerMp = (newMp) => {
 };
 
 export const UPDATE_PLAYER_ITEMS = 'UPDATE_PLAYER_ITEMS';
-export const updatePlayerItems = () => {
+export const updatePlayerItems = (newItems) => {
   return {
-    type: UPDATE_PLAYER_ITEMS
+    type: UPDATE_PLAYER_ITEMS,
+    newItems
   };
 };
 

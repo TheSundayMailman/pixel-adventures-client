@@ -210,6 +210,9 @@ export class CommandList extends React.Component {
 
     if (intent === 'ATTACK') {
       damage = (player.stats.attack - enemy.stats.defense) + Math.floor(Math.random() * player.level);
+      if (damage <= 0) {
+        damage = 1;
+      }
       newEnemyHp = oldEnemyHp - damage;
       if (newEnemyHp <= 0) {
         newEnemyHp = 0;
@@ -276,6 +279,9 @@ export class CommandList extends React.Component {
 
     if (intent === 'ATTACK') {
       damage = (enemy.stats.attack - player.stats.defense) + Math.floor(Math.random() * enemy.level);
+      if (damage <= 0) {
+        damage = 1;
+      }
       newPlayerHp = oldPlayerHp - damage;
       if (newPlayerHp <= 0) {
         newPlayerHp = 0;
@@ -351,7 +357,7 @@ export class CommandList extends React.Component {
     if (this.props.game.itemMode || this.props.game.skillMode) {
       return (
         <section id="listMode" className="menu command-list animate-reveal animate-last">
-          <button>WAITING...</button>
+          <p>WAITING...</p>
         </section>
       );
     }

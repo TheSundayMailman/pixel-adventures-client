@@ -6,9 +6,6 @@ import {
   updatePlayerHp,
   updatePlayerMp,
   updatePlayerItems,
-  collectBattleRewards,
-  toggleLevelUpMode,
-  toggleVictoryMode,
   finishPlayerTurn
 } from '../actions/index.js';
 
@@ -23,6 +20,17 @@ export class ItemList extends React.Component {
     const oldPlayerHp = player.hp.current;
     const oldPlayerMp = player.mp.current;
     const oldPlayerItems = player.items;
+
+    const newPlayerItems = oldPlayerItems
+      .map(item => {
+        if (item.name === currentItem.name) {
+          return {...item, quantity: item.quantity -1};
+        } else {
+          return item;
+        }
+      })
+      .filter(item => item.quantity >= 1)
+      .sort((a, b) => a.id - b.id);
 
     // initialize variables depending on player's item type
     let newPlayerHp;
@@ -39,7 +47,7 @@ export class ItemList extends React.Component {
         `${currentItem.power} health points restored!`
       ];
       this.props.dispatch(updatePlayerHp(newPlayerHp));
-      this.props.dispatch(updatePlayerItems());
+      this.props.dispatch(updatePlayerItems(newPlayerItems));
       this.props.dispatch(finishPlayerTurn(messages));
     }
 
@@ -53,7 +61,7 @@ export class ItemList extends React.Component {
         `${currentItem.power} magic points restored!`
       ];
       this.props.dispatch(updatePlayerMp(newPlayerMp));
-      this.props.dispatch(updatePlayerItems());
+      this.props.dispatch(updatePlayerItems(newPlayerItems));
       this.props.dispatch(finishPlayerTurn(messages));
     }
 
@@ -72,15 +80,15 @@ export class ItemList extends React.Component {
       ];
       this.props.dispatch(updatePlayerHp(newPlayerHp));
       this.props.dispatch(updatePlayerMp(newPlayerMp));
-      this.props.dispatch(updatePlayerItems());
+      this.props.dispatch(updatePlayerItems(newPlayerItems));
       this.props.dispatch(finishPlayerTurn(messages));
     }
   }
 
   render() {
     if (this.props.game.itemMode) {
-      const itemButtons = this.props.player.items.map((item, index) =>
-        <button onClick={() => this.useItem(item.name, item.quantity, this.props.player, this.props.enemy)}key={index}>{item.name}: {item.quantity}</button>
+      const itemButtons = this.props.player.items.map(item =>
+        <button onClick={() => this.useItem(item.name, item.quantity, this.props.player, this.props.enemy)}key={item.id}>{item.name}: {item.quantity}</button>
       );
       return (
         <section className="menu item-list">

@@ -4,7 +4,7 @@ const forestEnemyDb = [
     name: 'SLIME',
     level: 1,
     hp: {current: 5, max: 5},
-    stats: {attack: 20, defense: 10},
+    stats: {attack: 1, defense: 1},
     rewards: {exp: 999, gold: 100},
   },
   {
@@ -12,7 +12,7 @@ const forestEnemyDb = [
     name: 'GHOUL',
     level: 3,
     hp: {current: 23, max: 23},
-    stats: {attack: 20, defense: 10},
+    stats: {attack: 10, defense: 5},
     rewards: {exp: 12, gold: 33}
   },
   {
@@ -28,7 +28,7 @@ const forestEnemyDb = [
     name: 'SKELETON',
     level: 5,
     hp: {current: 38, max: 38},
-    stats: {attack: 20, defense: 10},
+    stats: {attack: 25, defense: 13},
     rewards: {exp: 29, gold: 65}
   }
 ];
