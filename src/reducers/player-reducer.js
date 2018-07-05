@@ -5,10 +5,10 @@ const initialState = {
   hp: {current: 1, max: 128},
   mp: {current: 1, max: 21},
   stats: {attack: 20, defense: 10, intelligence: 10},
-  skills: {BASH: 5},
+  skills: ['SHIELD-BASH', 'X-STRIKE', 'METEOR-SLASH', 'HELM-SPLITTER'],
+  items: [{'POTION': 12}, {'HI-POTION': 3}, {'ETHER': 3}, {'HI-ETHER': 3}, {'ELIXIR': 1}],
   exp: 634,
   gold: 51,
-  items: {potions: 2},
   nextLevel: 1
 };
 

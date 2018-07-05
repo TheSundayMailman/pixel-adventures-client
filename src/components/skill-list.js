@@ -3,15 +3,17 @@ import {connect} from 'react-redux';
 
 import {toggleSkillMode} from '../actions/index.js';
 
+import skillSet from '../database/skill-db.js';
+
 export class SkillList extends React.Component {
   render() {
+    const skillButtons = this.props.skills.map((skillName, index) => 
+      <button onClick={() => console.log(skillName)} key={index}>{skillName}: {skillSet[skillName].mp} MP</button>
+    );
     if (this.props.skillMode) {
       return (
         <section className="menu skill-list">
-          <button>BASH: 5 MP</button>
-          <button>X-SLASH: 10 MP</button>
-          <button>SHIELD-CHARGE: 15 MP</button>
-          <button>HELM-SPLITTER: 20 MP</button>
+          {skillButtons}
           <button onClick={() => this.props.dispatch(toggleSkillMode())}>CANCEL</button>
         </section>
       );
@@ -22,7 +24,8 @@ export class SkillList extends React.Component {
 
 const mapStateToStore = (state, prop) => {
   return {
-    skillMode: state.game.skillMode
+    skillMode: state.game.skillMode,
+    skills: state.player.skills
   };
 }
 
