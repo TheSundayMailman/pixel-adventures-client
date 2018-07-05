@@ -7,7 +7,7 @@ const initialState = {
   stats: {attack: 20, defense: 10, intelligence: 10},
   skills: {BASH: 5},
   exp: 634,
-  gold: 101,
+  gold: 51,
   items: {potions: 2},
   nextLevel: 1
 };

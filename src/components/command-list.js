@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 
 import {
   toggleStatusMode,
+  toggleNpcDisplay,
+  toggleEnemyDisplay,
   enterHubMode,
   enterTownMode,
   populateNpcObject,
@@ -62,6 +64,7 @@ export class CommandList extends React.Component {
       'You are in back in TOWN.',
       'Where will you go next?'
     ];
+    this.props.dispatch(toggleNpcDisplay());
     this.props.dispatch(enterTownMode(messages));
     // below generates a new npc for next conversation
     const randomNpc = npcDb[Math.floor(Math.random() * npcDb.length)];
@@ -70,6 +73,7 @@ export class CommandList extends React.Component {
 
   engageConversation() {
     const messages = this.props.npc.messages;
+    this.props.dispatch(toggleNpcDisplay());
     this.props.dispatch(toggleConvoMode(messages));
   }
 
@@ -80,6 +84,7 @@ export class CommandList extends React.Component {
       'your HP and MP?',
       'It costs 50 GOLD per stay...'
     ];
+    this.props.dispatch(toggleNpcDisplay());
     this.props.dispatch(toggleInnMode(messages));
   }
 
@@ -183,6 +188,7 @@ export class CommandList extends React.Component {
       'It prepares for battle!',
       'What will you do next?'
     ];
+    this.props.dispatch(toggleEnemyDisplay());
     this.props.dispatch(toggleBattleMode(messages));
   }
 
@@ -198,7 +204,7 @@ export class CommandList extends React.Component {
     let newEnemyHp;
     let messages;
 
-    if (intent === 'attack') {
+    if (intent === 'ATTACK') {
       damage = (player.stats.attack - enemy.stats.defense) + Math.floor(Math.random() * player.level);
       newEnemyHp = oldEnemyHp - damage;
       if (newEnemyHp <= 0) {
@@ -226,15 +232,15 @@ export class CommandList extends React.Component {
       }
     }
 
-    if (intent === 'items') {
+    if (intent === 'ITEMS') {
       console.log('item feature to come...');
     }
 
-    if (intent === 'skills') {
+    if (intent === 'SKILLS') {
       console.log('skill feature to come...')
     }
 
-    if (intent === 'escape') {
+    if (intent === 'ESCAPE') {
       if (escapeChance > Math.random()) {
         newNextLevel = oldNextLevel;
         messages = [
@@ -243,7 +249,8 @@ export class CommandList extends React.Component {
           `${player.name} gains 0 EXP point and 1 GOLD...`
         ];
         this.props.dispatch(toggleVictoryMode(messages));
-        this.props.dispatch(collectBattleRewards(0, 1, newNextLevel))
+        this.props.dispatch(collectBattleRewards(0, 1, newNextLevel));
+        this.props.dispatch(toggleEnemyDisplay());
       } else {
         messages = [
           `${player.name} tried to escape from the`,
@@ -263,7 +270,7 @@ export class CommandList extends React.Component {
     let newPlayerHp;
     let messages;
 
-    if (intent === 'attack') {
+    if (intent === 'ATTACK') {
       damage = (enemy.stats.attack - player.stats.defense) + Math.floor(Math.random() * enemy.level);
       newPlayerHp = oldPlayerHp - damage;
       if (newPlayerHp <= 0) {
@@ -323,103 +330,104 @@ export class CommandList extends React.Component {
     ];
     this.props.dispatch(levelUpPlayer(newLevel, newMaxHp, newMaxMp, newAttack, newDefense, newIntelligence, newNextLevel));
     this.props.dispatch(toggleVictoryMode(messages));
+    this.props.dispatch(toggleEnemyDisplay());
   }
 
   restartGame() {
-    console.log('tried to restart game...')
+    console.log('tried to restart game...');
   }
 
   render() {
     if (this.props.game.statusMode) {
       return (
         <section id="statusMode" className="menu command-list animate-reveal animate-last">
-        <button onClick={() => this.viewPlayerStatus()}>OK</button>
-      </section>
+          <button onClick={() => this.viewPlayerStatus()}>OK</button>
+        </section>
       );
     }
     if (this.props.game.hubMode) {
       return (
         <section id="hubMode" className="menu command-list animate-reveal animate-last">
-        <button onClick={() => this.enterTown()}>TOWN</button>
-        <button onClick={() => this.enterExploration('FOREST')}>FOREST</button>
-        <button onClick={() => this.enterExploration('MOUNTAIN')}>MOUNTAIN</button>
-        <button onClick={() => this.enterExploration('DUNGEON')}>DUNGEON</button>
-        <button onClick={() => this.viewPlayerStatus()}>STATUS</button>
-      </section>
+          <button onClick={() => this.enterTown()}>TOWN</button>
+          <button onClick={() => this.enterExploration('FOREST')}>FOREST</button>
+          <button onClick={() => this.enterExploration('MOUNTAIN')}>MOUNTAIN</button>
+          <button onClick={() => this.enterExploration('DUNGEON')}>DUNGEON</button>
+          <button onClick={() => this.viewPlayerStatus()}>STATUS</button>
+        </section>
       );
     }
     if (this.props.game.townMode) {
       return (
         <section id="townMode" className="menu command-list animate-reveal animate-last">
-        <button onClick={() => this.engageConversation()}>PUB</button>
-        <button onClick={() => this.engageInn()}>INN</button>
-        <button onClick={() => this.engageShop()}>SHOP</button>
-        <button onClick={() => this.viewPlayerStatus()}>STATUS</button>
-        <button onClick={() => this.enterHub()}>EXIT</button>
-      </section>
+          <button onClick={() => this.engageConversation()}>PUB</button>
+          <button onClick={() => this.engageInn()}>INN</button>
+          <button onClick={() => this.engageShop()}>SHOP</button>
+          <button onClick={() => this.viewPlayerStatus()}>STATUS</button>
+          <button onClick={() => this.enterHub()}>EXIT</button>
+        </section>
       );
     }
     if (this.props.game.convoMode) {
       return (
         <section id="convoMode" className="menu command-list animate-reveal animate-last">
-        <button onClick={() => this.resumeTown()}>OK</button>
-      </section>
+          <button onClick={() => this.resumeTown()}>OK</button>
+        </section>
       );
     }
     if (this.props.game.innMode) {
       return (
         <section id="innMode" className="menu command-list animate-reveal animate-last">
-        <button onClick={() => this.stayAtInn()}>YES</button>
-        <button onClick={() => this.resumeTown()}>NO</button>
-      </section>
+          <button onClick={() => this.stayAtInn()}>YES</button>
+          <button onClick={() => this.resumeTown()}>NO</button>
+        </section>
       );
     }
     if (this.props.game.exploreMode) {
       return (
         <section id="exploreMode" className="menu command-list animate-reveal animate-last">
-        <button onClick={() => this.engageBattle()}>EXPLORE</button>
-        <button onClick={() => this.viewPlayerStatus()}>STATUS</button>
-        <button onClick={() => this.enterHub()}>EXIT</button>
-      </section>
+          <button onClick={() => this.engageBattle()}>EXPLORE</button>
+          <button onClick={() => this.viewPlayerStatus()}>STATUS</button>
+          <button onClick={() => this.enterHub()}>EXIT</button>
+        </section>
       );
     }
     if (this.props.game.battleMode && this.props.game.playerTurn) {
       return (
         <section id="playerTurn" className="menu command-list animate-reveal animate-last">
-        <button onClick={() => this.processPlayerTurn('attack', this.props.player, this.props.enemy)}>ATTACK</button>
-        <button onClick={() => this.processPlayerTurn('skills', this.props.player, this.props.enemy)}>SKILLS</button>
-        <button onClick={() => this.processPlayerTurn('items', this.props.player, this.props.enemy)}>ITEMS</button>
-        <button onClick={() => this.viewPlayerStatus()}>STATUS</button>
-        <button onClick={() => this.processPlayerTurn('escape', this.props.player, this.props.enemy)}>ESCAPE</button>
-      </section>
+          <button onClick={() => this.processPlayerTurn('ATTACK', this.props.player, this.props.enemy)}>ATTACK</button>
+          <button onClick={() => this.processPlayerTurn('SKILLS', this.props.player, this.props.enemy)}>SKILLS</button>
+          <button onClick={() => this.processPlayerTurn('ITEMS', this.props.player, this.props.enemy)}>ITEMS</button>
+          <button onClick={() => this.viewPlayerStatus()}>STATUS</button>
+          <button onClick={() => this.processPlayerTurn('ESCAPE', this.props.player, this.props.enemy)}>RUN</button>
+        </section>
       );
     }
     if (this.props.game.battleMode && this.props.game.enemyTurn) {
       return (
         <section id="enemyTurn" className="menu command-list animate-reveal animate-last">
-        <button onClick={() => this.processEnemyTurn('attack', this.props.enemy, this.props.player)}>NEXT</button>
-      </section>
+          <button onClick={() => this.processEnemyTurn('ATTACK', this.props.enemy, this.props.player)}>NEXT</button>
+        </section>
       );
     }
     if (this.props.game.levelUpMode) {
       return (
         <section id="levelUpMode" className="menu command-list animate-reveal animate-last">
-        <button onClick={() => this.calculateLevelUp(this.props.player)}>OK</button>
-      </section>
+          <button onClick={() => this.calculateLevelUp(this.props.player)}>OK</button>
+        </section>
       );
     }
     if (this.props.game.victoryMode) {
       return (
         <section id="victoryMode" className="menu command-list animate-reveal animate-last">
-        <button onClick={() => this.resumeExploration()}>OK</button>
-      </section>
+          <button onClick={() => this.resumeExploration()}>OK</button>
+        </section>
       );
     }
     if (this.props.game.defeatMode) {
       return (
         <section id="defeatMode" className="menu command-list animate-reveal animate-last">
-        <button onClick={() => this.restartGame()}>RELOAD...</button>
-      </section>
+          <button onClick={() => this.restartGame()}>RELOAD...</button>
+        </section>
       );
     }
     return (

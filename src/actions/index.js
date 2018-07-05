@@ -5,6 +5,20 @@ export const toggleStatusMode = () => {
   };
 };
 
+export const TOGGLE_NPC_DISPLAY = 'TOGGLE_NPC_DISPLAY';
+export const toggleNpcDisplay = () => {
+  return {
+    type: TOGGLE_NPC_DISPLAY
+  };
+};
+
+export const TOGGLE_ENEMY_DISPLAY = 'TOGGLE_ENEMY_DISPLAY';
+export const toggleEnemyDisplay = () => {
+  return {
+    type: TOGGLE_ENEMY_DISPLAY
+  };
+};
+
 export const ENTER_HUB_MODE = 'ENTER_HUB_MODE';
 export const enterHubMode = (messages) => {
   return {

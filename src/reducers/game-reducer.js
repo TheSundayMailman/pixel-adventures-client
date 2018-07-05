@@ -1,6 +1,8 @@
 const initialState = {
   currentLocation: 'ASTERA',
   statusMode: false,
+  npcDisplay: false,
+  enemyDisplay: false,
   hubMode: true,
   townMode: false,
   convoMode: false,
@@ -26,6 +28,18 @@ export const gameReducer = (state = initialState, action) => {
     return {
       ...state,
       statusMode: !state.statusMode
+    };
+  }
+  if (action.type === 'TOGGLE_NPC_DISPLAY') {
+    return {
+      ...state,
+      npcDisplay: !state.npcDisplay
+    };
+  }
+  if (action.type === 'TOGGLE_ENEMY_DISPLAY') {
+    return {
+      ...state,
+      enemyDisplay: !state.enemyDisplay
     };
   }
   if (action.type === 'ENTER_HUB_MODE') {

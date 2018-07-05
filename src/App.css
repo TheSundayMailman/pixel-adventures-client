@@ -17,26 +17,33 @@ h2, p {
   position: relative;
   margin: 0 auto;
   background: black;
-  background-image: url(./images/BLANK.png);
+  background-image: url(./images/locations/BLANK.png);
   width: 640px;
   height: 480px;
 }
 
 /* BACKGROUND IMAGE FOR GAME CONTAINER */
 #ASTERA {
-  background-image: url(./images/ASTERA.jpg);
+  background-image: url(./images/locations/ASTERA.jpg);
 }
 #TOWN {
-  background-image: url(./images/TOWN.jpg);
+  background-image: url(./images/locations/TOWN.jpg);
 }
 #FOREST {
-  background-image: url(./images/FOREST.jpg);
+  background-image: url(./images/locations/FOREST.jpg);
 }
 #MOUNTAIN {
-  background-image: url(./images/MOUNTAIN.jpg);
+  background-image: url(./images/locations/MOUNTAIN.jpg);
 }
 #DUNGEON {
-  background-image: url(./images/DUNGEON.jpg);
+  background-image: url(./images/locations/DUNGEON.jpg);
+}
+
+/* DISPLAY STYLES OF NPC/ENEMY SPRITES */
+.sprite {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* MENU STYLE */
@@ -51,10 +58,12 @@ h2, p {
   display: inline-block;
 }
 #summaryView {
+  position: relative;
   width: 157px;
   height: 133px;
 }
 #fullView {
+  position: absolute;
   width: 640px;
   height: 347px
 }
@@ -96,48 +105,48 @@ h2, p {
 }
 .css-typing p:nth-child(1) {
   width: 483px;
-  -webkit-animation: type 1s steps(40, end);
-  animation: type 1s steps(40, end);
+  -webkit-animation: type 0.5s steps(40, end);
+  animation: type 0.5s steps(40, end);
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
 .css-typing p:nth-child(2) {
   width: 483px;
   opacity: 0;
-  -webkit-animation: type2 1s steps(40, end);
-  animation: type2 1s steps(40, end);
-  -webkit-animation-delay: 1s;
-  animation-delay: 1s;
+  -webkit-animation: type2 0.5s steps(40, end);
+  animation: type2 0.5s steps(40, end);
+  -webkit-animation-delay: 0.5s;
+  animation-delay: 0.5s;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
 .css-typing p:nth-child(3) {
   width: 483px;
   opacity: 0;
-  -webkit-animation: type3 1s steps(40, end), blink .5s step-end infinite alternate;
-  animation: type3 1s steps(40, end), blink .5s step-end infinite alternate;
-  -webkit-animation-delay: 2s;
-  animation-delay: 2s;
+  -webkit-animation: type3 0.5s steps(40, end), blink .5s step-end infinite alternate;
+  animation: type3 0.5s steps(40, end), blink .5s step-end infinite alternate;
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
 .css-typing p:nth-child(4) {
   width: 483px;
   opacity: 0;
-  -webkit-animation: type3 1s steps(40, end), blink .5s step-end infinite alternate;
-  animation: type3 1s steps(40, end), blink .5s step-end infinite alternate;
-  -webkit-animation-delay: 3s;
-  animation-delay: 3s;
+  -webkit-animation: type3 0.5s steps(40, end), blink .5s step-end infinite alternate;
+  animation: type3 0.5s steps(40, end), blink .5s step-end infinite alternate;
+  -webkit-animation-delay: 1.5s;
+  animation-delay: 1.5s;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
 .css-typing p:nth-child(5) {
   width: 483px;
   opacity: 0;
-  -webkit-animation: type3 1s steps(40, end), blink .5s step-end infinite alternate;
-  animation: type3 1s steps(40, end), blink .5s step-end infinite alternate;
-  -webkit-animation-delay: 4s;
-  animation-delay: 4s;
+  -webkit-animation: type3 0.5s steps(40, end), blink .5s step-end infinite alternate;
+  animation: type3 0.5s steps(40, end), blink .5s step-end infinite alternate;
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
@@ -235,10 +244,10 @@ h2, p {
           animation: reveal 1s cubic-bezier(0, 1, 0.5, 1) 1 normal forwards;
 }
 .animate-last {
-  -webkit-animation-delay: 4.5s;
-     -moz-animation-delay: 4.5s;
-       -o-animation-delay: 4.5s;
-          animation-delay: 4.5s;
+  -webkit-animation-delay: 1.5s;
+     -moz-animation-delay: 1.5s;
+       -o-animation-delay: 1.5s;
+          animation-delay: 1.5s;
 }
 @-webkit-keyframes reveal {
   0% {
