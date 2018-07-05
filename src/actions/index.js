@@ -116,6 +116,20 @@ export const toggleBattleMode = (messages) => {
   }
 };
 
+export const TOGGLE_ITEM_MODE = 'TOGGLE_ITEM_MODE';
+export const toggleItemMode = () => {
+  return {
+    type: TOGGLE_ITEM_MODE
+  };
+};
+
+export const TOGGLE_SKILL_MODE = 'TOGGLE_SKILL_MODE';
+export const toggleSkillMode = () => {
+  return {
+    type: TOGGLE_SKILL_MODE
+  };
+};
+
 export const UPDATE_PLAYER_HP = 'UPDATE_PLAYER_HP';
 export const updatePlayerHp = (newHp) => {
   return {

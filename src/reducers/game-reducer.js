@@ -12,6 +12,8 @@ const initialState = {
   battleMode: false,
   playerTurn: false,
   enemyTurn: false,
+  itemMode: false,
+  skillMode: false,
   victoryMode: false,
   levelUpMode: false,
   defeatMode: false,
@@ -145,6 +147,18 @@ export const gameReducer = (state = initialState, action) => {
       victoryMode: false,
       defeatMode: false,
       currentMessages: action.messages
+    };
+  }
+  if (action.type === 'TOGGLE_ITEM_MODE') {
+    return {
+      ...state,
+      itemMode: !state.itemMode
+    };
+  }
+  if (action.type === 'TOGGLE_SKILL_MODE') {
+    return {
+      ...state,
+      skillMode: !state.skillMode
     };
   }
   if (action.type === 'FINISH_PLAYER_TURN') {

@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import PlayerStatus from './player-status.js';
 import EventLog from './event-log.js';
 import CommandList from './command-list.js';
+import ItemList from './item-list.js';
+import SkillList from './skill-list.js';
 import NpcDisplay from './npc-display.js';
 import EnemyDisplay from './enemy-display.js';
 
@@ -20,6 +22,8 @@ export class GameContainer extends React.Component {
           <NpcDisplay />
           <EventLog />
           <CommandList />
+          <ItemList />
+          <SkillList />
         </main>
       );
     }
@@ -30,6 +34,8 @@ export class GameContainer extends React.Component {
           <EnemyDisplay />
           <EventLog />
           <CommandList />
+          <ItemList />
+          <SkillList />
         </main>
       );
     }
@@ -39,6 +45,8 @@ export class GameContainer extends React.Component {
           <PlayerStatus />
           <EventLog />
           <CommandList />
+          <ItemList />
+          <SkillList />
         </main>
       );
     }

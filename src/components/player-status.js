@@ -34,6 +34,7 @@ export class PlayerStatus extends React.Component {
         </section>
       );
     }
+    return null;
   }
 }
 

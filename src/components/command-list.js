@@ -14,6 +14,8 @@ import {
   enterExploreMode,
   populateEnemyObject,
   toggleBattleMode,
+  toggleItemMode,
+  toggleSkillMode,
   updateEnemyHp,
   updatePlayerGold,
   updatePlayerHp,
@@ -235,11 +237,11 @@ export class CommandList extends React.Component {
     }
 
     if (intent === 'ITEMS') {
-      console.log('item feature to come...');
+      this.props.dispatch(toggleItemMode());
     }
 
     if (intent === 'SKILLS') {
-      console.log('skill feature to come...')
+      this.props.dispatch(toggleSkillMode());
     }
 
     if (intent === 'ESCAPE') {
@@ -347,6 +349,13 @@ export class CommandList extends React.Component {
         </section>
       );
     }
+    if (this.props.game.itemMode || this.props.game.skillMode) {
+      return (
+        <section id="listMode" className="menu command-list animate-reveal animate-last">
+          <button>WAITING...</button>
+        </section>
+      );
+    }
     if (this.props.game.hubMode) {
       return (
         <section id="hubMode" className="menu command-list animate-reveal animate-last">
@@ -432,11 +441,7 @@ export class CommandList extends React.Component {
         </section>
       );
     }
-    return (
-      <section className="menu command-list animate-reveal animate-last">
-        <button>ERROR</button>
-      </section>
-    );
+    return null;
   }
 }
 
