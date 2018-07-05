@@ -2,11 +2,32 @@ const initialState = {
   name: 'ERDRICK',
   job: 'KNIGHT',
   level: 3,
-  hp: {current: 1, max: 128},
-  mp: {current: 1, max: 21},
-  stats: {attack: 20, defense: 10, intelligence: 10},
-  skills: ['SHIELD-BASH', 'X-STRIKE', 'METEOR-SLASH', 'HELM-SPLITTER'],
-  items: [{'POTION': 12}, {'HI-POTION': 3}, {'ETHER': 3}, {'HI-ETHER': 3}, {'ELIXIR': 1}],
+  hp: {
+    current: 1,
+    max: 128
+  },
+  mp: {
+    current: 1,
+    max: 21
+  },
+  stats: {
+    attack: 20,
+    defense: 10,
+    intelligence: 10
+  },
+  skills: [
+    'SHIELD-BASH',
+    'X-STRIKE',
+    'METEOR-SLASH',
+    'HELM-SPLITTER'
+  ],
+  items: [
+    {name: 'POTION', quantity: 12},
+    {name: 'HI-POTION', quantity: 3},
+    {name: 'ETHER', quantity: 3},
+    {name: 'HI-ETHER', quantity: 3},
+    {name: 'ELIXIR', quantity: 1}
+  ],
   exp: 634,
   gold: 51,
   nextLevel: 1
@@ -23,6 +44,11 @@ export const playerReducer = (state = initialState, action) => {
     return {
       ...state,
       mp: {...state.mp, current: action.newMp}
+    };
+  }
+  if (action.type === 'UPDATE_PLAYER_ITEMS') {
+    return {
+      ...state
     };
   }
   if (action.type === 'UPDATE_PLAYER_GOLD') {

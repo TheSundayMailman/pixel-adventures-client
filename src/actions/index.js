@@ -146,6 +146,13 @@ export const updatePlayerMp = (newMp) => {
   };
 };
 
+export const UPDATE_PLAYER_ITEMS = 'UPDATE_PLAYER_ITEMS';
+export const updatePlayerItems = () => {
+  return {
+    type: UPDATE_PLAYER_ITEMS
+  };
+};
+
 export const UPDATE_PLAYER_GOLD = 'UPDATE_PLAYER_GOLD';
 export const updatePlayerGold = (newGold) => {
   return {

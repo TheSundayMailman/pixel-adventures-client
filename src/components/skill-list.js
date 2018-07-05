@@ -68,16 +68,20 @@ export class SkillList extends React.Component {
       }
     }
 
+    if (currentSkill.type === 'magic') {
+      console.log('magic skills not yet implemented...');
+    }
+
     if (currentSkill.type === 'heal') {
       console.log('healing skills not yet implemented...');
     }
   }
 
   render() {
-    const skillButtons = this.props.player.skills.map((skillName, index) => 
-      <button onClick={() => this.useSkill(skillName, this.props.player, this.props.enemy)} key={index}>{skillName}: {skillSet[skillName].mp} MP</button>
-    );
     if (this.props.game.skillMode) {
+      const skillButtons = this.props.player.skills.map((skillName, index) => 
+        <button onClick={() => this.useSkill(skillName, this.props.player, this.props.enemy)} key={index}>{skillName}: {skillSet[skillName].mp} MP</button>
+      );
       return (
         <section className="menu skill-list">
           {skillButtons}
