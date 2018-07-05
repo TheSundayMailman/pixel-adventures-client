@@ -329,8 +329,7 @@ export class CommandList extends React.Component {
     const messages = [
       `${player.name} reached LVL ${newLevel}! HP increased by ${hpGain},`,
       `MP increased by ${mpGain}, ATK increased by ${attackGain},`,
-      `DEF increased by ${defenseGain}, INT increased by ${intelligenceGain}!`,
-      `Learned a new skill: BASH!`
+      `DEF increased by ${defenseGain}, INT increased by ${intelligenceGain}!`
     ];
     this.props.dispatch(levelUpPlayer(newLevel, newMaxHp, newMaxMp, newAttack, newDefense, newIntelligence, newNextLevel));
     this.props.dispatch(toggleVictoryMode(messages));
