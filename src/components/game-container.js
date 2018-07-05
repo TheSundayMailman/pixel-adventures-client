@@ -6,8 +6,7 @@ import EventLog from './event-log.js';
 import CommandList from './command-list.js';
 import ItemList from './item-list.js';
 import SkillList from './skill-list.js';
-import NpcDisplay from './npc-display.js';
-import EnemyDisplay from './enemy-display.js';
+import SpriteDisplay from './sprite-display.js';
 
 export class GameContainer extends React.Component {
   componentDidMount() {
@@ -15,41 +14,16 @@ export class GameContainer extends React.Component {
   }
 
   render() {
-    if (this.props.npcDisplay && !this.props.enemyDisplay) {
-      return (
-        <main className="game-container" id={this.props.currentLocation}>
-          <PlayerStatus />
-          <NpcDisplay />
-          <EventLog />
-          <CommandList />
-          <ItemList />
-          <SkillList />
-        </main>
-      );
-    }
-    if (!this.props.npcDisplay && this.props.enemyDisplay) {
-      return (
-        <main className="game-container" id={this.props.currentLocation}>
-          <PlayerStatus />
-          <EnemyDisplay />
-          <EventLog />
-          <CommandList />
-          <ItemList />
-          <SkillList />
-        </main>
-      );
-    }
-    else {
-      return (
-        <main className="game-container" id={this.props.currentLocation}>
-          <PlayerStatus />
-          <EventLog />
-          <CommandList />
-          <ItemList />
-          <SkillList />
-        </main>
-      );
-    }
+    return (
+      <main className="game-container" id={this.props.currentLocation}>
+        <PlayerStatus />
+        <SpriteDisplay />
+        <EventLog />
+        <CommandList />
+        <ItemList />
+        <SkillList />
+      </main>
+    );
   }
 }
 
