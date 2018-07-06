@@ -2,11 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import PlayerStatus from './player-status.js';
+import ShoppingList from './shopping-list.js';
+import SpriteDisplay from './sprite-display.js';
 import EventLog from './event-log.js';
 import CommandList from './command-list.js';
 import ItemList from './item-list.js';
 import SkillList from './skill-list.js';
-import SpriteDisplay from './sprite-display.js';
 
 export class GameContainer extends React.Component {
   componentDidMount() {
@@ -17,6 +18,7 @@ export class GameContainer extends React.Component {
     return (
       <main className="game-container" id={this.props.currentLocation}>
         <PlayerStatus />
+        <ShoppingList />
         <SpriteDisplay />
         <EventLog />
         <CommandList />

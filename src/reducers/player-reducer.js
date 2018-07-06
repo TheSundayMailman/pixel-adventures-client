@@ -11,9 +11,9 @@ const initialState = {
     max: 21
   },
   stats: {
-    attack: 20,
+    attack: 21,
     defense: 10,
-    intelligence: 10
+    intelligence: 7
   },
   skills: [
     'SHIELD-BASH',

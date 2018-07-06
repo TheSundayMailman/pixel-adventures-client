@@ -3,6 +3,9 @@ import {connect} from 'react-redux';
 
 export class PlayerStatus extends React.Component {
   render() {
+    if (this.props.buyMode || this.props.sellMode) {
+      return null;
+    }
     if (!this.props.statusMode) {
       return (
         <section className="menu character-status" id="summaryView">
@@ -41,6 +44,8 @@ export class PlayerStatus extends React.Component {
 const mapStateToProps = (state, props) => {
   return {
     statusMode: state.game.statusMode,
+    buyMode: state.game.buyMode,
+    sellMode: state.game.sellMode,
     player: state.player
   };
 };

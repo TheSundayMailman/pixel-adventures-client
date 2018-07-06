@@ -68,6 +68,13 @@ h2, p {
   height: 347px
 }
 
+/* SHOPPING WINDOW */
+.shopping-window {
+  position: absolute;
+  width: 640px;
+  height: 347px
+}
+
 /* EVENT LOG DISPLAY */
 .event-log {
   display: inline-block;

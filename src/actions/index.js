@@ -59,6 +59,30 @@ export const toggleInnMode = (messages) => {
   }
 };
 
+export const TOGGLE_SHOP_MODE = 'TOGGLE_SHOP_MODE';
+export const toggleShopMode = (messages) => {
+  return {
+    type: TOGGLE_SHOP_MODE,
+    messages
+  }
+};
+
+export const TOGGLE_BUY_MODE = 'TOGGLE_BUY_MODE';
+export const toggleBuyMode = (messages) => {
+  return {
+    type: TOGGLE_BUY_MODE,
+    messages
+  }
+};
+
+export const TOGGLE_SELL_MODE = 'TOGGLE_SELL_MODE';
+export const toggleSellMode = (messages) => {
+  return {
+    type: TOGGLE_SELL_MODE,
+    messages
+  }
+};
+
 export const POPULATE_NPC_OBJECT = 'POPULATE_NPC_OBJECT';
 export const populateNpcObject = (npc) => {
   return {

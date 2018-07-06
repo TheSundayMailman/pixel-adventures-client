@@ -11,6 +11,9 @@ import {
   populateNpcObject,
   toggleConvoMode,
   toggleInnMode,
+  toggleShopMode,
+  toggleBuyMode,
+  toggleSellMode,
   enterExploreMode,
   populateEnemyObject,
   toggleBattleMode,
@@ -118,7 +121,29 @@ export class CommandList extends React.Component {
   }
 
   engageShop() {
-    console.log('tried to visit shop...');
+    const messages = [
+      'SHOP-KEEPER:',
+      'Welcome! How may I help you today?'
+    ];
+    this.props.dispatch(enableNpcDisplay());
+    this.props.dispatch(toggleShopMode(messages));
+  }
+
+  engageBuy() {
+    const messages = [
+      'SHOP-KEEPER:',
+      'Have a look at our fine wares! Just pick out',
+      'the item and quantity of your choice!'
+    ];
+    this.props.dispatch(toggleBuyMode(messages));
+  }
+
+  engageSell() {
+    const messages = [
+      'SHOP-KEEPER:',
+      'Sure! Let\'s take a look at what you have!'
+    ];
+    this.props.dispatch(toggleSellMode(messages));
   }
 
   enterExploration(location) {
@@ -187,8 +212,8 @@ export class CommandList extends React.Component {
 
   engageBattle() {
     const messages = [
-      `As you explore the ${this.props.game.currentLocation}, a ${this.props.enemy.name}`,
-      'suddenly draws near!',
+      `As you explore the expansive ${this.props.game.currentLocation},`,
+      `a LVL ${this.props.enemy.level} ${this.props.enemy.name} suddenly draws near!`,
       'It prepares for battle!',
       'What will you do next?'
     ];
@@ -217,6 +242,9 @@ export class CommandList extends React.Component {
       if (newEnemyHp <= 0) {
         newEnemyHp = 0;
         newNextLevel = oldNextLevel - enemy.rewards.exp;
+        if (player.level === 20) {
+          newNextLevel = 0;
+        }
         messages = [
           `${player.name} attacked!`,
           `${enemy.name} received ${damage} damage points!`,
@@ -225,7 +253,9 @@ export class CommandList extends React.Component {
         ];
         this.props.dispatch(updateEnemyHp(newEnemyHp));
         this.props.dispatch(collectBattleRewards(enemy.rewards.exp, enemy.rewards.gold, newNextLevel));
-        if (newNextLevel <= 0) {
+        if (player.level === 20) {
+          this.props.dispatch(toggleVictoryMode(messages));
+        } else if (newNextLevel <= 0) {
           this.props.dispatch(toggleLevelUpMode(messages));
         } else {
           this.props.dispatch(toggleVictoryMode(messages));
@@ -395,6 +425,31 @@ export class CommandList extends React.Component {
         <section id="innMode" className="menu command-list animate-reveal animate-last">
           <button onClick={() => this.stayAtInn()}>YES</button>
           <button onClick={() => this.resumeTown()}>NO</button>
+        </section>
+      );
+    }
+    if (this.props.game.shopMode) {
+      return (
+        <section id="shopMode" className="menu command-list animate-reveal animate-last">
+          <button onClick={() => this.engageBuy()}>BUY</button>
+          <button onClick={() => this.engageSell()}>SELL</button>
+          <button onClick={() => this.resumeTown()}>CANCEL</button>
+        </section>
+      );
+    }
+    if (this.props.game.buyMode) {
+      return (
+        <section id="shopMode" className="menu command-list animate-reveal animate-last">
+          <button onClick={() => console.log('tried to buy')}>CONFIRM</button>
+          <button onClick={() => this.engageShop()}>CANCEL</button>
+        </section>
+      );
+    }
+    if (this.props.game.sellMode) {
+      return (
+        <section id="shopMode" className="menu command-list animate-reveal animate-last">
+          <button onClick={() => console.log('tried to sell')}>CONFIRM</button>
+          <button onClick={() => this.engageShop()}>CANCEL</button>
         </section>
       );
     }

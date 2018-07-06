@@ -8,6 +8,8 @@ const initialState = {
   convoMode: false,
   innMode: false,
   shopMode: false,
+  buyMode: false,
+  sellMode: false,
   exploreMode: false,
   battleMode: false,
   playerTurn: false,
@@ -62,6 +64,8 @@ export const gameReducer = (state = initialState, action) => {
       convoMode: false,
       innMode: false,
       shopMode: false,
+      buyMode: false,
+      sellMode: false,
       exploreMode: false,
       battleMode: false,
       playerTurn: false,
@@ -80,6 +84,8 @@ export const gameReducer = (state = initialState, action) => {
       convoMode: false,
       innMode: false,
       shopMode: false,
+      buyMode: false,
+      sellMode: false,
       exploreMode: false,
       battleMode: false,
       playerTurn: false,
@@ -96,6 +102,8 @@ export const gameReducer = (state = initialState, action) => {
       convoMode: true,
       innMode: false,
       shopMode: false,
+      buyMode: false,
+      sellMode: false,
       currentMessages: action.messages
     };
   }
@@ -106,6 +114,8 @@ export const gameReducer = (state = initialState, action) => {
       convoMode: false,
       innMode: true,
       shopMode: false,
+      buyMode: false,
+      sellMode: false,
       currentMessages: action.messages
     };
   }
@@ -116,6 +126,32 @@ export const gameReducer = (state = initialState, action) => {
       convoMode: false,
       innMode: false,
       shopMode: true,
+      buyMode: false,
+      sellMode: false,
+      currentMessages: action.messages
+    };
+  }
+  if (action.type === 'TOGGLE_BUY_MODE') {
+    return {
+      ...state,
+      townMode: false,
+      convoMode: false,
+      innMode: false,
+      shopMode: false,
+      buyMode: true,
+      sellMode: false,
+      currentMessages: action.messages
+    };
+  }
+  if (action.type === 'TOGGLE_SELL_MODE') {
+    return {
+      ...state,
+      townMode: false,
+      convoMode: false,
+      innMode: false,
+      shopMode: false,
+      buyMode: false,
+      sellMode: true,
       currentMessages: action.messages
     };
   }
@@ -128,6 +164,8 @@ export const gameReducer = (state = initialState, action) => {
       convoMode: false,
       innMode: false,
       shopMode: false,
+      buyMode: false,
+      sellMode: false,
       exploreMode: true,
       battleMode: false,
       playerTurn: false,
