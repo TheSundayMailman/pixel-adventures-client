@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 import {
   updatePlayerItems,
   updatePlayerGold,
-  toggleBuyMode
+  toggleBuyMode,
+  toggleSellMode
 } from '../actions/index.js';
 
 import itemSet from '../database/item-db';
@@ -43,7 +44,7 @@ export class ShoppingList extends React.Component {
     if (newPlayerGold < 0) {
       messages = [
         'SHOP-KEEPER:',
-        'You don\'t have enough gold...'
+        'You don\'t have enough GOLD...'
       ];
       this.props.dispatch(toggleBuyMode(messages));
     } else {
@@ -58,17 +59,44 @@ export class ShoppingList extends React.Component {
     }
   }
 
+  sellItem(currentItem, player) {
+    const oldPlayerGold = player.gold;
+    const oldPlayerItems = player.items;
+    
+    const newPlayerGold = oldPlayerGold + itemSet[currentItem.name].price / 2;
+
+    const newPlayerItems = oldPlayerItems
+      .map(item => {
+        if (item.name === currentItem.name) {
+          return {...item, quantity: item.quantity - 1};
+        } else {
+          return item;
+        }
+      })
+      .filter(item => item.quantity >= 1)
+      .sort((a, b) => a.id - b.id)
+    ;
+    const messages = [
+      'SHOP-KEEPER:',
+      `1x ${currentItem.name} sold!`,
+      'Thank you very much!'
+    ];
+
+    this.props.dispatch(updatePlayerGold(newPlayerGold));
+    this.props.dispatch(updatePlayerItems(newPlayerItems));
+    this.props.dispatch(toggleSellMode(messages));
+  }
+
   render() {
     const playerItems = this.props.player.items.map(item =>
       <li key={item.id}>{item.name}: {item.quantity}</li>
     );
 
-    // this sets up list of items for sale
-    const potion = itemSet['POTION'];
-    const hiPotion = itemSet['HI-POTION'];
-    const ether = itemSet['ETHER'];
-
     if (this.props.buyMode) {
+      // this sets up list of items for purchase
+      const potion = itemSet['POTION'];
+      const hiPotion = itemSet['HI-POTION'];
+      const ether = itemSet['ETHER'];
       return (
         <section className="menu shopping-window">
           <h2>{this.props.player.name}</h2>
@@ -77,11 +105,11 @@ export class ShoppingList extends React.Component {
           <p>HP: {this.props.player.hp.current} / {this.props.player.hp.max}</p>
           <p>MP: {this.props.player.mp.current} / {this.props.player.mp.max}</p>
           <p>GOLD: {this.props.player.gold}</p>
-          <section className="menu items-for-purchase">
+          <section className="menu items-for-barter">
             <p>Click to purchase an item:</p>
-            <button onClick={() => this.purchaseItem(potion, this.props.player)}> - {potion.name}: {potion.price} GOLD</button>
-            <button onClick={() => this.purchaseItem(hiPotion, this.props.player)}> - {hiPotion.name}: {hiPotion.price} GOLD</button>
-            <button onClick={() => this.purchaseItem(ether, this.props.player)}> - {ether.name}: {ether.price} GOLD</button>
+            <button onClick={() => this.purchaseItem(potion, this.props.player)}>{potion.name}: {potion.price} GOLD</button>
+            <button onClick={() => this.purchaseItem(hiPotion, this.props.player)}>{hiPotion.name}: {hiPotion.price} GOLD</button>
+            <button onClick={() => this.purchaseItem(ether, this.props.player)}>{ether.name}: {ether.price} GOLD</button>
           </section>
           <section className="menu items-owned">
             <ul>Items currently owned:
@@ -92,9 +120,28 @@ export class ShoppingList extends React.Component {
       );
     }
     if (this.props.sellMode) {
+      // this sets up list of items for sale
+      const saleItems = this.props.player.items.map(item =>
+        <button onClick={() => this.sellItem(item, this.props.player)} key={item.id}>{item.name}: {itemSet[item.name].price / 2} GOLD</button>
+      );
+  
       return (
         <section className="menu shopping-window">
-          <p>SALES WINDOW IN CONSTRUCTION</p>
+          <h2>{this.props.player.name}</h2>
+          <p>CLASS: {this.props.player.job}</p>
+          <p>LVL: {this.props.player.level}</p>
+          <p>HP: {this.props.player.hp.current} / {this.props.player.hp.max}</p>
+          <p>MP: {this.props.player.mp.current} / {this.props.player.mp.max}</p>
+          <p>GOLD: {this.props.player.gold}</p>
+          <section className="menu items-for-barter">
+            <p>Click to sell an item:</p>
+            {saleItems}
+          </section>
+          <section className="menu items-owned">
+            <ul>Items currently owned:
+              {playerItems}
+            </ul>
+          </section>
         </section>
       );
     }
