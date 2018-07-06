@@ -15,6 +15,11 @@ const initialState = {
     defense: 10,
     intelligence: 7
   },
+  equipment: {
+    weapon: 'BROAD-SWORD',
+    armor: 'STEEL-PLATE',
+    accessory: 'MEDALLION'
+  },
   skills: [
     'SHIELD-BASH',
     'X-STRIKE',
@@ -22,11 +27,11 @@ const initialState = {
     'HELM-SPLITTER'
   ],
   items: [
-    {id: 1, name: 'POTION', quantity: 1},
-    {id: 2, name: 'HI-POTION', quantity: 1},
-    {id: 3, name: 'ETHER', quantity: 1},
-    {id: 4, name: 'HI-ETHER', quantity: 1},
-    {id: 5, name: 'ELIXIR', quantity: 3}
+    {id: 1, name: 'POTION', quantity: 12},
+    {id: 2, name: 'HI-POTION', quantity: 5},
+    {id: 3, name: 'ETHER', quantity: 7},
+    {id: 4, name: 'HI-ETHER', quantity: 3},
+    {id: 5, name: 'ELIXIR', quantity: 1}
   ],
   exp: 634,
   gold: 999,

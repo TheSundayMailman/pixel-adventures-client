@@ -76,6 +76,7 @@ export class ShoppingList extends React.Component {
       .filter(item => item.quantity >= 1)
       .sort((a, b) => a.id - b.id)
     ;
+
     const messages = [
       'SHOP-KEEPER:',
       `1x ${currentItem.name} sold!`,
@@ -94,9 +95,11 @@ export class ShoppingList extends React.Component {
 
     if (this.props.buyMode) {
       // this sets up list of items for purchase
-      const potion = itemSet['POTION'];
-      const hiPotion = itemSet['HI-POTION'];
-      const ether = itemSet['ETHER'];
+      const saleList = ['POTION', 'HI-POTION', 'ETHER'];
+      const saleItems = saleList.map(item =>
+        <button onClick={() => this.purchaseItem(itemSet[item], this.props.player)} key={itemSet[item].id}>{itemSet[item].name}: {itemSet[item].price} GOLD</button>
+      );
+
       return (
         <section className="menu shopping-window">
           <h2>{this.props.player.name}</h2>
@@ -107,9 +110,7 @@ export class ShoppingList extends React.Component {
           <p>GOLD: {this.props.player.gold}</p>
           <section className="menu items-for-barter">
             <p>Click to purchase an item:</p>
-            <button onClick={() => this.purchaseItem(potion, this.props.player)}>{potion.name}: {potion.price} GOLD</button>
-            <button onClick={() => this.purchaseItem(hiPotion, this.props.player)}>{hiPotion.name}: {hiPotion.price} GOLD</button>
-            <button onClick={() => this.purchaseItem(ether, this.props.player)}>{ether.name}: {ether.price} GOLD</button>
+            {saleItems}
           </section>
           <section className="menu items-owned">
             <ul>Items currently owned:
@@ -119,6 +120,7 @@ export class ShoppingList extends React.Component {
         </section>
       );
     }
+    
     if (this.props.sellMode) {
       // this sets up list of items for sale
       const saleItems = this.props.player.items.map(item =>
@@ -145,6 +147,7 @@ export class ShoppingList extends React.Component {
         </section>
       );
     }
+
     return null;
   }
 }

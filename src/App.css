@@ -73,6 +73,38 @@ li {
   width: 640px;
   height: 347px
 }
+.equipment-details{
+  display: inline-block;
+  position: absolute;
+  width: 317px;
+  height: 152px;
+  right: 0;
+  top: 0;
+}
+.stats-details {
+  display: inline-block;
+  position: absolute;
+  width: 170px;
+  height: 189px;
+  left: 0;
+  bottom: 0;
+}
+.current-skills {
+  display: inline-block;
+  position: absolute;
+  width: 294px;
+  height: 189px;
+  left: 170px;
+  bottom: 0;
+}
+.current-items {
+  display: inline-block;
+  position: absolute;
+  width: 170px;
+  height: 189px;
+  right: 0;
+  bottom: 0;
+}
 
 /* SHOPPING WINDOW */
 .shopping-window {
