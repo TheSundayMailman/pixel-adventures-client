@@ -60,7 +60,7 @@ export class ShoppingList extends React.Component {
 
   render() {
     const playerItems = this.props.player.items.map(item =>
-      <p key={item.id}>{item.name}: {item.quantity}</p>
+      <li key={item.id}>{item.name}: {item.quantity}</li>
     );
 
     // this sets up list of items for sale
@@ -71,15 +71,23 @@ export class ShoppingList extends React.Component {
     if (this.props.buyMode) {
       return (
         <section className="menu shopping-window">
-          <p>Click to purchase an item:</p>
-          <p> </p>
-          <button onClick={() => this.purchaseItem(potion, this.props.player)}> - {potion.name}: {potion.price} GOLD</button>
-          <button onClick={() => this.purchaseItem(hiPotion, this.props.player)}> - {hiPotion.name}: {hiPotion.price} GOLD</button>
-          <button onClick={() => this.purchaseItem(ether, this.props.player)}> - {ether.name}: {ether.price} GOLD</button>
-          <p> </p>
-          <p>Items currently owned:</p>
-          <p> </p>
-          {playerItems}
+          <h2>{this.props.player.name}</h2>
+          <p>CLASS: {this.props.player.job}</p>
+          <p>LVL: {this.props.player.level}</p>
+          <p>HP: {this.props.player.hp.current} / {this.props.player.hp.max}</p>
+          <p>MP: {this.props.player.mp.current} / {this.props.player.mp.max}</p>
+          <p>GOLD: {this.props.player.gold}</p>
+          <section className="menu items-for-purchase">
+            <p>Click to purchase an item:</p>
+            <button onClick={() => this.purchaseItem(potion, this.props.player)}> - {potion.name}: {potion.price} GOLD</button>
+            <button onClick={() => this.purchaseItem(hiPotion, this.props.player)}> - {hiPotion.name}: {hiPotion.price} GOLD</button>
+            <button onClick={() => this.purchaseItem(ether, this.props.player)}> - {ether.name}: {ether.price} GOLD</button>
+          </section>
+          <section className="menu items-owned">
+            <ul>Items currently owned:
+              {playerItems}
+            </ul>
+          </section>
         </section>
       );
     }

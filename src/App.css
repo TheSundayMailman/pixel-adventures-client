@@ -3,13 +3,19 @@ h1 {
   font-family: fantasy;
   text-align: center;
 }
-h2, p {
+h2, p, ul, li {
   color: #fff;
   margin: 7px;
   font-size: 15px;
   font-family: monospace;
   letter-spacing: .1em; /* Adjust as needed */
   white-space: nowrap; /* Keeps the content on a single line */
+}
+ul {
+  padding-left: 0;
+}
+li {
+  list-style-type: none;
 }
 
 /* GAME CONTAINER DIMENSIONS */
@@ -73,6 +79,22 @@ h2, p {
   position: absolute;
   width: 640px;
   height: 347px
+}
+.items-for-purchase {
+  display: inline-block;
+  position: absolute;
+  width: 317px;
+  height: 189px;
+  left: 0;
+  bottom: 0;
+}
+.items-owned {
+  display: inline-block;
+  position: absolute;
+  width: 317px;
+  height: 189px;
+  right: 0;
+  bottom: 0;
 }
 
 /* EVENT LOG DISPLAY */
