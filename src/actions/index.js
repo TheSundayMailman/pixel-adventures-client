@@ -1,3 +1,49 @@
+// export const POPULATE_PLAYER_OBJECT = 'POPULATE_PLAYER_OBJECT';
+// export const populatePlayerObject = (player) => {
+//   return {
+//     type: POPULATE_Player_OBJECT,
+//     player
+//   };
+// };
+
+// export const CREATE_PLAYER_OBJECT = 'CREATE_PLAYER_OBJECT';
+// export const createPlayerObject = (user) => (dispatch, getState) => {
+//   const authToken = getState().auth.authToken; // need to setup and import auth
+//   fetch('api/address/here', {
+//     method: 'POST',
+//     header: {Authorization: `Bearer ${authToken}`},
+//     body: jsonStringify(user)
+//   })
+//     .then(res => res.json())
+//     .then(player => disptach(populatePlayerObject(player)))
+//     .catch(err => console.error(err));
+// };
+
+// export const GET_PLAYER_OBJECT = 'GET_PLAYER_OBJECT';
+// export const getPlayerObject = () => (dispatch, getState) => {
+//   const authToken = getState().auth.authToken; // need to setup and import auth
+//   fetch('api/address/here', {
+//     method: 'GET',
+//     header: {Authorization: `Bearer ${authToken}`}
+//   })
+//     .then(res => res.json())
+//     .then(player => disptach(populatePlayerObject(player)))
+//     .catch(err => console.error(err));
+// };
+
+// export const UPDATE_PLAYER_OBJECT = 'UPDATE_PLAYER_OBJECT';
+// export const updatePlayerObject = (player) => (dispatch, getState) => {
+//   const authToken = getState().auth.authToken; // need to setup and import auth
+//   fetch('api/address/here', {
+//     method: 'PUT',
+//     header: {Authorization: `Bearer ${authToken}`},
+//     body: jsonStringify(player)
+//   })
+//     .then(res => res.json())
+//     .then(player => disptach(populatePlayerObject(player)))
+//     .catch(err => console.error(err));
+// };
+
 export const TOGGLE_STATUS_MODE = 'TOGGLE_STATUS_MODE';
 export const toggleStatusMode = () => {
   return {
@@ -99,7 +145,7 @@ export const populateNpcObject = (npc) => {
 //     header: {Authorization: `Bearer ${authToken}`}
 //   })
 //     .then(res => res.json())
-//     .then(enemy => disptach(populateNpcObject(enemy)))
+//     .then(npc => disptach(populateNpcObject(npc)))
 //     .catch(err => console.error(err));
 // };
 

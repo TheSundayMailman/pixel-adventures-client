@@ -1,18 +1,24 @@
 import React from 'react';
+import {Route} from 'react-router-dom';
 
 import './App.css';
 
 import NavBar from './components/nav-bar.js';
-import GameContainer from './components/game-container.js';
+import LoginPage from './components/login-page.js';
+import RegisterPage from './components/register-page.js';
+import GamePage from './components/game-page.js';
 
-export default class App extends React.Component {
+export class App extends React.Component {
   render() {
     return (
       <div>
         <NavBar />
-        <h1>Pixel Adventures</h1>
-        <GameContainer />
+        <Route exact path="/" component={LoginPage} />
+        <Route exact path="/register" component={RegisterPage}/>
+        <Route exact path="/game" component={GamePage} />
       </div>
     );
   }
 }
+
+export default App;

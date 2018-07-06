@@ -11,11 +11,12 @@ export class PlayerStatus extends React.Component {
     if (!this.props.statusMode) {
       return (
         <section className="menu character-status" id="summaryView">
-          <h2>{this.props.player.name}</h2>
-          <p>LVL: {this.props.player.level}</p>
-          <p>HP: {this.props.player.hp.current} / {this.props.player.hp.max}</p>
-          <p>MP: {this.props.player.mp.current} / {this.props.player.mp.max}</p>
-          <p>GOLD: {this.props.player.gold}</p>
+          <ul>{this.props.player.name}
+            <li>LVL: {this.props.player.level}</li>
+            <li>HP: {this.props.player.hp.current} / {this.props.player.hp.max}</li>
+            <li>MP: {this.props.player.mp.current} / {this.props.player.mp.max}</li>
+            <li>GOLD: {this.props.player.gold}</li>
+          </ul>
         </section>
       );
     }
@@ -31,21 +32,22 @@ export class PlayerStatus extends React.Component {
       return (
         <section className="menu character-status" id="fullView">
           <ul>{this.props.player.name}
-            <li>CLASS: {this.props.player.job}</li>
             <li>LVL: {this.props.player.level}</li>
             <li>HP: {this.props.player.hp.current} / {this.props.player.hp.max}</li>
             <li>MP: {this.props.player.mp.current} / {this.props.player.mp.max}</li>
             <li>GOLD: {this.props.player.gold}</li>
           </ul>
           <section className="menu equipment-details">
-            <ul>EQUIPMENT:
+            <ul>EQUIPMENT
               <li>WEAPON: {this.props.player.equipment.weapon}</li>
               <li>ARMOR: {this.props.player.equipment.armor}</li>
               <li>ACCESSORY: {this.props.player.equipment.accessory}</li>
             </ul>
           </section>
           <section className="menu stats-details">
-            <ul>STATS:
+            <ul>STATS
+              <li>CLASS: {this.props.player.job}</li>
+              <li>STATUS: NORMAL</li>
               <li>ATK: {this.props.player.stats.attack}</li>
               <li>DEF: {this.props.player.stats.defense}</li>
               <li>INT: {this.props.player.stats.intelligence}</li>
@@ -54,12 +56,12 @@ export class PlayerStatus extends React.Component {
             </ul>
           </section>
           <section className="menu current-skills">
-          <ul>SKILLS:
+          <ul>SKILLS
             {playerSkills}
           </ul>
           </section>
           <section className="menu current-items">
-            <ul>ITEMS:
+            <ul>ITEMS
               {playerItems}
             </ul>
           </section>

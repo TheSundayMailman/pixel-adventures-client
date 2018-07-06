@@ -1,4 +1,5 @@
-import { createStore, combineReducers, applyMiddleware} from 'redux';
+import {createStore, combineReducers, applyMiddleware} from 'redux';
+import {reducer as formReducer} from 'redux-form';
 import thunk from 'redux-thunk';
 
 import gameReducer from './reducers/game-reducer.js';
@@ -8,6 +9,7 @@ import npcReducer from './reducers/npc-reducer.js';
 
 const store = createStore(
   combineReducers({
+    form: formReducer,
     game: gameReducer,
     player: playerReducer,
     enemy: enemyReducer,

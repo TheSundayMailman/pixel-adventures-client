@@ -39,6 +39,23 @@ const initialState = {
 };
 
 export const playerReducer = (state = initialState, action) => {
+  if (action.type === 'POPULATE_PLAYER_OBJECT') {
+    return {
+      ...state,
+      name: action.player.name,
+      job: action.player.job,
+      level: action.player.level,
+      hp: {...action.player.hp},
+      mp: {...action.player.mp},
+      stats: {...action.player.stats},
+      equipment: {...action.player.equipment},
+      skills: [...action.player.skills],
+      items: [...action.player.items],
+      exp: action.player.exp,
+      gold: action.player.gold,
+      nextLevel: action.player.nextLevel
+    };
+  }
   if (action.type === 'UPDATE_PLAYER_HP') {
     return {
       ...state,
