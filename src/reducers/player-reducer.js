@@ -22,14 +22,14 @@ const initialState = {
     'HELM-SPLITTER'
   ],
   items: [
-    {id: 1, name: 'POTION', quantity: 1},
-    {id: 2, name: 'HI-POTION', quantity: 1},
-    {id: 3, name: 'ETHER', quantity: 1},
-    {id: 4, name: 'HI-ETHER', quantity: 1},
-    {id: 5, name: 'ELIXIR', quantity: 3}
+    // {id: 1, name: 'POTION', quantity: 1},
+    // {id: 2, name: 'HI-POTION', quantity: 1},
+    // {id: 3, name: 'ETHER', quantity: 1},
+    // {id: 4, name: 'HI-ETHER', quantity: 1},
+    // {id: 5, name: 'ELIXIR', quantity: 3}
   ],
   exp: 634,
-  gold: 51,
+  gold: 999,
   nextLevel: 1
 };
 

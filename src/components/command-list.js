@@ -94,47 +94,77 @@ export class CommandList extends React.Component {
     this.props.dispatch(toggleInnMode(messages));
   }
 
-  stayAtInn() {
+  stayAtInn(intent) {
     const newHp = this.props.player.hp.max;
     const newMp = this.props.player.mp.max;
     const oldGold = this.props.player.gold;
     const newGold = oldGold - 50;
+
     let messages;
-    if (newGold < 0) {
+
+    if (intent === 'YES') {
+      if (newGold < 0) {
+        messages = [
+          'INN-KEEPER:',
+          'You do not have enough gold...'
+        ];
+        this.props.dispatch(toggleConvoMode(messages));
+      } else {
+        messages = [
+          'INN-KEEPER:',
+          'Thank you! Enjoy your stay!',
+          ' ',
+          '(Your HP and MP are fully restored!)'
+        ];
+        this.props.dispatch(updatePlayerHp(newHp));
+        this.props.dispatch(updatePlayerMp(newMp));
+        this.props.dispatch(updatePlayerGold(newGold));
+        this.props.dispatch(toggleConvoMode(messages));
+      }
+    }
+    if (intent === 'NO') {
       messages = [
         'INN-KEEPER:',
-        'You do not have enough gold...'
+        'Please come back if you change your mind!'
       ];
-      this.props.dispatch(toggleConvoMode(messages));
-    } else {
-      messages = [
-        'INN-KEEPER:',
-        'Thank you! Enjoy your stay!',
-        ' ',
-        '(Your HP and MP are fully restored!)'
-      ];
-      this.props.dispatch(updatePlayerHp(newHp));
-      this.props.dispatch(updatePlayerMp(newMp));
-      this.props.dispatch(updatePlayerGold(newGold));
       this.props.dispatch(toggleConvoMode(messages));
     }
   }
 
-  engageShop() {
-    const messages = [
-      'SHOP-KEEPER:',
-      'Welcome! How may I help you today?'
-    ];
-    this.props.dispatch(enableNpcDisplay());
-    this.props.dispatch(toggleShopMode(messages));
+  engageShop(intent) {
+    let messages;
+    if (intent === 'START') {
+      messages = [
+        'SHOP-KEEPER:',
+        'Welcome! How may I help you today?'
+      ];
+      this.props.dispatch(enableNpcDisplay());
+      this.props.dispatch(toggleShopMode(messages));
+    }
+    if (intent === 'DONE') {
+      messages = [
+        'SHOP-KEEPER:',
+        'Thank you!',
+        'What else can I do for you?'
+      ];
+      this.props.dispatch(enableNpcDisplay());
+      this.props.dispatch(toggleShopMode(messages));
+    }
+    if (intent === 'CANCEL') {
+      messages = [
+        'SHOP-KEEPER:',
+        'Please come again!'
+      ];
+      this.props.dispatch(toggleConvoMode(messages));
+    }
   }
 
   engageBuy() {
     const messages = [
-      'SHOP-KEEPER:',
-      'Have a look at our fine wares! Just pick out',
-      'the item and quantity of your choice!'
-    ];
+        'SHOP-KEEPER:',
+        'Have a look at our fine wares! Just pick out',
+        'the item and quantity of your choice!'
+      ];
     this.props.dispatch(toggleBuyMode(messages));
   }
 
@@ -407,7 +437,7 @@ export class CommandList extends React.Component {
         <section id="townMode" className="menu command-list animate-reveal animate-last">
           <button onClick={() => this.engageConversation()}>PUB</button>
           <button onClick={() => this.engageInn()}>INN</button>
-          <button onClick={() => this.engageShop()}>SHOP</button>
+          <button onClick={() => this.engageShop('START')}>SHOP</button>
           <button onClick={() => this.viewPlayerStatus()}>STATUS</button>
           <button onClick={() => this.enterHub()}>EXIT</button>
         </section>
@@ -423,8 +453,8 @@ export class CommandList extends React.Component {
     if (this.props.game.innMode) {
       return (
         <section id="innMode" className="menu command-list animate-reveal animate-last">
-          <button onClick={() => this.stayAtInn()}>YES</button>
-          <button onClick={() => this.resumeTown()}>NO</button>
+          <button onClick={() => this.stayAtInn('YES')}>YES</button>
+          <button onClick={() => this.stayAtInn('NO')}>NO</button>
         </section>
       );
     }
@@ -433,23 +463,14 @@ export class CommandList extends React.Component {
         <section id="shopMode" className="menu command-list animate-reveal animate-last">
           <button onClick={() => this.engageBuy()}>BUY</button>
           <button onClick={() => this.engageSell()}>SELL</button>
-          <button onClick={() => this.resumeTown()}>CANCEL</button>
+          <button onClick={() => this.engageShop('CANCEL')}>CANCEL</button>
         </section>
       );
     }
-    if (this.props.game.buyMode) {
+    if (this.props.game.buyMode || this.props.game.sellMode) {
       return (
         <section id="shopMode" className="menu command-list animate-reveal animate-last">
-          <button onClick={() => console.log('tried to buy')}>CONFIRM</button>
-          <button onClick={() => this.engageShop()}>CANCEL</button>
-        </section>
-      );
-    }
-    if (this.props.game.sellMode) {
-      return (
-        <section id="shopMode" className="menu command-list animate-reveal animate-last">
-          <button onClick={() => console.log('tried to sell')}>CONFIRM</button>
-          <button onClick={() => this.engageShop()}>CANCEL</button>
+          <button onClick={() => this.engageShop('DONE')}>DONE</button>
         </section>
       );
     }

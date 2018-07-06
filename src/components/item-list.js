@@ -24,13 +24,14 @@ export class ItemList extends React.Component {
     const newPlayerItems = oldPlayerItems
       .map(item => {
         if (item.name === currentItem.name) {
-          return {...item, quantity: item.quantity -1};
+          return {...item, quantity: item.quantity - 1};
         } else {
           return item;
         }
       })
       .filter(item => item.quantity >= 1)
-      .sort((a, b) => a.id - b.id);
+      .sort((a, b) => a.id - b.id)
+    ;
 
     // initialize variables depending on player's item type
     let newPlayerHp;
@@ -67,13 +68,7 @@ export class ItemList extends React.Component {
 
     if (currentItem.type === 'full-recovery') {
       newPlayerHp = player.hp.max;
-      if (newPlayerHp > player.hp.max) {
-        newPlayerHp = player.hp.max;
-      }
       newPlayerMp = player.mp.max;
-      if (newPlayerMp > player.mp.max) {
-        newPlayerMp = player.mp.max;
-      }
       messages = [
         `${player.name} used ${itemName}!`,
         `Health and magic points are fully restored!`
