@@ -1,4 +1,5 @@
 const initialState = {
+  id: '000000000000000000000001',
   name: 'ERDRICK',
   job: 'KNIGHT',
   level: 3,
@@ -27,14 +28,14 @@ const initialState = {
     'HELM-SPLITTER'
   ],
   items: [
-    {id: 1, name: 'POTION', quantity: 12},
-    {id: 2, name: 'HI-POTION', quantity: 5},
-    {id: 3, name: 'ETHER', quantity: 7},
-    {id: 4, name: 'HI-ETHER', quantity: 3},
-    {id: 5, name: 'ELIXIR', quantity: 1}
+    {id: 1, name: 'POTION', quantity: 7},
+    {id: 2, name: 'HI-POTION', quantity: 10},
+    {id: 3, name: 'ETHER', quantity: 5},
+    {id: 4, name: 'HI-ETHER', quantity: 1},
+    {id: 5, name: 'ELIXIR', quantity: 3}
   ],
   exp: 634,
-  gold: 999,
+  gold: 50,
   nextLevel: 1
 };
 
@@ -42,6 +43,7 @@ export const playerReducer = (state = initialState, action) => {
   if (action.type === 'POPULATE_PLAYER_OBJECT') {
     return {
       ...state,
+      id: action.player.id,
       name: action.player.name,
       job: action.player.job,
       level: action.player.level,

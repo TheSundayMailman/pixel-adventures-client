@@ -1,5 +1,5 @@
 {
-  "name": "pixel-adventures",
+  "name": "pixel-adventures-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

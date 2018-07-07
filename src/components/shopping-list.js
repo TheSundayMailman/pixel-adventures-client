@@ -16,7 +16,6 @@ export class ShoppingList extends React.Component {
     const oldPlayerItems = player.items;
     
     let messages;
-    let newPlayerGold;
     let newPlayerItems;
 
     const itemCheck = player.items.filter(item => item.name === currentItem.name);
@@ -39,12 +38,19 @@ export class ShoppingList extends React.Component {
         .sort((a, b) => a.id - b.id)
       ;
     }
-
-    newPlayerGold = oldPlayerGold - currentItem.price;
+    
+    const newPlayerGold = oldPlayerGold - currentItem.price;
+    const itemLimit = newPlayerItems.filter(item => item.quantity > 99);
     if (newPlayerGold < 0) {
       messages = [
         'SHOP-KEEPER:',
         'You don\'t have enough GOLD...'
+      ];
+      this.props.dispatch(toggleBuyMode(messages));
+    } else if (itemLimit.length > 0) {
+      messages = [
+        'SHOP-KEEPER:',
+        'You cannot carry anymore of this item...'
       ];
       this.props.dispatch(toggleBuyMode(messages));
     } else {

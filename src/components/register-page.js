@@ -17,8 +17,8 @@ export class RegisterPage extends React.Component {
           <label htmlFor="password">Password: </label>
           <Field component="input" type="password" name="password" /><br />
           <label htmlFor="char-name">Character Name: </label>
-          <Field component="input" type="text" name="char-name" /><br />
-          <Field component="select" name="char-class">
+          <Field component="input" type="text" name="name" /><br />
+          <Field component="select" name="job">
             <option>Choose a class</option>
             <option>KNIGHT</option>
           </Field><br />

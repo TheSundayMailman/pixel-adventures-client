@@ -292,6 +292,7 @@ export class CommandList extends React.Component {
         }
       } else {
         messages = [
+          `${player.name} attacked!`,
           `${enemy.name} received ${damage} damage points!`
         ];
         this.props.dispatch(updateEnemyHp(newEnemyHp));
