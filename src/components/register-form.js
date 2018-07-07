@@ -2,8 +2,8 @@ import React from 'react';
 import {reduxForm, Field} from 'redux-form';
 
 import {registerUser} from '../actions/users.js';
-import {createCharacter} from '../actions/characters.js';
 import {loginUser} from '../actions/auth.js';
+import {createCharacter} from '../actions/characters.js';
 
 export class RegisterForm extends React.Component {
   submitUser(values) {

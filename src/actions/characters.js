@@ -22,3 +22,19 @@ export const createCharacter = (character) => (dispatch, getState) => {
   .then(player => dispatch(populatePlayerObject(player)))
   .catch(err => console.error(err));
 }
+
+export const RETRIEVE_CHARACTER = 'RETRIEVE_CHARACTER';
+export const retrieveCharacter = () => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  return fetch('http://localhost:8080/api/characters', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`
+      },
+    }
+  )
+  .then(res => res.json())
+  .then(player => dispatch(populatePlayerObject(player)))
+  .catch(err => console.error(err));
+}
