@@ -116,7 +116,8 @@ export class CommandList extends React.Component {
           'INN-KEEPER:',
           'Thank you! Enjoy your stay!',
           ' ',
-          '(Your HP and MP are fully restored!)'
+          '(Your HP and MP are fully restored!)',
+          '(Your game is saved!)'
         ];
         this.props.dispatch(updatePlayerHp(newHp));
         this.props.dispatch(updatePlayerMp(newMp));

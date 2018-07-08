@@ -47,6 +47,9 @@ export class SkillList extends React.Component {
       } else if (newEnemyHp <= 0) {
         newEnemyHp = 0;
         newNextLevel = oldNextLevel - enemy.rewards.exp;
+        if (player.level === 20) {
+          newNextLevel = 0;
+        }
         messages = [
           `${player.name} used ${skillName}!`,
           `${enemy.name} received ${damage} damage points!`,
