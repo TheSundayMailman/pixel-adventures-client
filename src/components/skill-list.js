@@ -56,7 +56,9 @@ export class SkillList extends React.Component {
         this.props.dispatch(updatePlayerMp(newPlayerMp));
         this.props.dispatch(updateEnemyHp(newEnemyHp));
         this.props.dispatch(collectBattleRewards(enemy.rewards.exp, enemy.rewards.gold, newNextLevel));
-        if (newNextLevel <= 0) {
+        if (player.level === 20) {
+          this.props.dispatch(toggleVictoryMode(messages));
+        } else if (newNextLevel <= 0) {
           this.props.dispatch(toggleLevelUpMode(messages));
         } else {
           this.props.dispatch(toggleVictoryMode(messages));
