@@ -32,6 +32,8 @@ import {
   levelUpPlayer
 } from '../actions/index.js';
 
+import {recordCharacter} from '../actions/characters.js';
+
 import npcDb from '../database/npc-db.js';
 import forestEnemyDb from '../database/forest-enemy-db.js';
 import mountainEnemyDb from '../database/mountain-enemy-db.js';
@@ -120,6 +122,7 @@ export class CommandList extends React.Component {
         this.props.dispatch(updatePlayerMp(newMp));
         this.props.dispatch(updatePlayerGold(newGold));
         this.props.dispatch(toggleConvoMode(messages));
+        this.props.dispatch(recordCharacter());
       }
     }
     if (intent === 'NO') {

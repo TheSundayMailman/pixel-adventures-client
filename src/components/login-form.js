@@ -2,15 +2,12 @@ import React from 'react';
 import {reduxForm, Field} from 'redux-form';
 
 import {loginUser} from '../actions/auth.js';
-import {retrieveCharacter} from '../actions/characters.js';
 
 export class LoginForm extends React.Component {
   submitUser(values) {
     const {username, password} = values;
     const user = {username, password};
-
-    return this.props.dispatch(loginUser(user))
-    .then(() => this.props.dispatch(retrieveCharacter()));
+    return this.props.dispatch(loginUser(user));
   }
 
   render() {

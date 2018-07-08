@@ -38,3 +38,22 @@ export const retrieveCharacter = () => (dispatch, getState) => {
   .then(player => dispatch(populatePlayerObject(player)))
   .catch(err => console.error(err));
 }
+
+export const RECORD_CHARACTER = 'RECORD_CHARACTER';
+export const recordCharacter = () => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  const id = getState().player.id;
+  const player = getState().player;
+  return fetch(`http://localhost:8080/api/characters/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`
+      },
+      body: JSON.stringify(player)
+    }
+  )
+  .then(res => res.json())
+  .then(player => dispatch(populatePlayerObject(player)))
+  .catch(err => console.error(err));
+}

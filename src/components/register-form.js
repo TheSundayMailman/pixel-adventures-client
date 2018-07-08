@@ -28,6 +28,8 @@ export class RegisterForm extends React.Component {
         <Field component="select" name="job">
           <option>Choose a class</option>
           <option>KNIGHT</option>
+          <option>WIZARD</option>
+          <option>CLERIC</option>
         </Field><br />
         <Field component="button" name="register-button">Register</Field>
       </form>

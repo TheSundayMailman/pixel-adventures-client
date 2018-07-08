@@ -1,7 +1,7 @@
 export const registerUser = (user) => (dispatch, getState) => {
   return fetch('http://localhost:8080/api/users', {
     method: 'POST',
-    headers: {'content-type': 'application/json'},
+    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(user)
   })
   .then(res => res.json())
