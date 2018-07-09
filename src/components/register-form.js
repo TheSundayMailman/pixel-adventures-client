@@ -1,5 +1,6 @@
 import React from 'react';
 import {reduxForm, Field} from 'redux-form';
+import {Link} from 'react-router-dom';
 
 import {registerUser} from '../actions/users.js';
 import {loginUser} from '../actions/auth.js';
@@ -18,21 +19,26 @@ export class RegisterForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.props.handleSubmit(values => this.submitUser(values))}>
-        <label htmlFor="username">Username: </label>
-        <Field component="input" type="text" name="username" /><br />
-        <label htmlFor="password">Password: </label>
-        <Field component="input" type="password" name="password" /><br />
-        <label htmlFor="char-name">Character Name: </label>
-        <Field component="input" type="text" name="name" /><br />
-        <Field component="select" name="job">
-          <option>Choose a class</option>
-          <option>KNIGHT</option>
-          <option>WIZARD</option>
-          <option>CLERIC</option>
-        </Field><br />
-        <Field component="button" name="register-button">Register</Field>
-      </form>
+      <section className="form-container">
+        <h1>Register to play!</h1>
+        <form className="form-input" onSubmit={this.props.handleSubmit(values => this.submitUser(values))}>
+          <label htmlFor="username">Username: </label>
+          <Field component="input" type="text" name="username" />
+          <label htmlFor="password">Password: </label>
+          <Field component="input" type="password" name="password" />
+          <label htmlFor="char-name">Character Name: </label>
+          <Field component="input" type="text" name="name" />
+          <label htmlFor="job">Choose a Class: </label>
+          <Field component="select" name="job">
+            <option>Choose a class</option>
+            <option>KNIGHT</option>
+            <option>WIZARD</option>
+            <option>CLERIC</option>
+          </Field><br />
+          <Field component="button" name="register-button">Register</Field>
+          <p>Have an account? Click <Link to="/">here</Link> to login!</p>
+        </form>
+      </section>
     );
   }
 }

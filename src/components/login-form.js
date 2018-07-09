@@ -1,5 +1,6 @@
 import React from 'react';
 import {reduxForm, Field} from 'redux-form';
+import {Link} from 'react-router-dom';
 
 import {loginUser} from '../actions/auth.js';
 
@@ -12,13 +13,17 @@ export class LoginForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.props.handleSubmit(values => this.submitUser(values))}>
-        <label htmlFor="username">Username: </label>
-        <Field component="input" type="text" name="username" /><br />
-        <label htmlFor="password">Password: </label>
-        <Field component="input" type="password" name="password" /><br />
-        <Field component="button" name="login-button">Login</Field>
-      </form>
+      <section className="form-container">
+        <h1>Login to continue...</h1>
+        <form className="form-input" onSubmit={this.props.handleSubmit(values => this.submitUser(values))}>
+          <label htmlFor="username">Username: </label>
+          <Field component="input" type="text" name="username" />
+          <label htmlFor="password">Password: </label>
+          <Field component="input" type="password" name="password" />
+          <Field component="button" name="login-button">Login</Field>
+          <p>Don't have an account? Click <Link to="/register">here</Link> to make one!</p>
+        </form>
+      </section>
     );
   }
 }

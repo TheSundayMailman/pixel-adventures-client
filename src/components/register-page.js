@@ -11,7 +11,6 @@ export function RegisterPage(props) {
   return (
     <main>
       <h1>Pixel Adventures</h1>
-      <p>Register to play!</p>
       <RegisterForm />
     </main>
   );
