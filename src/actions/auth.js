@@ -55,11 +55,10 @@ export const loginUser = (username, password) => (dispatch, getState) => {
     .then(({authToken}) => storeAuthInfo(authToken, dispatch))
     .catch(err => {
       const {code} = err;
-      console.log(code);
       const message =
         code === 401
-          ? 'Incorrect username or password'
-          : 'Unable to login, please try again';
+          ? 'Unable to login, please try again'
+          : 'Incorrect username or password';
       dispatch(authError(err));
       // Could not authenticate, so return a SubmissionError for Redux Form
       return Promise.reject(new SubmissionError({_error: message}));

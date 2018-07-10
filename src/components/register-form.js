@@ -26,7 +26,7 @@ export class RegisterForm extends React.Component {
 
   render() {
     return (
-      <section className="form-container">
+      <section className="form-container" aria-live="polite">
         <h1>Register to play!</h1>
         <form className="form-input" onSubmit={this.props.handleSubmit(values => this.submitUser(values))}>
           <label htmlFor="username">Username: </label>

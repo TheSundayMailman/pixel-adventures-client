@@ -16,7 +16,7 @@ export class GameContainer extends React.Component {
 
   render() {
     return (
-      <main className="game-container" id={this.props.currentLocation}>
+      <main className="game-container" aria-live="polite" id={this.props.currentLocation}>
         <PlayerStatus />
         <ShoppingList />
         <SpriteDisplay />

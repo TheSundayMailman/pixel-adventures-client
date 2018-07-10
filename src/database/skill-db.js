@@ -53,7 +53,7 @@ const skillSet = {
     name: 'METEOR',
     type: 'magic',
     mp: 20,
-    power: 20
+    power: 40
   },
   'HEAL': {
     id: 9,

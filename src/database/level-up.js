@@ -27,16 +27,16 @@ export const getLevelUp = (player) => {
   }
 
   if (player.job === 'KNIGHT') {
-    hpGain = Math.floor(oldMaxHp * 0.1) + Math.floor(Math.random() * 10);
+    hpGain = Math.floor(oldMaxHp * 0.1) + Math.floor(Math.random() * 11);
     newMaxHp = oldMaxHp + hpGain;
 
-    mpGain = Math.floor(oldMaxMp * 0.1) + Math.floor(Math.random() * 5);
+    mpGain = Math.floor(oldMaxMp * 0.1) + Math.floor(Math.random() * 3);
     newMaxMp = oldMaxMp + mpGain;
 
-    attackGain = Math.floor(oldAttack * 0.13) + Math.floor(Math.random() * 4);
+    attackGain = Math.floor(oldAttack * 0.12) + Math.floor(Math.random() * 4);
     newAttack = oldAttack + attackGain;
 
-    defenseGain = Math.floor(oldDefense * 0.11) + Math.floor(Math.random() * 3);
+    defenseGain = Math.floor(oldDefense * 0.1) + Math.floor(Math.random() * 4);
     newDefense = oldDefense + defenseGain;
 
     intelligenceGain = Math.floor(oldIntelligence * 0.1) + Math.floor(Math.random() * 3);
@@ -51,19 +51,19 @@ export const getLevelUp = (player) => {
     }
 
   } else if (player.job === 'WIZARD') {
-    hpGain = Math.floor(oldMaxHp * 0.1) + Math.floor(Math.random() * 5);
+    hpGain = Math.floor(oldMaxHp * 0.11) + Math.floor(Math.random() * 4);
     newMaxHp = oldMaxHp + hpGain;
 
     mpGain = Math.floor(oldMaxMp * 0.1) + Math.floor(Math.random() * 10);
     newMaxMp = oldMaxMp + mpGain;
 
-    attackGain = Math.floor(oldAttack * 0.1) + Math.floor(Math.random() * 1);
+    attackGain = Math.floor(oldAttack * 0.11) + Math.floor(Math.random() * 3);
     newAttack = oldAttack + attackGain;
 
-    defenseGain = Math.floor(oldDefense * 0.12) + Math.floor(Math.random() * 3);
+    defenseGain = Math.floor(oldDefense * 0.11) + Math.floor(Math.random() * 3);
     newDefense = oldDefense + defenseGain;
 
-    intelligenceGain = Math.floor(oldIntelligence * 0.13) + Math.floor(Math.random() * 4);
+    intelligenceGain = Math.floor(oldIntelligence * 0.12) + Math.floor(Math.random() * 4);
     newIntelligence = oldIntelligence + intelligenceGain;
 
     if (newLevel === 5) {
@@ -75,19 +75,19 @@ export const getLevelUp = (player) => {
     }
 
   } else if (player.job === 'CLERIC') {
-    hpGain = Math.floor(oldMaxHp * 0.1) + Math.floor(Math.random() * 8);
+    hpGain = Math.floor(oldMaxHp * 0.1) + Math.floor(Math.random() * 7);
     newMaxHp = oldMaxHp + hpGain;
     
-    mpGain = Math.floor(oldMaxMp * 0.1) + Math.floor(Math.random() * 8);
+    mpGain = Math.floor(oldMaxMp * 0.1) + Math.floor(Math.random() * 7);
     newMaxMp = oldMaxMp + mpGain;
     
     attackGain = Math.floor(oldAttack * 0.1) + Math.floor(Math.random() * 3);
     newAttack = oldAttack + attackGain;
     
-    defenseGain = Math.floor(oldDefense * 0.13) + Math.floor(Math.random() * 4);
+    defenseGain = Math.floor(oldDefense * 0.12) + Math.floor(Math.random() * 4);
     newDefense = oldDefense + defenseGain;
     
-    intelligenceGain = Math.floor(oldIntelligence * 0.12) + Math.floor(Math.random() * 3);
+    intelligenceGain = Math.floor(oldIntelligence * 0.11) + Math.floor(Math.random() * 3);
     newIntelligence = oldIntelligence + intelligenceGain;
 
     if (newLevel === 5) {

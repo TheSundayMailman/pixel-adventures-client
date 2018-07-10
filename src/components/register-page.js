@@ -9,7 +9,7 @@ export function RegisterPage(props) {
     return <Redirect to="/game" />
   }
   return (
-    <main>
+    <main aria-live="polite">
       <h1>Pixel Adventures</h1>
       <RegisterForm />
     </main>

@@ -13,16 +13,23 @@ const passwordLength = lengthCheck({min: 10, max: 72});
 export class LoginForm extends React.Component {
   submitUser(values) {
     const {username, password} = values;
-    // const user = {username, password};
     return this.props.dispatch(loginUser(username, password));
   }
 
   render() {
+    let error;
+    if (this.props.error) {
+      error = (
+        <div className="form-error" aria-live="polite">
+          {this.props.error}
+        </div>
+      );
+    }
     return (
-      <section className="form-container">
+      <section className="form-container" aria-live="polite">
         <h1>Login to continue...</h1>
         <form className="form-input" onSubmit={this.props.handleSubmit(values => this.submitUser(values))}>
-          <label htmlFor="username">Username: </label>
+          <label htmlFor="username">Username: {error}</label>
           <Field
             component={Input}
             element="input"
