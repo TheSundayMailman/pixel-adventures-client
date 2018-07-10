@@ -21,7 +21,7 @@ export const getLevelUp = (player) => {
 
   const newSkills = [...player.skills];
 
-  let newNextLevel = newLevel * 25;
+  let newNextLevel = newLevel * 50;
   if (newLevel === 20) {
     newNextLevel = 0;
   }
@@ -63,7 +63,7 @@ export const getLevelUp = (player) => {
     defenseGain = Math.floor(oldDefense * 0.11) + Math.floor(Math.random() * 3);
     newDefense = oldDefense + defenseGain;
 
-    intelligenceGain = Math.floor(oldIntelligence * 0.12) + Math.floor(Math.random() * 4);
+    intelligenceGain = Math.floor(oldIntelligence * 0.13) + Math.floor(Math.random() * 4);
     newIntelligence = oldIntelligence + intelligenceGain;
 
     if (newLevel === 5) {

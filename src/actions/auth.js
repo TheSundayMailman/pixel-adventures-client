@@ -1,6 +1,7 @@
 import jwtDecode from 'jwt-decode';
 import {SubmissionError} from 'redux-form';
 
+import {API_BASE_URL} from '../config.js';
 import {normalizeResponseErrors} from './utils.js';
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
@@ -42,12 +43,11 @@ const storeAuthInfo = (authToken, dispatch) => {
 export const loginUser = (username, password) => (dispatch, getState) => {
   dispatch(authRequest());
   return (
-    fetch('http://localhost:8080/api/login', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({username, password})
-      }
-    )
+    fetch(`${API_BASE_URL}/login`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({username, password})
+    })
     // Reject any requests which don't return a 200 status, creating
     // errors which follow a consistent format
     .then(res => normalizeResponseErrors(res))
@@ -69,19 +69,20 @@ export const loginUser = (username, password) => (dispatch, getState) => {
 export const refreshAuthToken = () => (dispatch, getState) => {
   dispatch(authRequest());
   const authToken = getState().auth.authToken;
-  return fetch('http://localhost:8080/api/refresh', {
+  return (
+    fetch(`${API_BASE_URL}/refresh`, {
       method: 'POST',
       headers: {Authorization: `Bearer ${authToken}`}
-    }
-  )
-  .then(res => normalizeResponseErrors(res))
-  .then(res => res.json())
-  .then(({authToken}) => storeAuthInfo(authToken, dispatch))
-  .catch(err => {
-    // We couldn't get a refresh token because our current credentials
-    // are invalid or expired, or something else went wrong, so clear
-    // them and sign us out
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(({authToken}) => storeAuthInfo(authToken, dispatch))
+    .catch(err => {
+      // We couldn't get a refresh token because our current credentials
+      // are invalid or expired, or something else went wrong, so clear
+      // them and sign us out
     dispatch(authError(err));
     dispatch(clearAuth());
-  });
+    })
+  );
 };
