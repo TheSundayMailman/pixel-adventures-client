@@ -102,6 +102,7 @@ export const playerReducer = (state = initialState, action) => {
       hp: {...state.hp, max: action.newMaxHp},
       mp: {...state.mp, max: action.newMaxMp},
       stats: {...state.stats, attack: action.newAttack, defense: action.newDefense, intelligence: action.newIntelligence},
+      skills: action.newSkills,
       nextLevel: action.newNextLevel
     };
   }

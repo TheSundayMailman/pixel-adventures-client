@@ -34,7 +34,7 @@ const skillSet = {
     mp: 5,
     power: 10
   },
-  'ICE:': {
+  'ICE': {
     id: 6,
     name: 'ICE',
     type: 'magic',
@@ -48,22 +48,36 @@ const skillSet = {
     mp: 15,
     power: 30
   },
-  'HEAL': {
+  'METEOR': {
     id: 8,
+    name: 'METEOR',
+    type: 'magic',
+    mp: 20,
+    power: 20
+  },
+  'HEAL': {
+    id: 9,
     name: 'HEAL',
     type: 'heal',
     mp: 5,
-    power: 10
+    power: 12
+  },
+  'SHIELD-CHARGE': {
+    id: 1,
+    name: 'SHIELD-CHARGE',
+    type: 'attack',
+    mp: 10,
+    power: 15
   },
   'HOLY': {
-    id: 9,
+    id: 11,
     name: 'HOLY',
     type: 'magic',
     mp: 15,
-    power: 30
+    power: 20
   },
   'MIST': {
-    id: 10,
+    id: 12,
     name: 'MIST',
     type: 'escape',
     mp: 10,

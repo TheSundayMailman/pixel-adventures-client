@@ -38,6 +38,7 @@ import npcDb from '../database/npc-db.js';
 import forestEnemyDb from '../database/forest-enemy-db.js';
 import mountainEnemyDb from '../database/mountain-enemy-db.js';
 import dungeonEnemyDb from '../database/dungeon-enemy-db.js';
+import { getLevelUp } from '../database/level-up.js';
 
 export class CommandList extends React.Component {
   viewPlayerStatus() {
@@ -370,39 +371,35 @@ export class CommandList extends React.Component {
   }
 
   calculateLevelUp(player) {
-    const oldLevel = player.level;
-    const newLevel = oldLevel + 1;
+    const {
+      newLevel,
+      hpGain, newMaxHp,
+      mpGain, newMaxMp,
+      attackGain, newAttack,
+      defenseGain, newDefense,
+      intelligenceGain, newIntelligence,
+      newSkills,
+      newNextLevel
+    } = getLevelUp(player);
 
-    const oldMaxHp = player.hp.max;
-    const hpGain = Math.floor(oldMaxHp * 0.1) + Math.floor(Math.random() * 10);
-    const newMaxHp = oldMaxHp + hpGain;
-
-    const oldMaxMp = player.mp.max;
-    const mpGain = Math.floor(oldMaxMp * 0.1) + Math.floor(Math.random() * 5);
-    const newMaxMp = oldMaxMp + mpGain;
-
-    const oldAttack = player.stats.attack;
-    const attackGain = Math.floor(oldAttack * 0.14) + Math.floor(Math.random() * 3);
-    const newAttack = oldAttack + attackGain;
-
-    const oldDefense = player.stats.defense;
-    const defenseGain = Math.floor(oldDefense * 0.12) + Math.floor(Math.random() * 6);
-    const newDefense = oldDefense + defenseGain;
-
-    const oldIntelligence = player.stats.intelligence;
-    const intelligenceGain = Math.floor(oldIntelligence * 0.1) + Math.floor(Math.random() * 3);
-    const newIntelligence = oldIntelligence + intelligenceGain;
-
-    // need a table for this...
-    const newNextLevel = 300; // need a table for this...
-
-    // also need to add skills
-    const messages = [
-      `${player.name} reached LVL ${newLevel}! HP increased by ${hpGain},`,
-      `MP increased by ${mpGain}, ATK increased by ${attackGain},`,
-      `DEF increased by ${defenseGain}, INT increased by ${intelligenceGain}!`
-    ];
-    this.props.dispatch(levelUpPlayer(newLevel, newMaxHp, newMaxMp, newAttack, newDefense, newIntelligence, newNextLevel));
+    const oldSkills = [...player.skills];
+    
+    let messages;
+    if (newSkills.length === oldSkills.length) {
+      messages = [
+        `${player.name} reached LVL ${newLevel}! HP increased by ${hpGain},`,
+        `MP increased by ${mpGain}, ATK increased by ${attackGain},`,
+        `DEF increased by ${defenseGain}, INT increased by ${intelligenceGain}!`
+      ];
+    } else if (newSkills.length > oldSkills.length) {
+      messages = [
+        `${player.name} reached LVL ${newLevel}! HP increased by ${hpGain},`,
+        `MP increased by ${mpGain}, ATK increased by ${attackGain},`,
+        `DEF increased by ${defenseGain}, INT increased by ${intelligenceGain}!`,
+        `Learned a new SKILL, ${newSkills[newSkills.length - 1]}!`
+      ];
+    }
+    this.props.dispatch(levelUpPlayer(newLevel, newMaxHp, newMaxMp, newAttack, newDefense, newIntelligence, newSkills, newNextLevel));
     this.props.dispatch(toggleVictoryMode(messages));
     this.props.dispatch(disableSpriteDisplay());
   }

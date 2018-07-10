@@ -1,49 +1,3 @@
-// export const POPULATE_PLAYER_OBJECT = 'POPULATE_PLAYER_OBJECT';
-// export const populatePlayerObject = (player) => {
-//   return {
-//     type: POPULATE_Player_OBJECT,
-//     player
-//   };
-// };
-
-// export const CREATE_PLAYER_OBJECT = 'CREATE_PLAYER_OBJECT';
-// export const createPlayerObject = (user) => (dispatch, getState) => {
-//   const authToken = getState().auth.authToken; // need to setup and import auth
-//   fetch('api/address/here', {
-//     method: 'POST',
-//     header: {Authorization: `Bearer ${authToken}`},
-//     body: jsonStringify(user)
-//   })
-//     .then(res => res.json())
-//     .then(player => disptach(populatePlayerObject(player)))
-//     .catch(err => console.error(err));
-// };
-
-// export const GET_PLAYER_OBJECT = 'GET_PLAYER_OBJECT';
-// export const getPlayerObject = () => (dispatch, getState) => {
-//   const authToken = getState().auth.authToken; // need to setup and import auth
-//   fetch('api/address/here', {
-//     method: 'GET',
-//     header: {Authorization: `Bearer ${authToken}`}
-//   })
-//     .then(res => res.json())
-//     .then(player => disptach(populatePlayerObject(player)))
-//     .catch(err => console.error(err));
-// };
-
-// export const UPDATE_PLAYER_OBJECT = 'UPDATE_PLAYER_OBJECT';
-// export const updatePlayerObject = (player) => (dispatch, getState) => {
-//   const authToken = getState().auth.authToken; // need to setup and import auth
-//   fetch('api/address/here', {
-//     method: 'PUT',
-//     header: {Authorization: `Bearer ${authToken}`},
-//     body: jsonStringify(player)
-//   })
-//     .then(res => res.json())
-//     .then(player => disptach(populatePlayerObject(player)))
-//     .catch(err => console.error(err));
-// };
-
 export const TOGGLE_STATUS_MODE = 'TOGGLE_STATUS_MODE';
 export const toggleStatusMode = () => {
   return {
@@ -267,7 +221,7 @@ export const collectBattleRewards = (exp, gold, newNextLevel) => {
 };
 
 export const LEVEL_UP_PLAYER = 'LEVEL_UP_PLAYER';
-export const levelUpPlayer = (newLevel, newMaxHp, newMaxMp, newAttack, newDefense, newIntelligence, newNextLevel) => {
+export const levelUpPlayer = (newLevel, newMaxHp, newMaxMp, newAttack, newDefense, newIntelligence, newSkills, newNextLevel) => {
   return {
     type: LEVEL_UP_PLAYER,
     newLevel,
@@ -276,6 +230,7 @@ export const levelUpPlayer = (newLevel, newMaxHp, newMaxMp, newAttack, newDefens
     newAttack,
     newDefense,
     newIntelligence,
+    newSkills,
     newNextLevel
   };
 }
