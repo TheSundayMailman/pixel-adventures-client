@@ -7,7 +7,7 @@ export const populatePlayerObject = (player) => {
 };
 
 export const CREATE_CHARACTER = 'CREATE_CHARACTER';
-export const createCharacter = (character) => (dispatch, getState) => {
+export const createCharacter = (name, job) => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
   return fetch('http://localhost:8080/api/characters', {
       method: 'POST',
@@ -15,7 +15,7 @@ export const createCharacter = (character) => (dispatch, getState) => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${authToken}`
       },
-      body: JSON.stringify(character)
+      body: JSON.stringify({name, job})
     }
   )
   .then(res => res.json())

@@ -37,7 +37,7 @@ export class SkillList extends React.Component {
       }
       newEnemyHp = oldEnemyHp - damage;
       newPlayerMp = oldPlayerMp - currentSkill.mp;
-      if (newPlayerMp <= 0) {
+      if (newPlayerMp < 0) {
         messages = [
           `${player.name} tried to use ${skillName}!`,
           `But the skill has failed!`,

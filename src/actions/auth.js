@@ -1,5 +1,7 @@
 import jwtDecode from 'jwt-decode';
-// import {SubmissionError} from 'redux-form';
+import {SubmissionError} from 'redux-form';
+
+import {normalizeResponseErrors} from './utils.js';
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
 export const setAuthToken = authToken => ({
@@ -37,26 +39,30 @@ const storeAuthInfo = (authToken, dispatch) => {
   dispatch(authSuccess(decodedToken.user));
 };
 
-export const loginUser = (user) => dispatch => {
+export const loginUser = (username, password) => (dispatch, getState) => {
   dispatch(authRequest());
   return (
     fetch('http://localhost:8080/api/login', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(user)
+        body: JSON.stringify({username, password})
       }
     )
     // Reject any requests which don't return a 200 status, creating
     // errors which follow a consistent format
+    .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
     .then(({authToken}) => storeAuthInfo(authToken, dispatch))
     .catch(err => {
       const {code} = err;
-      const message = code === 401 ? 'Incorrect username or password' : 'Unable to login, please try again';
+      console.log(code);
+      const message =
+        code === 401
+          ? 'Incorrect username or password'
+          : 'Unable to login, please try again';
       dispatch(authError(err));
-      console.log(`error message:`, message);
       // Could not authenticate, so return a SubmissionError for Redux Form
-      // return Promise.reject(new SubmissionError({_error: message}));
+      return Promise.reject(new SubmissionError({_error: message}));
     })
   );
 };
@@ -69,6 +75,7 @@ export const refreshAuthToken = () => (dispatch, getState) => {
       headers: {Authorization: `Bearer ${authToken}`}
     }
   )
+  .then(res => normalizeResponseErrors(res))
   .then(res => res.json())
   .then(({authToken}) => storeAuthInfo(authToken, dispatch))
   .catch(err => {

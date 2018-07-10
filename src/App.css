@@ -28,13 +28,12 @@ form.form-input label {
   font-family: fantasy;
   padding-left: 30px;
   padding-top: 15px;
-  padding-bottom: 15px;
 }
 form.form-input input {
   width: 320px;
   height: 55px;
   padding: 15px;
-  color: #b3b4b5;
+  color: black;
   font-weight: bold;
   border: solid lightgray 2px;
   border-radius: 1%;
@@ -61,6 +60,9 @@ form.form-input button {
 }
 form.form-input button:hover {
   background-color: darkgray;
+}
+.form-error {
+  color: red;
 }
 
 /* GAME TEXT STYLE */
