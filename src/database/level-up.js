@@ -95,7 +95,7 @@ export const getLevelUp = (player) => {
     } else if (newLevel === 10) {
       newSkills.push('SHIELD-CHARGE');
     } else if (newLevel === 15) {
-      newSkills.push('HOLY');
+      newSkills.push('HOLY-LIGHT');
     }
 
   }

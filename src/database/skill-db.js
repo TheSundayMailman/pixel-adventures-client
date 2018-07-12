@@ -69,9 +69,9 @@ const skillSet = {
     mp: 10,
     power: 15
   },
-  'HOLY': {
+  'HOLY-LIGHT': {
     id: 11,
-    name: 'HOLY',
+    name: 'HOLY-LIGHT',
     type: 'magic',
     mp: 15,
     power: 20
