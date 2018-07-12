@@ -108,12 +108,12 @@ export class ShoppingList extends React.Component {
 
       return (
         <section className="menu shopping-window">
-          <h2>{this.props.player.name}</h2>
-          <p>CLASS: {this.props.player.job}</p>
-          <p>LVL: {this.props.player.level}</p>
-          <p>HP: {this.props.player.hp.current} / {this.props.player.hp.max}</p>
-          <p>MP: {this.props.player.mp.current} / {this.props.player.mp.max}</p>
-          <p>GOLD: {this.props.player.gold}</p>
+          <ul>{this.props.player.name}
+            <li>LVL: {this.props.player.level}</li>
+            <li>HP: {this.props.player.hp.current} / {this.props.player.hp.max}</li>
+            <li>MP: {this.props.player.mp.current} / {this.props.player.mp.max}</li>
+            <li>GOLD: {this.props.player.gold}</li>
+          </ul>
           <section className="menu items-for-barter">
             <p>Click to purchase an item:</p>
             {saleItems}
@@ -135,12 +135,12 @@ export class ShoppingList extends React.Component {
   
       return (
         <section className="menu shopping-window">
-          <h2>{this.props.player.name}</h2>
-          <p>CLASS: {this.props.player.job}</p>
-          <p>LVL: {this.props.player.level}</p>
-          <p>HP: {this.props.player.hp.current} / {this.props.player.hp.max}</p>
-          <p>MP: {this.props.player.mp.current} / {this.props.player.mp.max}</p>
-          <p>GOLD: {this.props.player.gold}</p>
+          <ul>{this.props.player.name}
+            <li>LVL: {this.props.player.level}</li>
+            <li>HP: {this.props.player.hp.current} / {this.props.player.hp.max}</li>
+            <li>MP: {this.props.player.mp.current} / {this.props.player.mp.max}</li>
+            <li>GOLD: {this.props.player.gold}</li>
+          </ul>
           <section className="menu items-for-barter">
             <p>Click to sell an item:</p>
             {saleItems}

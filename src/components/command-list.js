@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 import {
   toggleStatusMode,
@@ -33,6 +34,7 @@ import {
 } from '../actions/index.js';
 
 import {recordCharacter} from '../actions/characters.js';
+import {clearAuth} from '../actions/auth.js';
 
 import npcDb from '../database/npc-db.js';
 import forestEnemyDb from '../database/forest-enemy-db.js';
@@ -405,7 +407,8 @@ export class CommandList extends React.Component {
   }
 
   restartGame() {
-    console.log('tried to restart game...');
+    this.props.dispatch(clearAuth());
+    return <Redirect to="/" />;
   }
 
   render() {
