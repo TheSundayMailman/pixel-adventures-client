@@ -11,12 +11,18 @@ import GamePage from './components/game-page.js';
 export class App extends React.Component {
   render() {
     return (
-      <div>
+      <main>
+        <div id="main-container">
         <NavBar />
+        <img id="logo" src={require('./images/logo.png')} alt="Pixel Adventures" />
         <Route exact path="/" component={LoginPage} />
         <Route exact path="/register" component={RegisterPage}/>
         <Route exact path="/game" component={GamePage} />
-      </div>
+        </div>
+        <div id="tilt">
+          <img id="tilt-message" src={require('./images/tilt.png')} alt="Please rotate your screen." />
+        </div>
+      </main>
     );
   }
 }

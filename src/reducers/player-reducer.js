@@ -1,41 +1,34 @@
 const initialState = {
-  id: '000000000000000000000001',
-  name: 'ERDRICK',
+  id: '000000000000000000000000',
+  name: 'ERROR',
   job: 'KNIGHT',
-  level: 3,
+  level: 1,
   hp: {
     current: 1,
-    max: 128
+    max: 1
   },
   mp: {
     current: 1,
-    max: 21
+    max: 1
   },
   stats: {
-    attack: 21,
-    defense: 10,
-    intelligence: 7
+    attack: 1,
+    defense: 1,
+    intelligence: 1
   },
   equipment: {
-    weapon: 'BROAD-SWORD',
-    armor: 'STEEL-PLATE',
-    accessory: 'MEDALLION'
+    weapon: 'WEAPON',
+    armor: 'ARMOR',
+    accessory: 'ACCESSORY'
   },
   skills: [
-    'SHIELD-BASH',
-    'X-STRIKE',
-    'METEOR-SLASH',
-    'HELM-SPLITTER'
+    'SHIELD-BASH'
   ],
   items: [
-    {id: 1, name: 'POTION', quantity: 7},
-    {id: 2, name: 'HI-POTION', quantity: 10},
-    {id: 3, name: 'ETHER', quantity: 5},
-    {id: 4, name: 'HI-ETHER', quantity: 1},
-    {id: 5, name: 'ELIXIR', quantity: 3}
+    {id: 1, name: 'POTION', quantity: 1}
   ],
-  exp: 634,
-  gold: 50,
+  exp: 0,
+  gold: 0,
   nextLevel: 1
 };
 

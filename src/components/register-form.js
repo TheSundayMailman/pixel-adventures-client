@@ -77,7 +77,8 @@ export class RegisterForm extends React.Component {
             <option>CLERIC</option>
           </Field>
           <Field component="button" name="register-button">Register</Field>
-          <p>Have an account? Click <Link to="/">here</Link> to login!</p>
+          <p>Have an account?</p>
+          <p>Click <Link to="/">here</Link> to login!</p>
         </form>
       </section>
     );

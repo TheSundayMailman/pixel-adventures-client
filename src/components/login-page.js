@@ -9,10 +9,9 @@ export function LoginPage(props) {
     return <Redirect to="game" />
   }
   return (
-    <main aria-live="polite">
-      <h1>Pixel Adventures</h1>
+    <section aria-live="polite">
       <LoginForm />
-    </main>
+    </section>
   );
 }
 

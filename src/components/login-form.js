@@ -48,7 +48,8 @@ export class LoginForm extends React.Component {
             id="password"
           />
           <Field component="button" name="login-button">Login</Field>
-          <p>Don't have an account? Click <Link to="/register">here</Link> to make one!</p>
+          <p>Don't have an account?</p>
+          <p>Click <Link to="/register">here</Link> to register!</p>
         </form>
       </section>
     );

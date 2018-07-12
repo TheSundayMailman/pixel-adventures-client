@@ -20,10 +20,9 @@ export class GamePage extends React.Component {
       return <Redirect to="/" />
     }
     return (
-      <main>
-        <h1>Pixel Adventures</h1>
+      <article>
         <GameContainer />
-      </main>
+      </article>
     );
   }
 }

@@ -1,38 +1,64 @@
+/* LOGO */
+#logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+/* TILT MESSAGE */
+#tilt-message {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
+
 /* LOGIN/REGISTER FORMS */
 .form-container {
   display: block;
-  margin: auto;
-  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
   width: 400px;
-  background-color: white;
-  border-radius: 1%;
+  background: darkblue;
+  border: 3px solid white;
+  border-radius: 5px;
 }
 .form-container h1 {
   text-align: center;
+  color: white;
   padding-top: 30px;
 }
 .form-container p {
   text-align: center;
-  color: black;
+  color: white;
   font-family: fantasy;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
 }
 .form-container p a {
   display: inline-block;
+}
+.form-container a:link {
+  color: white;
+}
+.form-container a:visited {
+  color: white;
 }
 form.form-input * {
   display: block;
   margin: auto;
 }
 form.form-input label {
+  color: white;
   font-family: fantasy;
   padding-left: 30px;
-  padding-top: 15px;
+  padding-top: 10px;
 }
 form.form-input input {
   width: 320px;
   height: 55px;
-  padding: 15px;
+  padding: 10px;
   color: black;
   font-weight: bold;
   border: solid lightgray 2px;
@@ -41,7 +67,7 @@ form.form-input input {
 form.form-input select {
   width: 320px;
   height: 55px;
-  padding: 15px;
+  padding: 10px;
   color: black;
   font-weight: bold;
   border: solid lightgray 2px;
@@ -70,7 +96,7 @@ h1 {
   font-family: fantasy;
   text-align: center;
 }
-h2, p, ul, li {
+p, ul, li {
   color: #fff;
   margin: 7px;
   font-size: 15px;
@@ -249,4 +275,20 @@ li {
   right: 5px;
   width: 240px;
   height: 135px;
+}
+
+/* MEDIA QUERIES */
+#main-container {
+  display: initial;
+}
+#tilt {
+  display: none;
+}
+@media screen and (max-width: 639px) and (orientation: portrait) {
+  #main-container {
+    display: none;
+  }
+  #tilt {
+    display: block;
+  }
 }
