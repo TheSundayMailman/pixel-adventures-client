@@ -12,9 +12,11 @@ import {
   populateNpcObject,
   toggleConvoMode,
   toggleInnMode,
+  disengageInnMode,
   toggleShopMode,
   toggleBuyMode,
   toggleSellMode,
+  disengageShopMode,
   enterExploreMode,
   populateEnemyObject,
   toggleBattleMode,
@@ -91,8 +93,8 @@ export class CommandList extends React.Component {
   engageInn() {
     const messages = [
       'INN-KEEPER:',
-      'Would you like to stay the night and restore',
-      'your HP and MP?',
+      'Would you like to stay the night to restore',
+      'your HP / MP and save your game?',
       'It costs 50 GOLD per stay...'
     ];
     this.props.dispatch(enableNpcDisplay());
@@ -113,7 +115,7 @@ export class CommandList extends React.Component {
           'INN-KEEPER:',
           'You do not have enough gold...'
         ];
-        this.props.dispatch(toggleConvoMode(messages));
+        this.props.dispatch(disengageInnMode(messages));
       } else {
         messages = [
           'INN-KEEPER:',
@@ -125,7 +127,7 @@ export class CommandList extends React.Component {
         this.props.dispatch(updatePlayerHp(newHp));
         this.props.dispatch(updatePlayerMp(newMp));
         this.props.dispatch(updatePlayerGold(newGold));
-        this.props.dispatch(toggleConvoMode(messages));
+        this.props.dispatch(disengageInnMode(messages));
         this.props.dispatch(recordCharacter());
       }
     }
@@ -134,7 +136,7 @@ export class CommandList extends React.Component {
         'INN-KEEPER:',
         'Please come back if you change your mind!'
       ];
-      this.props.dispatch(toggleConvoMode(messages));
+      this.props.dispatch(disengageInnMode(messages));
     }
   }
 
@@ -162,7 +164,7 @@ export class CommandList extends React.Component {
         'SHOP-KEEPER:',
         'Please come again!'
       ];
-      this.props.dispatch(toggleConvoMode(messages));
+      this.props.dispatch(disengageShopMode(messages));
     }
   }
 
@@ -463,6 +465,13 @@ export class CommandList extends React.Component {
         </section>
       );
     }
+    if (this.props.game.disengageInnMode) {
+      return (
+        <section id="disengageInnMode" className="menu command-list animate-reveal animate-last">
+          <button onClick={() => this.resumeTown()}>OK</button>
+        </section>
+      );
+    }
     if (this.props.game.shopMode) {
       return (
         <section id="shopMode" className="menu command-list animate-reveal animate-last">
@@ -476,6 +485,13 @@ export class CommandList extends React.Component {
       return (
         <section id="shopMode" className="menu command-list animate-reveal animate-last">
           <button onClick={() => this.engageShop('DONE')}>DONE</button>
+        </section>
+      );
+    }
+    if (this.props.game.disengageShopMode) {
+      return (
+        <section id="disengageInnMode" className="menu command-list animate-reveal animate-last">
+          <button onClick={() => this.resumeTown()}>OK</button>
         </section>
       );
     }

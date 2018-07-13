@@ -183,9 +183,13 @@ li {
 
 /* DISPLAY STYLES OF NPC/ENEMY SPRITES */
 .sprite {
-  display: block;
+  position: absolute;
+  display: inline-block;
   margin-left: auto;
   margin-right: auto;
+  left: 0;
+  right: 0;
+  bottom: 170px;
 }
 
 /* MENU STYLE */

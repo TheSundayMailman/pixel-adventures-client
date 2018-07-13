@@ -59,6 +59,14 @@ export const toggleInnMode = (messages) => {
   }
 };
 
+export const DISENGAGE_INN_MODE = 'DISENGAGE_INN_MODE';
+export const disengageInnMode = (messages) => {
+  return {
+    type: DISENGAGE_INN_MODE,
+    messages
+  }
+};
+
 export const TOGGLE_SHOP_MODE = 'TOGGLE_SHOP_MODE';
 export const toggleShopMode = (messages) => {
   return {
@@ -79,6 +87,14 @@ export const TOGGLE_SELL_MODE = 'TOGGLE_SELL_MODE';
 export const toggleSellMode = (messages) => {
   return {
     type: TOGGLE_SELL_MODE,
+    messages
+  }
+};
+
+export const DISENGAGE_SHOP_MODE = 'DISENGAGE_SHOP_MODE';
+export const disengageShopMode = (messages) => {
+  return {
+    type: DISENGAGE_SHOP_MODE,
     messages
   }
 };

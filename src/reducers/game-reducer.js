@@ -7,9 +7,11 @@ const initialState = {
   townMode: false,
   convoMode: false,
   innMode: false,
+  disengageInnMode: false,
   shopMode: false,
   buyMode: false,
   sellMode: false,
+  disengageShopMode: false,
   exploreMode: false,
   battleMode: false,
   playerTurn: false,
@@ -63,9 +65,11 @@ export const gameReducer = (state = initialState, action) => {
       townMode: false,
       convoMode: false,
       innMode: false,
+      disengageInnMode: false,
       shopMode: false,
       buyMode: false,
       sellMode: false,
+      disengageShopMode: false,
       exploreMode: false,
       battleMode: false,
       playerTurn: false,
@@ -83,9 +87,11 @@ export const gameReducer = (state = initialState, action) => {
       townMode: true,
       convoMode: false,
       innMode: false,
+      disengageInnMode: false,
       shopMode: false,
       buyMode: false,
       sellMode: false,
+      disengageShopMode: false,
       exploreMode: false,
       battleMode: false,
       playerTurn: false,
@@ -101,9 +107,11 @@ export const gameReducer = (state = initialState, action) => {
       townMode: false,
       convoMode: true,
       innMode: false,
+      disengageInnMode: false,
       shopMode: false,
       buyMode: false,
       sellMode: false,
+      disengageShopMode: false,
       currentMessages: action.messages
     };
   }
@@ -113,9 +121,25 @@ export const gameReducer = (state = initialState, action) => {
       townMode: false,
       convoMode: false,
       innMode: true,
+      disengageInnMode: false,
       shopMode: false,
       buyMode: false,
       sellMode: false,
+      disengageShopMode: false,
+      currentMessages: action.messages
+    };
+  }
+  if (action.type === 'DISENGAGE_INN_MODE') {
+    return {
+      ...state,
+      townMode: false,
+      convoMode: false,
+      innMode: false,
+      disengageInnMode: true,
+      shopMode: false,
+      buyMode: false,
+      sellMode: false,
+      disengageShopMode: false,
       currentMessages: action.messages
     };
   }
@@ -125,9 +149,11 @@ export const gameReducer = (state = initialState, action) => {
       townMode: false,
       convoMode: false,
       innMode: false,
+      disengageInnMode: false,
       shopMode: true,
       buyMode: false,
       sellMode: false,
+      disengageShopMode: false,
       currentMessages: action.messages
     };
   }
@@ -137,9 +163,11 @@ export const gameReducer = (state = initialState, action) => {
       townMode: false,
       convoMode: false,
       innMode: false,
+      disengageInnMode: false,
       shopMode: false,
       buyMode: true,
       sellMode: false,
+      disengageShopMode: false,
       currentMessages: action.messages
     };
   }
@@ -149,9 +177,25 @@ export const gameReducer = (state = initialState, action) => {
       townMode: false,
       convoMode: false,
       innMode: false,
+      disengageInnMode: false,
       shopMode: false,
       buyMode: false,
       sellMode: true,
+      disengageShopMode: false,
+      currentMessages: action.messages
+    };
+  }
+  if (action.type === 'DISENGAGE_SHOP_MODE') {
+    return {
+      ...state,
+      townMode: false,
+      convoMode: false,
+      innMode: false,
+      disengageInnMode: false,
+      shopMode: false,
+      buyMode: false,
+      sellMode: false,
+      disengageShopMode: true,
       currentMessages: action.messages
     };
   }

@@ -47,6 +47,76 @@ const npcDb = [
       'I\'m not supposed to be in a pub. If anyone',
       'asks, you never saw me.'
     ]
+  },
+  {
+    id: 6,
+    name: 'ALCHEMIST',
+    messages: [
+      'ALCHEMIST:',
+      'Visit the SHOP for some quality POTION. If',
+      'you\'re taking heavy hits, you might even',
+      'want to keep a few HI-POTION handy.'
+    ]
+  },
+  {
+    id: 7,
+    name: 'SCHOLAR',
+    messages: [
+      'SCHOLAR:',
+      'A WIZARD can wield the power of METEOR, a rare',
+      'spell bestowed to those elite few of the',
+      'discipline.'
+    ]
+  },
+  {
+    id: 8,
+    name: 'PRIEST',
+    messages: [
+      'PRIEST:',
+      'A CLERIC has not only excellent defense, but',
+      'also the ability to cast HEAL spells during',
+      'battle.'
+    ]
+  },
+  {
+    id: 9,
+    name: 'SOLDIER',
+    messages: [
+      'SOLDIER:',
+      'A KNIGHT lacks the ability to cast spells but',
+      'makes up for it with powerful swordplay.'
+    ]
+  },
+  {
+    id: 10,
+    name: 'JESTER',
+    messages: [
+      'JESTER:',
+      'I have a colleague who hides in the sewer and',
+      'tells people that things float down there. I',
+      'hope he is doing OK.'
+    ]
+  },
+  {
+    id: 11,
+    name: 'MAN',
+    messages: [
+      'MAN:',
+      'They say the ARCH-MAGE has appeared, but I',
+      'don\'t see him around...as if he\'s not even',
+      'implemented yet...'
+    ]
+  },
+  {
+    id: 12,
+    name: 'WOMAN',
+    messages: [
+      'WOMAN:',
+      'There sure are a lot of strange people in this',
+      'PUB. Just now, a shady-looking man told me he',
+      'is a Sith Lord and wants me to join him and',
+      'rule the galaxy...what even is a galaxy?'
+    ]
   }
 ];
 
