@@ -38,6 +38,8 @@ export class SkillList extends React.Component {
       damage = Math.floor(player.stats.attack * currentSkill.power * 0.7) - enemy.stats.defense - Math.floor(Math.random() * enemy.level * 0.5);
       if (damage <= 0) {
         damage = Math.floor(Math.random() * 10) + 1;
+      } else if (damage > 9999) {
+        damage = 9999;
       }
       newEnemyHp = oldEnemyHp - damage;
       newPlayerMp = oldPlayerMp - currentSkill.mp;
@@ -85,6 +87,8 @@ export class SkillList extends React.Component {
       damage = Math.floor(player.stats.intelligence * currentSkill.power * 0.7) - enemy.stats.defense - Math.floor(Math.random() * enemy.level * 0.5);
       if (damage <= 0) {
         damage = Math.floor(Math.random() * 10) + 1;
+      } else if (damage > 9999) {
+        damage = 9999;
       }
       newEnemyHp = oldEnemyHp - damage;
       newPlayerMp = oldPlayerMp - currentSkill.mp;

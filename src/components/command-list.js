@@ -276,6 +276,8 @@ export class CommandList extends React.Component {
       damage = (player.stats.attack - enemy.stats.defense) + Math.floor(Math.random() * player.level);
       if (damage <= 0) {
         damage = 1;
+      } else if (damage > 9999) {
+        damage = 9999;
       }
       newEnemyHp = oldEnemyHp - damage;
       if (newEnemyHp <= 0) {

@@ -3,6 +3,9 @@ import {connect} from 'react-redux';
 
 export class SpriteDisplay extends React.Component {
   render() {
+    if (this.props.game.statusMode || this.props.game.buyMode || this.props.game.sellMode) {
+      return null;
+    }
     if (this.props.game.innMode && this.props.game.npcDisplay) {
       return (
         <img className="sprite" src={require('../images/npcs/innkeep.png')} alt="NPC sprite." />
