@@ -13,8 +13,10 @@ export class GamePage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(reinitializeGameState());
-    this.props.dispatch(retrieveCharacter());
+    if (this.props.loggedIn) {
+      this.props.dispatch(reinitializeGameState());
+      this.props.dispatch(retrieveCharacter());
+    }
   }
 
   render() {
