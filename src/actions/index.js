@@ -1,3 +1,10 @@
+export const REINITIALIZE_GAME_STATE = 'REINITIALIZE_GAME_STATE';
+export const reinitializeGameState = () => {
+  return {
+    type: REINITIALIZE_GAME_STATE
+  };
+};
+
 export const TOGGLE_STATUS_MODE = 'TOGGLE_STATUS_MODE';
 export const toggleStatusMode = () => {
   return {

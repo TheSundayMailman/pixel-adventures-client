@@ -1,9 +1,9 @@
 const initialState = {
-  currentLocation: 'ASTERA',
+  currentLocation: 'BLANK',
   statusMode: false,
   npcDisplay: false,
   enemyDisplay: false,
-  hubMode: true,
+  hubMode: false,
   townMode: false,
   convoMode: false,
   innMode: false,
@@ -22,14 +22,44 @@ const initialState = {
   levelUpMode: false,
   defeatMode: false,
   currentMessages: [
-    'You are now back in the world of ASTERA! Pick',
-    'a place to go! Visit the TOWN for some rest,',
-    'or venture into the wilderness to hunt for',
-    'some monsters or treasures!'
+    'IF YOU SEE THIS, THERE IS AN ERROR'
   ]
 };
 
 export const gameReducer = (state = initialState, action) => {
+  if (action.type === 'REINITIALIZE_GAME_STATE') {
+    return {
+      ...state,
+      currentLocation: 'ASTERA',
+      statusMode: false,
+      npcDisplay: false,
+      enemyDisplay: false,
+      hubMode: true,
+      townMode: false,
+      convoMode: false,
+      innMode: false,
+      disengageInnMode: false,
+      shopMode: false,
+      buyMode: false,
+      sellMode: false,
+      disengageShopMode: false,
+      exploreMode: false,
+      battleMode: false,
+      playerTurn: false,
+      enemyTurn: false,
+      itemMode: false,
+      skillMode: false,
+      victoryMode: false,
+      levelUpMode: false,
+      defeatMode: false,
+      currentMessages: [
+        'You are now back in the world of ASTERA! Pick',
+        'a place to go! Visit the TOWN for some rest,',
+        'or venture into the wilderness to hunt for',
+        'some monsters or treasures!'
+      ]
+    };
+  }
   if (action.type === 'TOGGLE_STATUS_MODE') {
     return {
       ...state,

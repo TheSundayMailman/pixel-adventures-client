@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
 import GameContainer from './game-container.js';
+import {reinitializeGameState} from '../actions/index.js';
 import {retrieveCharacter} from '../actions/characters.js';
 
 export class GamePage extends React.Component {
@@ -12,6 +13,7 @@ export class GamePage extends React.Component {
   }
 
   componentDidMount() {
+    this.props.dispatch(reinitializeGameState());
     this.props.dispatch(retrieveCharacter());
   }
 
