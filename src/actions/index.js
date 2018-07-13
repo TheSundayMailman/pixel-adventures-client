@@ -114,18 +114,6 @@ export const populateNpcObject = (npc) => {
   };
 };
 
-// export const GET_NEW_NPC = 'GET_NEW_NPC';
-// export const getNewNPC = () => (dispatch, getState) => {
-//   const authToken = getState().auth.authToken; // need to setup and import auth
-//   fetch('api/address/here', {
-//     method: 'GET',
-//     header: {Authorization: `Bearer ${authToken}`}
-//   })
-//     .then(res => res.json())
-//     .then(npc => disptach(populateNpcObject(npc)))
-//     .catch(err => console.error(err));
-// };
-
 export const ENTER_EXPLORE_MODE = 'ENTER_EXPLORE_MODE';
 export const enterExploreMode = (location, messages) => {
   return {
@@ -142,18 +130,6 @@ export const populateEnemyObject = (enemy) => {
     enemy,
   };
 };
-
-// export const GET_NEW_ENEMY = 'GET_NEW_ENEMY';
-// export const getNewEnemy = () => (dispatch, getState) => {
-//   const authToken = getState().auth.authToken; // need to setup and import auth
-//   fetch('api/address/here', {
-//     method: 'GET',
-//     header: {Authorization: `Bearer ${authToken}`}
-//   })
-//     .then(res => res.json())
-//     .then(enemy => disptach(populateEnemyObject(enemy)))
-//     .catch(err => console.error(err));
-// };
 
 export const TOGGLE_BATTLE_MODE = 'TOGGLE_BATTLE_MODE';
 export const toggleBattleMode = (messages) => {

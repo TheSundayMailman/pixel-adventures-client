@@ -10,10 +10,6 @@ import ItemList from './item-list.js';
 import SkillList from './skill-list.js';
 
 export class GameContainer extends React.Component {
-  componentDidMount() {
-    // fetch player data here
-  }
-
   render() {
     return (
       <main className="game-container" aria-live="polite" id={this.props.currentLocation}>
