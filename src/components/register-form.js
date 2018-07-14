@@ -69,9 +69,10 @@ export class RegisterForm extends React.Component {
             component={Input}
             element="select"
             name="job"
-            validate={[classCheck]}
+            validate={[required, classCheck]}
             id="job"
           >
+            <option>Choose a class</option>
             <option>KNIGHT</option>
             <option>WIZARD</option>
             <option>CLERIC</option>

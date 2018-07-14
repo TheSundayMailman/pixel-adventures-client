@@ -32,14 +32,11 @@ export const retrieveCharacter = () => (dispatch, getState) => {
   return (
     fetch(`${API_BASE_URL}/characters`, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`
-      },
+      headers: {Authorization: `Bearer ${authToken}`}
     })
     .then(res => res.json())
     .then(player => dispatch(populatePlayerObject(player)))
-    .catch(err => console.error(err))
+    .catch(() => console.log('character loaded'))
   );
 }
 
