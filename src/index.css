@@ -9,3 +9,10 @@ body {
   background-image: url(./images/background.png);
   font-family: sans-serif;
 }
+
+button:hover {
+  cursor: pointer;
+}
+button:focus {
+  outline: 0;
+}
