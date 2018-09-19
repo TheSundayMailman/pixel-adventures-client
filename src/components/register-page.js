@@ -4,6 +4,8 @@ import {Redirect} from 'react-router-dom';
 
 import RegisterForm from './register-form.js';
 
+import '../styles/login-register-forms.css';
+
 export function RegisterPage(props) {
   if (props.loggedIn) {
     return <Redirect to="/game" />

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../styles/nav-bar.css';
+
 export class NavBar extends React.Component {
   constructor(props) {
     super(props)

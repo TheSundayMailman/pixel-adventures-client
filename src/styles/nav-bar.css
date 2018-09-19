@@ -1,0 +1,41 @@
+/* HELP OVERLAY MODAL */
+.overlay {
+	display: block;
+  position: absolute;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+	top: 0;
+	left: 0;
+	margin: 0;
+	z-index: 1000;
+	color: white;
+  background: darkblue;
+  border: 3px solid white;
+  border-radius: 5px;
+}
+.modal {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px;
+}
+.modal p {
+  white-space: initial;
+}
+.modal #synopsis {
+  text-align: center;
+}
+.modal img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 320px;
+  height: 240px;
+}
+.modal button {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}

@@ -1,0 +1,76 @@
+/* LOGIN/REGISTER FORMS */
+.form-container {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  width: 400px;
+  background: darkblue;
+  border: 3px solid white;
+  border-radius: 5px;
+}
+.form-container h1 {
+  text-align: center;
+  color: white;
+  padding-top: 30px;
+}
+.form-container p {
+  text-align: center;
+  color: white;
+  font-family: fantasy;
+  padding-bottom: 10px;
+}
+.form-container p a {
+  display: inline-block;
+}
+.form-container a:link {
+  color: white;
+}
+.form-container a:visited {
+  color: white;
+}
+form.form-input * {
+  display: block;
+  margin: auto;
+}
+form.form-input label {
+  color: white;
+  font-family: fantasy;
+  padding-left: 30px;
+  padding-top: 10px;
+}
+form.form-input input {
+  width: 320px;
+  height: 55px;
+  padding: 10px;
+  color: black;
+  font-weight: bold;
+  border: solid lightgray 2px;
+  border-radius: 1%;
+}
+form.form-input select {
+  width: 320px;
+  height: 55px;
+  padding: 10px;
+  color: black;
+  font-weight: bold;
+  border: solid lightgray 2px;
+  border-radius: 1%;
+}
+form.form-input button {
+  font-family: fantasy;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 320px;
+  height: 55px;
+  color: white;
+  background-color: black;
+  font-weight: bold;
+  transition-duration: 0.5s;
+}
+form.form-input button:hover {
+  background-color: darkgray;
+}
+.form-error {
+  color: red;
+}

@@ -6,6 +6,8 @@ import GameContainer from './game-container.js';
 import {reinitializeGameState} from '../actions/index.js';
 import {retrieveCharacter} from '../actions/characters.js';
 
+import '../styles/game-page.css';
+
 export class GamePage extends React.Component {
   constructor(props) {
     super(props)

@@ -4,6 +4,8 @@ import {Redirect} from 'react-router-dom';
 
 import LoginForm from './login-form.js';
 
+import '../styles/login-register-forms.css';
+
 export function LoginPage(props) {
   if (props.loggedIn) {
     return <Redirect to="game" />
