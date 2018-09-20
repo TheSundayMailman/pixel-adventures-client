@@ -3,7 +3,9 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  max-width: 100%;
+  padding-top: 80px;
 }
 
 /* TILT MESSAGE */
@@ -21,11 +23,17 @@
 #tilt {
   display: none;
 }
+#tilt-message {
+  max-width: 100%;
+  width: auto;
+}
 @media screen and (max-width: 639px) and (orientation: portrait) {
-  #main-container {
+  #game-container {
     display: none;
   }
   #tilt {
     display: block;
+    padding-top: 20px;
+    padding-bottom: 280px;
   }
 }

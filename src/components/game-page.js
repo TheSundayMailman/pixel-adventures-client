@@ -26,9 +26,15 @@ export class GamePage extends React.Component {
       return <Redirect to="/" />
     }
     return (
-      <article>
+      <React.Fragment>
+      <main id="game-container">
+        <img id="logo" src={require('../images/logo.png')} alt="Pixel Adventures" />
         <GameContainer />
-      </article>
+      </main>
+      <section id="tilt">
+        <img id="tilt-message" src={require('../images/tilt.png')} alt="Please rotate your screen." />
+      </section>
+      </React.Fragment>
     );
   }
 }

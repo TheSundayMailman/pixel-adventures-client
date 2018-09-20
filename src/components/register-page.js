@@ -11,9 +11,10 @@ export function RegisterPage(props) {
     return <Redirect to="/game" />
   }
   return (
-    <section aria-live="polite">
+    <main aria-live="polite">
+      <img id="logo" src={require('../images/logo.png')} alt="Pixel Adventures" />
       <RegisterForm />
-    </section>
+    </main>
   );
 };
 

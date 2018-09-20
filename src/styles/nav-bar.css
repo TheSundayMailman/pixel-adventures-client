@@ -1,3 +1,28 @@
+nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 50px;
+  background-color: darkblue;
+  border-bottom: 3px solid white;
+  z-index: 1;
+}
+nav button {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  height: 30px;
+  font-family: fantasy;
+  color: white;
+  background-color: black;
+  font-weight: bold;
+  transition-duration: 0.5s;
+}
+nav button:hover {
+  background-color: darkgray;
+}
+
 /* HELP OVERLAY MODAL */
 .overlay {
 	display: block;
@@ -32,10 +57,4 @@
   margin-right: auto;
   width: 320px;
   height: 240px;
-}
-.modal button {
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
 }

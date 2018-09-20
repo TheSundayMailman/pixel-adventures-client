@@ -1,3 +1,29 @@
-.in-progress {
-  color: blue;
+header {
+  margin-top: 50px;
+  padding-top: 70px;
+  width: 100%;
+  height: 800px;
+  color: white;
+  background: url('https://i.pinimg.com/originals/f3/64/b7/f364b7d0a49566891789d291b8b2e53f.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.attract {
+  position: absolute;
+  width: 220px;
+  left: 50%;
+  margin-left: -110px;
+  bottom: 0;
+  margin-bottom: 70px;
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.welcome {
+  padding-bottom: 30px;
 }
