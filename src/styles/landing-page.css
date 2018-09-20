@@ -10,13 +10,13 @@ header {
 }
 #attract {
   position: absolute;
-  width: 120px;
-  height: 40px;
+  width: 140px;
+  height: 50px;
   left: 50%;
   bottom: 0;
-  margin-left: -60px;
-  margin-bottom: 50px;
-  padding: 5px;
+  margin-left: -70px;
+  margin-bottom: 30px;
+  padding-top: 10px;
   border: 1px solid white;
   color: white;
   background-color: black;
@@ -53,15 +53,22 @@ article {
 .how-to h1 {
   padding-top: 50px;
 }
+.how-to h2 {
+  margin-bottom: 0;
+  font-family: monospace;
+  text-align: center;
+}
 .how-to p {
-  padding: 20px;
+  padding: 10px 20px 20px 20px;
   text-align: center;
   font-family: monospace;
   white-space: initial;
 }
-.how-to h2 {
-  font-family: monospace;
-  text-align: center;
+.engage hr {
+  box-sizing: content-box;
+  overflow: visible;
+  height: 0;
+  border: 1px solid white;
 }
 
 .engage {
@@ -70,10 +77,9 @@ article {
 .engage h1 {
   padding-top: 50px;
 }
-.engage img {
-  width: 100%;
-  height: 100%;
-  padding-top: 20px;
+.engage h2 {
+  font-family: monospace;
+  text-align: center;
 }
 .engage p {
   padding: 10px;
@@ -81,21 +87,67 @@ article {
   font-family: monospace;
   white-space: initial;
 }
-.engage h2 {
-  font-family: monospace;
+.engage img {
+  width: 100%;
+  height: 100%;
+  padding-top: 20px;
+}
+.engage hr {
+  box-sizing: content-box;
+  overflow: visible;
+  height: 0;
+  border: 1px solid white;
+}
+.engage a {
+  display: block;
+  margin: 50px auto 20px auto;
+  width: 100px;
+  height: 50px;
+  padding-top: 18px;
+  color: white;
+  background-color: black;
+  border: 1px solid white;
   text-align: center;
+  text-decoration: none;
+  font-family: fantasy;
+  transition-duration: 0.5s;
+}
+.engage a:hover {
+  background-color: darkgray;
 }
 
 footer {
   width: 100%;
   bottom: 0;
-  margin-top: 100px;
+  margin-top: 50px;
   background-color: darkblue;
   border-top: 3px solid white;
 }
+footer .row {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+footer h1 {
+  margin-top: 20px;
+  color: white;
+  font-family: monospace;
+  font-size: 20px;
+  text-align: initial;
+}
 footer p {
-  margin: 0;
+  margin-bottom: 20px;
   padding: 5px;
   color: white;
   font-family: monospace;
+  white-space: initial;
+}
+footer li {
+  margin-left: 10px;
+}
+footer a {
+  color: white;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
 }
