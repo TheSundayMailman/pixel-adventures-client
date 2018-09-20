@@ -23,7 +23,7 @@ export class LandingPage extends React.Component {
             <img src={require('../images/npcs/8.png')} alt="Demo NPC Sprite." />
             <img src={require('../images/npcs/9.png')} alt="Demo NPC Sprite." />
           </section>
-          <Link id="attract" to="#welcome">START</Link>
+          <a id="attract" href="#welcome">START</a>
         </header>
         <main id="welcome">
           <article className="how-to">
