@@ -27,6 +27,9 @@ li {
   background-image: url(../images/locations/BLANK.png);
   width: 640px;
   height: 480px;
+  box-shadow: 1px 1px 20px 2px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 1px 1px 20px 2px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 1px 1px 20px 2px rgba(0, 0, 0, 0.5);
 }
 
 /* BACKGROUND IMAGE FOR GAME CONTAINER */

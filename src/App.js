@@ -8,7 +8,6 @@ import LandingPage from './components/landing-page.js';
 import LoginPage from './components/login-page.js';
 import RegisterPage from './components/register-page.js';
 import GamePage from './components/game-page.js';
-import Footer from './components/footer.js';
 
 export class App extends React.Component {
   render() {
@@ -19,7 +18,6 @@ export class App extends React.Component {
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/register" component={RegisterPage}/>
         <Route exact path="/game" component={GamePage} />
-        <Footer />
       </React.Fragment>
     );
   }

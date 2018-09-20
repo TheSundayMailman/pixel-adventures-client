@@ -6,6 +6,8 @@
   margin-bottom: 30px;
   max-width: 100%;
   padding-top: 80px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 /* TILT MESSAGE */
@@ -14,6 +16,8 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 /* MEDIA QUERIES */

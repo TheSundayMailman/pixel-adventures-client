@@ -7,11 +7,19 @@ html, body {
   height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   padding: 0;
   background-image: url(../images/background.png);
   font-family: sans-serif;
+}
+
+#root {
+  height: 100%;
 }
 
 button:hover {
