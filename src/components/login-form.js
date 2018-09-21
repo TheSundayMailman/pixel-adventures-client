@@ -50,6 +50,10 @@ export class LoginForm extends React.Component {
           <Field component="button" name="login-button">Login</Field>
           <p>Don't have an account?</p>
           <p>Click <Link to="/register">here</Link> to register!</p>
+          <br />
+          <p>Or try a demo Lvl 20 Knight!</p>
+          <p>Username: batman</p>
+          <p>Password: password123</p>
         </form>
       </section>
     );
