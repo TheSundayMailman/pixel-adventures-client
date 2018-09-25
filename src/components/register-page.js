@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
 import RegisterForm from './register-form.js';
+import Footer from './footer.js';
+
 import '../styles/login-register-forms.css';
 
 export function RegisterPage(props) {
@@ -10,10 +12,13 @@ export function RegisterPage(props) {
     return <Redirect to="/game" />
   }
   return (
-    <main aria-live="polite">
-      <img id="logo" src={require('../images/logo.png')} alt="Pixel Adventures" />
-      <RegisterForm />
-    </main>
+    <React.Fragment>
+      <main aria-live="polite">
+        <img id="logo" src={require('../images/logo.png')} alt="Pixel Adventures" />
+        <RegisterForm />
+      </main>
+      <Footer />
+    </React.Fragment>
   );
 };
 

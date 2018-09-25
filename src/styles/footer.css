@@ -1,0 +1,51 @@
+footer {
+  width: 100%;
+  bottom: 0;
+  margin-top: 60px;
+  background-color: darkblue;
+  border: 3px solid white;
+  border-radius: 5px;
+}
+footer .row {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+footer h1 {
+  margin-top: 20px;
+  color: white;
+  font-family: monospace;
+  font-size: 20px;
+  text-align: initial;
+}
+footer p {
+  margin-bottom: 20px;
+  padding: 5px;
+  color: white;
+  font-family: monospace;
+  white-space: initial;
+}
+footer li {
+  margin-left: 10px;
+}
+footer a {
+  color: white;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
+.game-footer {
+  min-width: 640px;
+}
+
+@media screen and (max-width: 639px) and (orientation: portrait) {
+  .game-footer {
+    display: none;
+  }
+}
+@media screen and (min-height: 942px) {
+  .game-footer {
+    position: absolute;
+  }
+}

@@ -1,13 +1,13 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
-
-import './styles/App.css';
+import { Route } from 'react-router-dom';
 
 import NavBar from './components/nav-bar.js';
 import LandingPage from './components/landing-page.js';
 import LoginPage from './components/login-page.js';
 import RegisterPage from './components/register-page.js';
 import GamePage from './components/game-page.js';
+
+import './styles/App.css';
 
 export class App extends React.Component {
   render() {

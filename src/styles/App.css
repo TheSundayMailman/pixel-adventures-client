@@ -32,9 +32,6 @@
   width: auto;
 }
 @media screen and (max-width: 639px) and (orientation: portrait) {
-  #game-container {
-    display: none;
-  }
   #tilt {
     display: block;
     padding-top: 20px;

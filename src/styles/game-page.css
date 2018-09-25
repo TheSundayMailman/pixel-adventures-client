@@ -190,3 +190,10 @@ li {
   width: 240px;
   height: 135px;
 }
+
+/* MEDIA QUERY FOR SCREEN SIZE LESS THAN 640PX */
+@media screen and (max-width: 639px) and (orientation: portrait) {
+  #game-container {
+    display: none;
+  }
+}

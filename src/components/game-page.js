@@ -3,8 +3,10 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
 import GameContainer from './game-container.js';
-import {reinitializeGameState} from '../actions/index.js';
-import {retrieveCharacter} from '../actions/characters.js';
+import Footer from './footer.js';
+
+import { reinitializeGameState } from '../actions/index.js';
+import { retrieveCharacter } from '../actions/characters.js';
 
 import '../styles/game-page.css';
 
@@ -27,13 +29,14 @@ export class GamePage extends React.Component {
     }
     return (
       <React.Fragment>
-      <main id="game-container">
-        <img id="logo" src={require('../images/logo.png')} alt="Pixel Adventures" />
-        <GameContainer />
-      </main>
-      <section id="tilt">
-        <img id="tilt-message" src={require('../images/tilt.png')} alt="Please rotate your screen." />
-      </section>
+        <main id="game-container">
+          <img id="logo" src={require('../images/logo.png')} alt="Pixel Adventures" />
+          <GameContainer />
+        </main>
+        <Footer />
+        <section id="tilt">
+          <img id="tilt-message" src={require('../images/tilt.png')} alt="Please rotate your screen." />
+        </section>
       </React.Fragment>
     );
   }

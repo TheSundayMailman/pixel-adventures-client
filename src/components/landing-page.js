@@ -1,8 +1,8 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import '../styles/landing-page.css';
 import '../styles/float-grid.css';
+import '../styles/landing-page.css';
 
 export class LandingPage extends React.Component {
   constructor(props) {
@@ -114,7 +114,7 @@ export class LandingPage extends React.Component {
           <div className="row">
             <section className="col-6 box">
               <h1>ABOUT:</h1>
-              <p>This game is built entirely on HTML5, CSS3, and React. Server-side operations powered by Node and Express. Check out my GitHub Repo for more information.</p>
+              <p>Pixel Adventures is built on HTML5, CSS3, and React. Server-side operations powered by Node and Express. Check out my GitHub Repo for more information.</p>
             </section>
             <section className="col-6 box">
             <ul><h1>LINKS:</h1>
